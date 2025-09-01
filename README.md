@@ -107,6 +107,47 @@ pnpm test
 
 ---
 
+## 👥 Contribution Guidelines
+
+To maintain code quality and ensure production safety, please follow these rules strictly:
+
+1. **Never push directly to the `main` branch** 🚫  
+   - The `main` branch is **production-only**.  
+   - Any direct push to `main` is strictly prohibited to avoid production glitches or accidental outages.  
+
+2. **Always create a new branch for your work** 🌱  
+   - Branch names should follow the pattern:  
+     ```
+     feature/<your-feature-name>
+     bugfix/<your-bug-name>
+     hotfix/<your-hotfix-name>
+     ```
+   - Example: `feature/user-authentication`, `bugfix/navbar-overlap`
+
+3. **Push your changes to your branch only** 📤  
+
+   ```bash
+   git checkout -b feature/my-feature
+   # make changes
+   git push origin feature/my-feature
+   ```
+4. **Raise a Pull Request (PR) → `pre-deployment` branch** 🔄 
+
+- All feature branches must be merged into the **`pre-deployment`** branch via PR.  
+- The **`pre-deployment`** branch serves as the staging/testing environment.  
+
+5. **Code Review & Testing** ✅ 
+
+- PRs will be reviewed by **mentors/senior developers**.  
+- Once tested and approved, changes will be merged into **`main`** by maintainers.  
+
+---
+
+### ⚠️ Important Warning
+
+Direct commits or pushes to **`main`** are **not allowed under any circumstances**.  
+
+
 ## 📜 License
 
 This project is private and maintained by **Shikom Solutions**.  
