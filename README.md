@@ -141,12 +141,12 @@ To maintain code quality and ensure production safety, please follow these rules
 - PRs will be reviewed by **mentors/senior developers**.  
 - Once tested and approved, changes will be merged into **`main`** by maintainers.  
 
----
 
 ### ⚠️ Important Warning
 
 Direct commits or pushes to **`main`** are **not allowed under any circumstances**.  
 
+---
 
 ## 📜 License
 
