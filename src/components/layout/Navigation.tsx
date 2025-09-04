@@ -26,7 +26,7 @@ export default function Navigation({ activeSection, scrollToSection }: Navigatio
             <li key={item}>
               <button
                 onClick={() => scrollToSection(item)}
-                className={`font-medium transition-all duration-300 relative ${
+                className={`font-medium transition-all duration-300 relative cursor-pointer ${
                   activeSection === item ? "text-purple-600" : "text-gray-800 hover:text-purple-600"
                 }`}
               >
@@ -54,7 +54,7 @@ export default function Navigation({ activeSection, scrollToSection }: Navigatio
                 scrollToSection(item);
                 setMobileMenuOpen(false);
               }}
-              className="block w-full text-left px-5 py-2 font-medium text-gray-800 hover:text-purple-600 transition-colors"
+              className="block w-full text-left px-5 py-2 font-medium text-gray-800 hover:text-purple-600 transition-colors cursor-pointer"
             >
               {item.charAt(0).toUpperCase() + item.slice(1)}
             </button>

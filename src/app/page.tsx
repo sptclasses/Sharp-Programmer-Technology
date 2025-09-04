@@ -8,10 +8,9 @@ import Courses from "../components/Courses";
 import Testimonials from "../components/Testimonials";
 import Results from "../components/Results";
 import Alumni from "../components/Alumni";
-import Contact from "../components/Contact";
+import Email from "../components/Email";
 import Footer from "../components/Footer";
 import WhatsAppButton from "../components/WhatsAppButton";
-import Email from "../components/Email";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -25,15 +24,6 @@ export default function Home() {
       element.scrollIntoView({ behavior: "smooth" });
     }
     setMobileMenuOpen(false);
-  };
-
-  // Handle form submission
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    console.log("Form submitted:", Object.fromEntries(formData));
-    alert("Thank you for your message! We'll get back to you soon.");
-    e.currentTarget.reset();
   };
 
   return (
@@ -50,10 +40,10 @@ export default function Home() {
       <Testimonials />
       <Results />
       <Alumni />
-      <Contact handleFormSubmit={handleFormSubmit} />
+      <Email/>
       <Footer scrollToSection={scrollToSection} />
       <WhatsAppButton />
-      <Email/>
+      
    
     </div>
   );

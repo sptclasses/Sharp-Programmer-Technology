@@ -94,10 +94,10 @@ export default function Contact({ handleFormSubmit }: ContactProps) {
                   className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-purple-600 focus:outline-none transition-colors"
                 >
                   <option value="">Select a subject</option>
-                  <option value="course-inquiry">CCC Course</option>
-                  <option value="library-access">O&apos;level Course</option>
-                  <option value="general">Digital Marketing</option>
-                  <option value="general">Python</option>
+                  <option value="CCC Course">CCC Course</option>
+                  <option value="O'level Course">O&apos;level Course</option>
+                  <option value="Digital Marketing">Digital Marketing</option>
+                  <option value="Python">Python</option>
                 </select>
               </div>
               <div>
@@ -116,13 +116,13 @@ export default function Contact({ handleFormSubmit }: ContactProps) {
               <div className="flex gap-4">
                 <button
                   type="submit"
-                  className="bg-purple-600 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-purple-700 hover:transform hover:-translate-y-1"
+                  className="bg-purple-600 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-purple-700 hover:transform hover:-translate-y-1 cursor-pointer"
                 >
                   Send Message
                 </button>
                 <button
                   type="reset"
-                  className="bg-gray-500 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-gray-600"
+                  className="bg-gray-500 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-gray-600 cursor-pointer"
                 >
                   Reset
                 </button>
