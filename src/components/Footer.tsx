@@ -55,7 +55,7 @@ export default function Footer({ scrollToSection }: FooterProps) {
                 <li key={index}>
                   <button
                     onClick={() => scrollToSection("courses")}
-                    className="text-gray-300 hover:text-purple-400 transition-colors"
+                    className="text-gray-300 hover:text-purple-400 transition-colors cursor-pointer"
                   >
                     {course}
                   </button>
@@ -70,7 +70,7 @@ export default function Footer({ scrollToSection }: FooterProps) {
                 <li key={index}>
                   <button
                     onClick={() => scrollToSection(item.section)}
-                    className="text-gray-300 hover:text-purple-400 transition-colors"
+                    className="text-gray-300 hover:text-purple-400 transition-colors cursor-pointer"
                   >
                     {item.name}
                   </button>
