@@ -11,6 +11,7 @@ import Alumni from "../components/Alumni";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 import WhatsAppButton from "../components/WhatsAppButton";
+import Email from "../components/Email";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -52,6 +53,8 @@ export default function Home() {
       <Contact handleFormSubmit={handleFormSubmit} />
       <Footer scrollToSection={scrollToSection} />
       <WhatsAppButton />
+      <Email/>
+   
     </div>
   );
 }
