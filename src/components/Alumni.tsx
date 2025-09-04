@@ -23,7 +23,7 @@ export default function Alumni() {
                 <p className="text-purple-600 font-semibold mb-1">{alumnus.title}</p>
                 <p className="text-gray-600 text-sm mb-4">{alumnus.company}</p>
                 <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                  <button className="bg-blue-600 text-white px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-blue-700 hover:transform hover:-translate-y-1">
+                  <button className="bg-blue-600 text-white px-6 py-2 rounded-full text-sm font-semibold transition-all duration-300 hover:bg-blue-700 hover:transform hover:-translate-y-1 cursor-pointer">
                     LinkedIn
                   </button>
                 </a>

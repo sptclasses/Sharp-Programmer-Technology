@@ -56,7 +56,7 @@ export default function Courses() {
                   rel="noopener noreferrer"
                   className="block text-center"
                 >
-                  <button className="bg-green-500 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-green-600 hover:transform hover:-translate-y-1 w-full">
+                  <button className="bg-green-500 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-green-600 hover:transform hover:-translate-y-1 w-full cursor-pointer">
                     Learn More
                   </button>
                 </a>
