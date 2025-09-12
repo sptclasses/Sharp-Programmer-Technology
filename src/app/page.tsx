@@ -26,6 +26,7 @@ export default function Home() {
     setMobileMenuOpen(false);
   };
 
+
   return (
     <div className="min-h-screen bg-white text-gray-800 overflow-x-hidden">
       <Navigation
@@ -34,7 +35,7 @@ export default function Home() {
         setMobileMenuOpen={setMobileMenuOpen}
         scrollToSection={scrollToSection}
       />
-      <Hero />
+      <Hero scrollToSection={scrollToSection} />
       <About />
       <Courses />
       <Testimonials />
