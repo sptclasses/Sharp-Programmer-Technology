@@ -1,16 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import Navigation from "../component/Navigation";
-import Hero from "../component/Hero";
-import About from "../component/About";
-import Courses from "../component/Course";
-import Testimonials from "../component/Testimonials";
-import Results from "../component/Result";
-import Alumni from "../component/Alumni";
-import Contact from "../component/Contact";
-import Footer from "../component/Footer";
-import WhatsAppButton from "../component/WhatsAppButton";
+import Navigation from "../components/Navigation";
+import Hero from "../components/Hero";
+import About from "../components/About";
+import Courses from "../components/Courses";
+import Testimonials from "../components/Testimonials";
+import Results from "../components/Results";
+import Alumni from "../components/Alumni";
+import Email from "../components/Email";
+import Footer from "../components/Footer";
+import WhatsAppButton from "../components/WhatsAppButton";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -26,14 +26,6 @@ export default function Home() {
     setMobileMenuOpen(false);
   };
 
-  // Handle form submission
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    console.log("Form submitted:", Object.fromEntries(formData));
-    alert("Thank you for your message! We'll get back to you soon.");
-    e.currentTarget.reset();
-  };
 
   return (
     <div className="min-h-screen bg-white text-gray-800 overflow-x-hidden">
@@ -43,15 +35,17 @@ export default function Home() {
         setMobileMenuOpen={setMobileMenuOpen}
         scrollToSection={scrollToSection}
       />
-      <Hero />
+      <Hero scrollToSection={scrollToSection} />
       <About />
       <Courses />
       <Testimonials />
       <Results />
       <Alumni />
-      <Contact handleFormSubmit={handleFormSubmit} />
+      <Email/>
       <Footer scrollToSection={scrollToSection} />
       <WhatsAppButton />
+      
+   
     </div>
   );
 }
