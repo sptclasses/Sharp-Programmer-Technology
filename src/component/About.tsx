@@ -1,9 +1,14 @@
-import React from "react";
+import react from "react";
 import Image from "next/image";
 
-export default function About() {
-  return (
-    <section id="about" className="py-24 bg-gray-50">
+export default function About(){
+    const stats=[
+        {number: "500+",label:"Students Graduated"},
+        {number:"10+",label:"Years Experience"},
+        {number:"15+",label:"Expert Instructors"},
+    ];
+    return(
+         <section id="about" className="py-24 bg-gray-50">
       <div className="max-w-6xl mx-auto px-5">
         <h2 className="text-4xl font-bold text-center mb-12 text-gray-900">About Us</h2>
         <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -19,6 +24,12 @@ export default function About() {
               professional goals through our carefully designed courses and extensive library resources.
             </p>
             <div className="flex gap-8 justify-center md:justify-start">
+              {stats.map((stat, index) => (
+                <div key={index} className="text-center">
+                  <h4 className="text-2xl font-bold text-purple-600 mb-2">{stat.number}</h4>
+                  <p className="text-gray-600">{stat.label}</p>
+                </div>
+              ))}
             </div>
           </div>
           <div>
@@ -33,5 +44,5 @@ export default function About() {
         </div>
       </div>
     </section>
-  );
+    );
 }
