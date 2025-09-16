@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import{useState} from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { 
   faEnvelope, 
@@ -12,12 +13,18 @@ import {
   faPaperPlane,
   faUsers
 } from "@fortawesome/free-solid-svg-icons";
+// import { constants } from "buffer";
 
 interface ContactProps {
   handleFormSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
+
 export default function Contact({ handleFormSubmit }: ContactProps) {
+  const [openIndex,setOpenIndex]=useState<number | null>(null);
+  const toggleFAQ=(index:number)=>{
+    setOpenIndex(openIndex===index ? null:index)
+  }
   const faqs = [
     { 
       question: "How long are the courses?", 
@@ -215,9 +222,23 @@ export default function Contact({ handleFormSubmit }: ContactProps) {
               <div className="space-y-4 mb-8">
                 {faqs.map((faq, index) => (
                   <div key={index} className="border border-gray-200 rounded-xl overflow-hidden">
-                    <div className="bg-gradient-to-r from-purple-50 to-blue-50 p-4">
-                      <h4 className="font-bold text-gray-900 text-sm mb-2">{faq.question}</h4>
-                      <p className="text-gray-700 text-sm leading-relaxed">{faq.answer}</p>
+                   {/* <div className="bg-gradient-to-r from-purple-50 to-blue-50 p-4"> */}
+                    <button onClick={()=>toggleFAQ(index)}
+                    className="w-full text-left bg-gradient-to-r from-purple-50 to-blue-50 p-4 flex justify-between items-center">
+                      <h4 className="font-bold text-gray-900 text-sm">{faq.question}</h4>
+                      <span className="text-gray-500 text-lg">
+                        {openIndex===index?"-":"+"}
+                      </span>
+                      </button>
+                      {/* answer */}
+                      <div
+                      className={`transition-all duration-300 ease-in-out ${
+                        openIndex === index ? "max-h-40 p-4" : "max-h-0 p-0"
+                      } overflow-hidden`}
+                    >
+                      <p className="text-gray-700 text-sm leading-relaxed">
+                        {faq.answer}
+                      </p>
                     </div>
                   </div>
                 ))}
