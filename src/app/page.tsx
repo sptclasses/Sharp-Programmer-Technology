@@ -28,7 +28,7 @@ export default function Home() {
 
   // Scroll tracking for active section
   useEffect(() => {
-    const sectionIds = ["home", "about", "courses", "testimonials", "results", "alumni", "email", "contact"];
+    const sectionIds = ["home", "about", "courses", "contact"];
     const handleScroll = () => {
       let current = "home";
       for (const id of sectionIds) {
