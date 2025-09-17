@@ -47,7 +47,7 @@ export default function Hero({ scrollToSection }: HeroProps = {}) {
         >
           <span className="text-purple-400">Go beyond the code.</span> Master the technical and soft skills that truly empower your future.
         </h1>
-  <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 opacity-90 max-w-2xl mx-auto">
+       <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 opacity-90 max-w-2xl mx-auto">
           Your growth in technology is our mission. With expert guidance and comprehensive resources, we're here to help you excel and achieve your goals.
         </p>
         
