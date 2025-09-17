@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navigation from "../components/Navigation";
 import Hero from "../components/Hero";
 import About from "../components/About";
@@ -14,7 +14,6 @@ import WhatsAppButton from "../components/WhatsAppButton";
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [activeSection, setActiveSection] = useState("home");
 
   // Smooth scroll to section
@@ -24,8 +23,28 @@ export default function Home() {
       element.scrollIntoView({ behavior: "smooth" });
     }
     setMobileMenuOpen(false);
+    setActiveSection(sectionId);
   };
 
+  // Scroll tracking for active section
+  useEffect(() => {
+    const sectionIds = ["home", "about", "courses", "contact"];
+    const handleScroll = () => {
+      let current = "home";
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top <= 120) {
+            current = id;
+          }
+        }
+      }
+      setActiveSection(current);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div className="min-h-screen bg-white text-gray-800 overflow-x-hidden">
@@ -36,7 +55,7 @@ export default function Home() {
         scrollToSection={scrollToSection}
       />
       <Hero scrollToSection={scrollToSection} />
-      <About />
+      <About  />
       <Courses />
       <Testimonials />
       <Results />

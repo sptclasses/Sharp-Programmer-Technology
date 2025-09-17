@@ -19,7 +19,6 @@ export default function Navigation({
 }: NavigationProps) {
   const [featuresDropdownOpen, setFeaturesDropdownOpen] = useState(false);
   const navItems = ["home", "about", "courses", "features", "contact"];
-  const [clickedItem, setClickedItem] = useState<string>("home");
 
   
   const featuresSubMenu = [
@@ -94,21 +93,18 @@ export default function Navigation({
                   </div>
                 ) : (
                   <button
-                              onClick={() => {
-                              setClickedItem(item);
-                    scrollToSection(item);
-            }}
-            className={`font-medium transition-all duration-300 relative cursor-pointer ${
-              clickedItem === item
-                ? "text-blue-400"
-                : "text-white hover:text-blue-400"
-            }`}
->
-  {getDisplayName(item)}
-  {clickedItem === item && (
-    <span className="absolute bottom-[-5px] left-0 w-full h-0.5 bg-blue-400 transition-all duration-300"></span>
-  )}
-</button>
+                    onClick={() => scrollToSection(item)}
+                    className={`font-medium transition-all duration-300 relative cursor-pointer ${
+                      activeSection === item
+                        ? "text-blue-400"
+                        : "text-white hover:text-blue-400"
+                    }`}
+                  >
+                    {getDisplayName(item)}
+                    {activeSection === item && (
+                      <span className="absolute bottom-[-5px] left-0 w-full h-0.5 bg-blue-400 transition-all duration-300"></span>
+                    )}
+                  </button>
                 )}
               </li>
             ))}
