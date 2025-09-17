@@ -113,7 +113,7 @@ export default function CoursePage() {
                           : item === "courses"
                           ? "/course"
                           : item === "contact"
-                          ? "/contact"
+                          ? "/"
                           : "#"
                       }
                       className={`font-medium transition-all duration-300 relative cursor-pointer ${
@@ -201,7 +201,7 @@ export default function CoursePage() {
                         : item === "courses"
                         ? "/course"
                         : item === "contact"
-                        ? "/contact"
+                        ? "/"
                         : "#"
                     }
                     className="block w-full text-left px-5 py-2 font-medium text-white hover:text-blue-400 transition-colors cursor-pointer"
@@ -224,12 +224,14 @@ export default function CoursePage() {
       </nav>
 
       {/* Hero */}
-      <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-20 px-6 mt-16">
+  <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white pt-32 pb-12 md:pt-40 md:pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 mt-16">
         <div className="max-w-5xl mx-auto">
-          <p className="text-sm opacity-80 mb-2">
-            Home &gt; Course On Computer Concepts
+          <p className="text-xs sm:text-sm opacity-80 mb-2 cursor-pointer">
+            <span>
+              <Link href="/" className="text-white cursor-pointer hover:-translate-y-1 font-bold transition-transform">Home</Link>
+            </span> &gt; Course On Computer Concepts
           </p>
-          <h1 className="text-4xl font-bold">Course On Computer Concepts</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Course On Computer Concepts</h1>
         </div>
       </div>
 
@@ -254,73 +256,84 @@ export default function CoursePage() {
 
       {/* Content */}
       <div className="max-w-5xl mx-auto px-6 py-12 space-y-8">
-        {/* What you'll learn */}
-        <div className="bg-white shadow-md rounded-xl p-6">
-          <h2 className="text-lg text-gray-700 font-bold mb-4">What you'll learn</h2>
-          <div className="grid md:grid-cols-2 gap-3 text-gray-700 text-sm">
-            <p className="flex items-center gap-2">
-              <FontAwesomeIcon icon={faCheck} /> Build modern web applications
-              with React
-            </p>
-            <p className="flex items-center gap-2">
-              <FontAwesomeIcon icon={faCheck} /> Create RESTful APIs with
-              Node.js and Express
-            </p>
-            <p className="flex items-center gap-2">
-              <FontAwesomeIcon icon={faCheck} /> Work with MongoDB and database
-              design
-            </p>
-            <p className="flex items-center gap-2">
-              <FontAwesomeIcon icon={faCheck} /> Deploy applications to cloud
-              platforms
-            </p>
-            <p className="flex items-center gap-2">
-              <FontAwesomeIcon icon={faCheck} /> Implement authentication and
-              authorization
-            </p>
-            <p className="flex items-center gap-2">
-              <FontAwesomeIcon icon={faCheck} /> Master Git version control and
-              collaboration
-            </p>
-          </div>
-        </div>
-
-        {/* Course Description */}
-        <div className="bg-white shadow-md rounded-xl p-6">
-          <h2 className="text-lg text-gray-700 font-bold font-bold mb-4">Course Description</h2>
-          <p className="text-gray-700 text-sm mb-4">
-            Welcome to the most comprehensive Full Stack Web Development course
-            on the platform! This course is designed to take you from a complete
-            beginner to a job-ready full stack developer.
-          </p>
-          <p className="text-gray-700 text-sm mb-4">
-            You’ll learn React for frontend, Node.js and Express for backend,
-            and MongoDB for database management. We’ll also cover Git,
-            deployment strategies, and best practices for writing clean,
-            maintainable code.
-          </p>
-          <p className="text-gray-700 text-sm mb-4">
-            You will build real-world projects like:
-          </p>
-          <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
-            <li>A social media platform with real-time messaging</li>
-            <li>An e-commerce store with payment integration</li>
-            <li>A task management application</li>
-            <li>A blog platform with content management</li>
-            <li>A portfolio website to showcase your work</li>
-          </ul>
-        </div>
-
-        {/* Requirements */}
-        <div className="bg-white shadow-md rounded-xl p-6">
-          <h2 className="text-lg text-gray-700 font-bold font-bold mb-4">Requirements</h2>
-          <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
-            <li>Basic understanding of HTML and CSS</li>
-            <li>Familiarity with JavaScript fundamentals</li>
-            <li>A computer with internet connection</li>
-            <li>Willingness to learn and practice coding</li>
-          </ul>
-        </div>
+        {activeTab === "overview" && (
+          <>
+            {/* Overview Content */}
+            <div className="bg-white shadow-md rounded-xl p-6">
+              <h2 className="text-lg text-gray-700 font-bold mb-4">What you'll learn</h2>
+              <div className="grid md:grid-cols-2 gap-3 text-gray-700 text-sm">
+                <p className="flex items-center gap-2">
+                  <FontAwesomeIcon icon={faCheck} /> Build modern web applications with React
+                </p>
+                <p className="flex items-center gap-2">
+                  <FontAwesomeIcon icon={faCheck} /> Create RESTful APIs with Node.js and Express
+                </p>
+                <p className="flex items-center gap-2">
+                  <FontAwesomeIcon icon={faCheck} /> Work with MongoDB and database design
+                </p>
+                <p className="flex items-center gap-2">
+                  <FontAwesomeIcon icon={faCheck} /> Deploy applications to cloud platforms
+                </p>
+                <p className="flex items-center gap-2">
+                  <FontAwesomeIcon icon={faCheck} /> Implement authentication and authorization
+                </p>
+                <p className="flex items-center gap-2">
+                  <FontAwesomeIcon icon={faCheck} /> Master Git version control and collaboration
+                </p>
+              </div>
+            </div>
+          </>
+        )}
+        {activeTab === "benefits" && (
+          <>
+            {/* Benefits Content */}
+            <div className="bg-white shadow-md rounded-xl p-6">
+              <h2 className="text-lg text-gray-700 font-bold mb-4">Benefits</h2>
+              <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
+                <li>Gain in-demand full stack development skills</li>
+                <li>Access to real-world projects and hands-on experience</li>
+                <li>Expert mentorship and career guidance</li>
+                <li>Flexible learning at your own pace</li>
+                <li>Certificate upon successful completion</li>
+              </ul>
+            </div>
+          </>
+        )}
+        {activeTab === "job market" && (
+          <>
+            {/* Job Market Content */}
+            <div className="bg-white shadow-md rounded-xl p-6">
+              <h2 className="text-lg text-gray-700 font-bold mb-4">Job Market</h2>
+              <p className="text-gray-700 text-sm mb-4">
+                The demand for full stack developers is rapidly growing across industries. Companies are seeking professionals who can handle both frontend and backend development, making you highly employable.
+              </p>
+              <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
+                <li>Opportunities in tech startups and established companies</li>
+                <li>Remote and onsite job options</li>
+                <li>Competitive salaries and growth potential</li>
+                <li>Roles: Full Stack Developer, Frontend Developer, Backend Developer, DevOps Engineer</li>
+              </ul>
+            </div>
+          </>
+        )}
+        {activeTab === "opportunities" && (
+          <>
+            {/* Opportunities Content */}
+            <div className="bg-white shadow-md rounded-xl p-6">
+              <h2 className="text-lg text-gray-700 font-bold mb-4">Opportunities</h2>
+              <p className="text-gray-700 text-sm mb-4">
+                After completing this course, you can pursue various opportunities:
+              </p>
+              <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
+                <li>Work as a freelance developer</li>
+                <li>Join a tech company or startup</li>
+                <li>Build your own products or SaaS</li>
+                <li>Continue learning advanced technologies</li>
+                <li>Contribute to open source projects</li>
+              </ul>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
