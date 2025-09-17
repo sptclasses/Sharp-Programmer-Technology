@@ -28,7 +28,7 @@ export default function WhatsAppButton() {
         </div>
       </div>
       
-      {/* WhatsApp Button */}
+      {/* WhatsApp Button
       <a
         href="https://wa.me/91000000000"
         target="_blank"
@@ -36,7 +36,7 @@ export default function WhatsAppButton() {
         className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white text-2xl shadow-lg transition-all duration-300 hover:bg-green-600 hover:scale-110 block"
       >
         <FontAwesomeIcon icon={faWhatsapp} />
-      </a>
+      </a> */}
     </div>
   );
 }

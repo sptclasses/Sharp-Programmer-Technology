@@ -2,6 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGraduationCap, faCode, faChartLine } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 export default function Courses() {
   const courseCategories = [
@@ -146,9 +147,12 @@ export default function Courses() {
                         category.id === 'nielit' ? 'mt-auto' : ''
                       }`}>
                         <span className="text-sm font-semibold text-gray-800">Duration: {course.duration}</span>
-                        <button className={`${category.color} ${category.hoverColor} text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 hover:transform hover:-translate-y-1 cursor-pointer`}>
-                          Learn More
-                        </button>
+                        <Link href="/CourseLandingPage">
+  <button className="text-white bg-purple-600 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-purple-700 transition-all duration-300">
+    Learn More
+  </button>
+</Link>
+                        
                       </div>
                     </div>
                   ))}
