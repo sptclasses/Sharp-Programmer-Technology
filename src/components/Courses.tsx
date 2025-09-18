@@ -3,6 +3,7 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGraduationCap, faCode, faChartLine } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import Link from "next/link";
 
 export default function Courses() {
   const courseCategories = [
