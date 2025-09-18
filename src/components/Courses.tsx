@@ -3,7 +3,6 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGraduationCap, faCode, faChartLine } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import Link from "next/link";
 
 export default function Courses() {
   const courseCategories = [
@@ -149,7 +148,7 @@ export default function Courses() {
                       }`}>
                         <span className="text-sm font-semibold text-gray-800">Duration: {course.duration}</span>
                         <Link href="/CourseLandingPage">
-  <button className="text-white bg-purple-600 px-4 py-2 cursor-pointer rounded-lg text-sm font-semibold hover:bg-purple-700 transition-all duration-300">
+  <button className="text-white bg-purple-600 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-purple-700 transition-all duration-300 cursor-pointer">
     Learn More
   </button>
 </Link>

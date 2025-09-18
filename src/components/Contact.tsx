@@ -2,19 +2,7 @@
 
 import React from "react";
 import{useState} from "react"
-import{useState} from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { 
-  faEnvelope, 
-  faPhone, 
-  faMapMarkerAlt, 
-  faClock, 
-  faQuestionCircle,
-  faHeadset,
-  faPaperPlane,
-  faUsers
-} from "@fortawesome/free-solid-svg-icons";
-// import { constants } from "buffer";
 import { 
   faEnvelope, 
   faPhone, 
@@ -32,33 +20,12 @@ interface ContactProps {
 }
 
 
-
 export default function Contact({ handleFormSubmit }: ContactProps) {
   const [openIndex,setOpenIndex]=useState<number | null>(null);
   const toggleFAQ=(index:number)=>{
     setOpenIndex(openIndex===index ? null:index)
   }
-  const [openIndex,setOpenIndex]=useState<number | null>(null);
-  const toggleFAQ=(index:number)=>{
-    setOpenIndex(openIndex===index ? null:index)
-  }
   const faqs = [
-    { 
-      question: "How long are the courses?", 
-      answer: "Course duration varies from 2-12 months depending on the program. CCC is 3 months, Python is 4 months, and O-Level is 12 months." 
-    },
-    { 
-      question: "Are the courses government certified?", 
-      answer: "Yes, our CCC and O-Level courses are NIELIT certified. We also provide industry-recognized certificates for other courses." 
-    },
-    { 
-      question: "Do you provide job assistance?", 
-      answer: "Absolutely! We have a 95% job placement rate and partnerships with 50+ companies to help our students find suitable positions." 
-    },
-    { 
-      question: "Can I attend classes online?", 
-      answer: "No, we offer only offline classes. You can choose the mode that suits your schedule and preferences." 
-    },
     { 
       question: "How long are the courses?", 
       answer: "Course duration varies from 2-12 months depending on the program. CCC is 3 months, Python is 4 months, and O-Level is 12 months." 
@@ -85,18 +52,10 @@ export default function Contact({ handleFormSubmit }: ContactProps) {
       action: "Email",
       link: "mailto:Email",
       gradient: "from-blue-500 to-purple-600"
-      description: "Get detailed information about our courses and admission process",
-      action: "Email",
-      link: "mailto:Email",
-      gradient: "from-blue-500 to-purple-600"
     },
     {
       icon: faPhone,
       title: "Call Us",
-      description: "Speak directly with our admission counselors",
-      action: "+9100000000",
-      link: "tel:+9100000000",
-      gradient: "from-green-500 to-teal-600"
       description: "Speak directly with our admission counselors",
       action: "+9100000000",
       link: "tel:+9100000000",
@@ -107,10 +66,7 @@ export default function Contact({ handleFormSubmit }: ContactProps) {
       title: "Visit Us",
       description: "Tour our modern facilities and meet our experienced faculty",
       action: "View Location",
-      description: "Tour our modern facilities and meet our experienced faculty",
-      action: "View Location",
       link: "#address",
-      gradient: "from-orange-500 to-red-600"
       gradient: "from-orange-500 to-red-600"
     },
   ];
@@ -206,7 +162,7 @@ export default function Contact({ handleFormSubmit }: ContactProps) {
                     <select
                       id="subject"
                       name="subject"
-                      className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl cursor-pointer focus:border-purple-600 focus:outline-none transition-all duration-300 hover:border-gray-300 bg-gray-50 focus:bg-white"
+                      className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:border-purple-600 focus:outline-none transition-all duration-300 hover:border-gray-300 bg-gray-50 focus:bg-white"
                     >
                       <option value="">Select your interest</option>
                       <option value="CCC Course">CCC Course</option>
@@ -256,7 +212,7 @@ export default function Contact({ handleFormSubmit }: ContactProps) {
           </div>
 
           {/* FAQ Section - Takes 1 column */}
-          <div className="xl:col-span-1 ">
+          <div className="xl:col-span-1">
             <div className="bg-white p-8 rounded-3xl shadow-2xl border border-gray-100 h-full">
               <div className="flex items-center gap-3 mb-8">
                 <FontAwesomeIcon icon={faQuestionCircle} className="text-2xl text-blue-600" />
@@ -265,7 +221,7 @@ export default function Contact({ handleFormSubmit }: ContactProps) {
               
               <div className="space-y-4 mb-8">
                 {faqs.map((faq, index) => (
-                  <div key={index} className="border border-gray-200 rounded-xl overflow-hidden  hover:shadow-lg transition-shadow duration-300">
+                  <div key={index} className="border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300   ease-in-out transform hover:-translate-y-1">
                    {/* <div className="bg-gradient-to-r from-purple-50 to-blue-50 p-4"> */}
                     <button onClick={()=>toggleFAQ(index)}
                     className="w-full text-left bg-gradient-to-r from-purple-50 to-blue-50 p-4 flex justify-between items-center cursor-pointer">
@@ -315,25 +271,18 @@ export default function Contact({ handleFormSubmit }: ContactProps) {
 
         {/* Contact Cards */}
         <div className="grid md:grid-cols-3 gap-8">
-        {/* Contact Cards */}
-        <div className="grid md:grid-cols-3 gap-8">
           {contactCards.map((contact, index) => (
             <div
               key={index}
               className="bg-white p-8 rounded-3xl text-center shadow-xl transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-2xl border border-gray-100"
-              className="bg-white p-8 rounded-3xl text-center shadow-xl transition-all duration-300 hover:transform hover:-translate-y-2 hover:shadow-2xl border border-gray-100"
             >
-              <div className={`w-20 h-20 bg-gradient-to-br ${contact.gradient} rounded-2xl flex items-center justify-center mx-auto mb-6 text-white text-2xl hover:scale-105 transition-transform duration-300 shadow-lg`}>
               <div className={`w-20 h-20 bg-gradient-to-br ${contact.gradient} rounded-2xl flex items-center justify-center mx-auto mb-6 text-white text-2xl hover:scale-105 transition-transform duration-300 shadow-lg`}>
                 <FontAwesomeIcon icon={contact.icon} />
               </div>
               <h3 className="text-2xl font-bold mb-4 text-gray-900">{contact.title}</h3>
               <p className="text-gray-600 mb-6 leading-relaxed">{contact.description}</p>
-              <h3 className="text-2xl font-bold mb-4 text-gray-900">{contact.title}</h3>
-              <p className="text-gray-600 mb-6 leading-relaxed">{contact.description}</p>
               <a
                 href={contact.link}
-                className={`inline-block bg-gradient-to-r ${contact.gradient} text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 hover:scale-105 hover:shadow-lg`}
                 className={`inline-block bg-gradient-to-r ${contact.gradient} text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 hover:scale-105 hover:shadow-lg`}
               >
                 {contact.action}
