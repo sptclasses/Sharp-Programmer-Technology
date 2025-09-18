@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhone, faChevronDown ,faGraduationCap} from "@fortawesome/free-solid-svg-icons";
+import { faPhone, faChevronDown, faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 
 interface NavigationProps {
   activeSection: string;
@@ -19,6 +19,7 @@ export default function Navigation({
 }: NavigationProps) {
   const [featuresDropdownOpen, setFeaturesDropdownOpen] = useState(false);
   const navItems = ["home", "about", "courses", "features", "contact"];
+
   
   const featuresSubMenu = [
     { id: "library", name: "Library" },
@@ -39,13 +40,14 @@ export default function Navigation({
 
   return (
     <nav className="fixed top-0 w-full bg-gray-800/95 backdrop-blur-md z-50 shadow-lg transition-all duration-300">
-      <div className="max-w-6xl mx-auto px-5 flex justify-between items-center py-4">
-        <div className="flex items-center gap-3 text-xl font-bold text-white">
-          <div className="w-8 h-8 bg-purple-600 rounded flex items-center justify-center text-white font-bold">
-            <FontAwesomeIcon icon={faGraduationCap} />
-          </div>
+      <div className="max-w-full mx-auto px-5 flex items-center py-4">
+        {/* Logo and Company Name - Left Side */}
+        <div className="flex items-center gap-3 text-xl font-bold text-white mr-auto">
+          <FontAwesomeIcon icon={faGraduationCap} className="text-2xl text-purple-400" />
           <span>Sharp Programming Technology</span>
         </div>
+        
+        {/* Navigation Items and Phone - Right Side */}
         <div className="flex items-center gap-8">
           <ul className="hidden md:flex gap-8">
             {navItems.map((item) => (
@@ -93,26 +95,32 @@ export default function Navigation({
                   <button
                     onClick={() => scrollToSection(item)}
                     className={`font-medium transition-all duration-300 relative cursor-pointer ${
-                      activeSection === item ? "text-blue-400" : "text-white hover:text-blue-400"
+                      activeSection === item
+                        ? "text-blue-400"
+                        : "text-white hover:text-blue-400"
                     }`}
                   >
                     {getDisplayName(item)}
-                    {activeSection === item && <span className="absolute bottom-[-5px] left-0 w-full h-0.5 bg-blue-400"></span>}
+                    {activeSection === item && (
+                      <span className="absolute bottom-[-5px] left-0 w-full h-0.5 bg-blue-400 transition-all duration-300"></span>
+                    )}
                   </button>
                 )}
               </li>
             ))}
           </ul>
           <a 
-            href="tel:+91000000000" 
+            href="tel:+9100000000" 
             className="hidden md:flex items-center gap-2 text-white bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-full transition-colors duration-300 cursor-pointer"
           >
             <FontAwesomeIcon icon={faPhone} className="text-sm" />
             <span className="text-sm font-medium">+91-000000000</span>
           </a>
         </div>
+        
+        {/* Mobile Menu Button - Right Side */}
         <button
-          className="md:hidden flex flex-col gap-1 cursor-pointer"
+          className="md:hidden flex flex-col gap-1 cursor-pointer ml-4"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
           <span className="w-6 h-0.5 bg-white transition-all duration-300"></span>
@@ -167,11 +175,11 @@ export default function Navigation({
             </div>
           ))}
           <a 
-            href="tel:+917508644919" 
+            href="tel:+9100000000" 
             className="flex items-center gap-2 text-white hover:text-blue-400 px-5 py-2 mt-2 transition-colors cursor-pointer"
           >
             <FontAwesomeIcon icon={faPhone} className="text-sm" />
-            <span className="text-sm font-medium">+91-75086 44919</span>
+            <span className="text-sm font-medium">+91-000000000</span>
           </a>
         </div>
       )}
