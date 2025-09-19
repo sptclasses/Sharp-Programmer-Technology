@@ -148,7 +148,7 @@ export default function Courses() {
                       }`}>
                         <span className="text-sm font-semibold text-gray-800">Duration: {course.duration}</span>
                         <Link href="/CourseLandingPage">
-  <button className="text-white bg-purple-600 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-purple-700 transition-all duration-300">
+  <button className="text-white bg-purple-600 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-purple-700 transition-all duration-300 cursor-pointer">
     Learn More
   </button>
 </Link>

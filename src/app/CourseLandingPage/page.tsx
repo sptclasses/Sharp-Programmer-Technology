@@ -237,15 +237,15 @@ export default function CoursePage() {
 
       {/* Tabs */}
       <div className="border-b border-gray-200 px-6">
-        <div className="max-w-5xl mx-auto flex gap-8">
+        <div className="max-w-5xl mx-auto flex gap-8 ">
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab.toLowerCase())}
               className={`py-4 font-medium ${
                 activeTab === tab.toLowerCase()
-                  ? "text-purple-600 border-b-2 border-purple-600"
-                  : "text-gray-500 hover:text-purple-600"
+                  ? "text-purple-600 border-b-2 border-purple-600 cursor-pointer"
+                  : "text-gray-500 hover:text-purple-600 cursor-pointer"
               }`}
             >
               {tab}
@@ -255,7 +255,7 @@ export default function CoursePage() {
       </div>
 
       {/* Content */}
-      <div className="max-w-5xl mx-auto px-6 py-12 space-y-8">
+      <div className="max-w-5xl mx-auto px-6 py-12 space-y-8 ">
         {activeTab === "overview" && (
           <>
             {/* Overview Content */}

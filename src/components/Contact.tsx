@@ -221,12 +221,12 @@ export default function Contact({ handleFormSubmit }: ContactProps) {
               
               <div className="space-y-4 mb-8">
                 {faqs.map((faq, index) => (
-                  <div key={index} className="border border-gray-200 rounded-xl overflow-hidden">
+                  <div key={index} className="border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300   ease-in-out transform hover:-translate-y-1">
                    {/* <div className="bg-gradient-to-r from-purple-50 to-blue-50 p-4"> */}
                     <button onClick={()=>toggleFAQ(index)}
-                    className="w-full text-left bg-gradient-to-r from-purple-50 to-blue-50 p-4 flex justify-between items-center">
+                    className="w-full text-left bg-gradient-to-r from-purple-50 to-blue-50 p-4 flex justify-between items-center cursor-pointer">
                       <h4 className="font-bold text-gray-900 text-sm">{faq.question}</h4>
-                      <span className="text-gray-500 text-lg">
+                      <span className="text-gray-500 text-lg cursor-pointer select-none">
                         {openIndex===index?"-":"+"}
                       </span>
                       </button>
