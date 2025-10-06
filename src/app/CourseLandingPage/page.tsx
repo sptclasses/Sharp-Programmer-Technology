@@ -5,15 +5,61 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faGraduationCap, faPhone, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
+// Data for Course Handout Table
+const courseHandoutData = [
+  {
+    sno: 1,
+    chapter: "Introduction to Computers",
+    duration: "2",
+    theoryLab: "1/1",
+    outcomes: "Understand basic computer concepts"
+  },
+  {
+    sno: 2,
+    chapter: "Operating Systems",
+    duration: "3",
+    theoryLab: "2/1",
+    outcomes: "Learn OS basics and usage"
+  },
+  // Add more rows as needed
+];
+
+// Table component for Course Handout
+function CourseHandoutTable() {
+  return (
+    <table className="min-w-full border text-sm text-black">
+      <thead>
+        <tr className="bg-gray-100">
+          <th className="border px-2 py-1">S. No.</th>
+          <th className="border px-2 py-1">Chapter Name</th>
+          <th className="border px-2 py-1">Duration (Hours)</th>
+          <th className="border px-2 py-1">Theory/Lab</th>
+          <th className="border px-2 py-1">Learning Outcomes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {courseHandoutData.map((row, idx) => (
+          <tr key={idx}>
+            <td className="border px-2 py-1 text-center">{row.sno}</td>
+            <td className="border px-2 py-1">{row.chapter}</td>
+            <td className="border px-2 py-1 text-center">{row.duration}</td>
+            <td className="border px-2 py-1 text-center">{row.theoryLab}</td>
+            <td className="border px-2 py-1">{row.outcomes}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
 export default function CoursePage() {
-  const [activeTab, setActiveTab] = useState("overview");
   const [featuresDropdownOpen, setFeaturesDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
+  const [clickedItem, setClickedItem] = useState<string>("courses");
 
-  const tabs = ["Overview", "Benefits", "Job Market", "Opportunities"];
+  const tabs = ["Overview", "Course Handout", "Benefits", "Job Market", "Opportunities"];
   const navItems = ["home", "about", "courses", "features", "contact"];
-   const [clickedItem, setClickedItem] = useState<string>("courses");
 
   const featuresSubMenu = [
     { id: "library", name: "Library" },
@@ -37,6 +83,13 @@ export default function CoursePage() {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const scrollToTab = (tabName: string) => {
+    const element = document.getElementById(tabName.toLowerCase().replace(/\s+/g, '-'));
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
 
@@ -235,18 +288,17 @@ export default function CoursePage() {
         </div>
       </div>
 
-      {/* Tabs */}
-      <div className="border-b border-gray-200 px-6">
-        <div className="max-w-5xl mx-auto flex gap-8 ">
+      {/* Navigation Tabs */}
+      <div className="border-b border-gray-200 px-6 sticky top-20 bg-white z-40">
+        <div
+          className="flex gap-8"
+          style={{ width: 'calc(100% - 400px)', marginLeft: '160px', maxWidth: '100%' }}
+        >
           {tabs.map((tab) => (
             <button
               key={tab}
-              onClick={() => setActiveTab(tab.toLowerCase())}
-              className={`py-4 font-medium ${
-                activeTab === tab.toLowerCase()
-                  ? "text-purple-600 border-b-2 border-purple-600 cursor-pointer"
-                  : "text-gray-500 hover:text-purple-600 cursor-pointer"
-              }`}
+              onClick={() => scrollToTab(tab)}
+              className="py-4 font-medium text-gray-500 hover:text-purple-600 cursor-pointer transition-colors"
             >
               {tab}
             </button>
@@ -254,86 +306,125 @@ export default function CoursePage() {
         </div>
       </div>
 
-      {/* Content */}
-      <div className="max-w-5xl mx-auto px-6 py-12 space-y-8 ">
-        {activeTab === "overview" && (
-          <>
-            {/* Overview Content */}
-            <div className="bg-white shadow-md rounded-xl p-6">
-              <h2 className="text-lg text-gray-700 font-bold mb-4">What you'll learn</h2>
-              <div className="grid md:grid-cols-2 gap-3 text-gray-700 text-sm">
-                <p className="flex items-center gap-2">
-                  <FontAwesomeIcon icon={faCheck} /> Build modern web applications with React
-                </p>
-                <p className="flex items-center gap-2">
-                  <FontAwesomeIcon icon={faCheck} /> Create RESTful APIs with Node.js and Express
-                </p>
-                <p className="flex items-center gap-2">
-                  <FontAwesomeIcon icon={faCheck} /> Work with MongoDB and database design
-                </p>
-                <p className="flex items-center gap-2">
-                  <FontAwesomeIcon icon={faCheck} /> Deploy applications to cloud platforms
-                </p>
-                <p className="flex items-center gap-2">
-                  <FontAwesomeIcon icon={faCheck} /> Implement authentication and authorization
-                </p>
-                <p className="flex items-center gap-2">
-                  <FontAwesomeIcon icon={faCheck} /> Master Git version control and collaboration
-                </p>
+      {/* Course Content - All Sections Visible */}
+      <div
+        className="py-12 space-y-16"
+        style={{ width: 'calc(100% - 400px)', marginLeft: '160px', maxWidth: '100%' }}
+      >
+        {/* Overview Section */}
+        <section id="overview" className="scroll-mt-32">
+          <div className="bg-white shadow-md rounded-xl p-6">
+            <h2 className="text-2xl text-gray-800 font-bold mb-6">Overview</h2>
+            <div className="text-gray-800 space-y-5">
+              <p>
+                The Course on Computer Concepts (CCC) is a foundational computer literacy program designed to equip learners with essential IT skills for personal, academic, and professional use. It provides a strong understanding of computer operations, applications, and the internet, enabling participants to confidently use digital tools in everyday life.
+              </p>
+              <div>
+                <span className="font-semibold text-lg">🎯 Objectives</span>
+                <ul className="list-disc list-inside ml-5 mt-2 space-y-1">
+                  <li>To introduce the basic concepts of computers and information technology.</li>
+                  <li>To develop skills in using common computer applications.</li>
+                  <li>To promote digital literacy and e-Governance awareness.</li>
+                </ul>
+              </div>
+              <div>
+                <span className="font-semibold text-lg">📘 What You’ll Learn</span>
+                <ul className="list-disc list-inside ml-5 mt-2 space-y-1">
+                  <li>Fundamentals of Computers: Hardware, software, input/output devices, operating systems.</li>
+                  <li>Word Processing & Spreadsheets: Create, format, and analyze documents and data.</li>
+                  <li>Presentation Skills: Design and deliver digital presentations.</li>
+                  <li>Internet & Email: Use browsers, search engines, and communicate via email.</li>
+                  <li>Digital Financial Services: Online banking, UPI, and cybersecurity basics.</li>
+                </ul>
+              </div>
+              <div>
+                <span className="font-semibold text-lg">🧠 Who Should Enroll</span>
+                <ul className="list-disc list-inside ml-5 mt-2 space-y-1">
+                  <li>Students, job seekers, and professionals seeking basic computer proficiency.</li>
+                  <li>Anyone preparing for government or competitive exams where computer knowledge is required.</li>
+                </ul>
+              </div>
+              <div>
+                <span className="font-semibold text-lg">🕒 Duration</span>
+                <p className="ml-5 mt-2">Typically 80 hours (Theory + Practical) — can be completed in 2–3 months.</p>
+              </div>
+              <div>
+                <span className="font-semibold text-lg">🏆 Certification</span>
+                <p className="ml-5 mt-2">After successful completion, learners receive an NIELIT (DOEACC) CCC Certificate, recognized by government and private organizations across India.</p>
               </div>
             </div>
-          </>
-        )}
-        {activeTab === "benefits" && (
-          <>
-            {/* Benefits Content */}
-            <div className="bg-white shadow-md rounded-xl p-6">
-              <h2 className="text-lg text-gray-700 font-bold mb-4">Benefits</h2>
-              <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
-                <li>Gain in-demand full stack development skills</li>
-                <li>Access to real-world projects and hands-on experience</li>
-                <li>Expert mentorship and career guidance</li>
-                <li>Flexible learning at your own pace</li>
-                <li>Certificate upon successful completion</li>
+          </div>
+        </section>
+
+        {/* Course Handout Section */}
+        <section id="course-handout" className="scroll-mt-32">
+          <div className="bg-white shadow-md rounded-xl p-6 overflow-x-auto">
+            <h2 className="text-2xl text-black font-bold mb-6">Course Handout</h2>
+            {/* Data-driven table for easy updates */}
+            <CourseHandoutTable />
+          </div>
+        </section>
+
+        {/* Benefits Section */}
+        <section id="benefits" className="scroll-mt-32">
+          <div className="bg-white shadow-md rounded-xl p-6">
+            <h2 className="text-2xl text-gray-800 font-bold mb-6">Benefits</h2>
+            <div className="space-y-4">
+              <ul className="list-disc list-inside text-gray-700 space-y-3">
+                <li className="text-sm">Gain in-demand full stack development skills</li>
+                <li className="text-sm">Access to real-world projects and hands-on experience</li>
+                <li className="text-sm">Expert mentorship and career guidance</li>
+                <li className="text-sm">Flexible learning at your own pace</li>
+                <li className="text-sm">Certificate upon successful completion</li>
+                <li className="text-sm">Job placement assistance and career support</li>
+                <li className="text-sm">Access to exclusive developer community</li>
               </ul>
             </div>
-          </>
-        )}
-        {activeTab === "job market" && (
-          <>
-            {/* Job Market Content */}
-            <div className="bg-white shadow-md rounded-xl p-6">
-              <h2 className="text-lg text-gray-700 font-bold mb-4">Job Market</h2>
-              <p className="text-gray-700 text-sm mb-4">
-                The demand for full stack developers is rapidly growing across industries. Companies are seeking professionals who can handle both frontend and backend development, making you highly employable.
-              </p>
-              <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
-                <li>Opportunities in tech startups and established companies</li>
-                <li>Remote and onsite job options</li>
-                <li>Competitive salaries and growth potential</li>
-                <li>Roles: Full Stack Developer, Frontend Developer, Backend Developer, DevOps Engineer</li>
+          </div>
+        </section>
+
+        {/* Job Market Section */}
+        <section id="job-market" className="scroll-mt-32">
+          <div className="bg-white shadow-md rounded-xl p-6">
+            <h2 className="text-2xl text-gray-800 font-bold mb-6">Job Market</h2>
+            <p className="text-gray-700 mb-6 leading-relaxed">
+              The demand for full stack developers is rapidly growing across industries. Companies are seeking professionals who can handle both frontend and backend development, making you highly employable in today's competitive market.
+            </p>
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-gray-800">Market Opportunities:</h3>
+              <ul className="list-disc list-inside text-gray-700 space-y-3">
+                <li className="text-sm">Opportunities in tech startups and established companies</li>
+                <li className="text-sm">Remote and onsite job options available globally</li>
+                <li className="text-sm">Competitive salaries ranging from ₹4-15 LPA</li>
+                <li className="text-sm">Career growth potential and leadership opportunities</li>
+                <li className="text-sm">Roles: Full Stack Developer, Frontend Developer, Backend Developer, DevOps Engineer</li>
               </ul>
             </div>
-          </>
-        )}
-        {activeTab === "opportunities" && (
-          <>
-            {/* Opportunities Content */}
-            <div className="bg-white shadow-md rounded-xl p-6">
-              <h2 className="text-lg text-gray-700 font-bold mb-4">Opportunities</h2>
-              <p className="text-gray-700 text-sm mb-4">
-                After completing this course, you can pursue various opportunities:
-              </p>
-              <ul className="list-disc list-inside text-gray-700 text-sm space-y-1">
-                <li>Work as a freelance developer</li>
-                <li>Join a tech company or startup</li>
-                <li>Build your own products or SaaS</li>
-                <li>Continue learning advanced technologies</li>
-                <li>Contribute to open source projects</li>
+          </div>
+        </section>
+
+        {/* Opportunities Section */}
+        <section id="opportunities" className="scroll-mt-32">
+          <div className="bg-white shadow-md rounded-xl p-6">
+            <h2 className="text-2xl text-gray-800 font-bold mb-6">Career Opportunities</h2>
+            <p className="text-gray-700 mb-6 leading-relaxed">
+              After completing this comprehensive course, you'll have access to diverse career paths and exciting opportunities in the tech industry.
+            </p>
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-gray-800">Your Future Paths:</h3>
+              <ul className="list-disc list-inside text-gray-700 space-y-3">
+                <li className="text-sm">Work as a freelance developer with international clients</li>
+                <li className="text-sm">Join leading tech companies or innovative startups</li>
+                <li className="text-sm">Build your own products, SaaS applications, or tech business</li>
+                <li className="text-sm">Continue learning advanced technologies like AI/ML, Cloud Computing</li>
+                <li className="text-sm">Contribute to open source projects and build your reputation</li>
+                <li className="text-sm">Become a technical mentor or instructor</li>
+                <li className="text-sm">Transition into product management or technical leadership roles</li>
               </ul>
             </div>
-          </>
-        )}
+          </div>
+        </section>
+
       </div>
     </div>
   );

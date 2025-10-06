@@ -8,7 +8,7 @@ export default function Alumni() {
     { 
       name: "Maria Rodriguez", 
       title: "Senior Software Engineer", 
-      company: "Google",
+      grade: "A+",
       course: "Python & Web Development",
       linkedin: "#",
       twitter:"#",
@@ -18,7 +18,7 @@ export default function Alumni() {
     { 
       name: "Ahmed Hassan", 
       title: "Data Science Manager", 
-      company: "Microsoft",
+      grade: "A+",
       course: "Python & Digital Marketing",
       linkedin: "#",
       twitter: "#",
@@ -28,7 +28,7 @@ export default function Alumni() {
     { 
       name: "Sarah Johnson", 
       title: "Marketing Director", 
-      company: "Amazon",
+      grade: "A+",
       course: "Digital Marketing & Tally",
       linkedin: "#",
       twitter: "#",
@@ -63,21 +63,21 @@ export default function Alumni() {
                   <div className={`w-24 h-24 bg-gradient-to-br ${alumnus.gradient} rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4 hover:scale-105 transition-transform duration-300 shadow-lg`}>
                     {alumnus.image}
                   </div>
-                  <div className="flex items-center justify-center gap-1 mb-2">
+                  {/* <div className="flex items-center justify-center gap-1 mb-2">
                     {[...Array(5)].map((_, i) => (
                       <FontAwesomeIcon key={i} icon={faStar} className="text-yellow-400 text-sm" />
                     ))}
-                  </div>
+                  </div> */}
                 </div>
                 
                 {/* Alumni Info */}
                 <div className="text-center mb-6">
                   <h4 className="text-xl font-bold mb-2 text-gray-900">{alumnus.name}</h4>
-                  <div className="flex items-center justify-center gap-2 mb-2">
+                  {/* <div className="flex items-center justify-center gap-2 mb-2">
                     <FontAwesomeIcon icon={faBriefcase} className="text-gray-500 text-sm" />
                     <p className="text-purple-600 font-semibold">{alumnus.title}</p>
-                  </div>
-                  <p className="text-lg font-bold text-gray-800 mb-3">{alumnus.company}</p>
+                  </div> */}
+                  <p className="text-lg font-bold text-gray-800 mb-3">{alumnus.grade}</p>
                   
                   {/* Course Badge */}
                   <div className="flex items-center justify-center gap-2 mb-3">
@@ -89,7 +89,7 @@ export default function Alumni() {
                 </div>
                 
                 {/* Social Links */}
-                <div className="flex justify-center gap-3">
+                {/* <div className="flex justify-center gap-3">
                   {alumnus.linkedin && (
                     <a href={alumnus.linkedin} target="_blank" rel="noopener noreferrer">
                       <button className="w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-all duration-300 hover:scale-105 cursor-pointer shadow-lg">
@@ -104,7 +104,7 @@ export default function Alumni() {
                       </button>
                     </a>
                   )}
-                </div>
+                </div> */}
               </div>
             </div>
           ))}
