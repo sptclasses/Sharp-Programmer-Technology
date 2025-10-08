@@ -47,6 +47,28 @@ function CourseHandoutTable() {
             <td className="border px-2 py-1">{row.outcomes}</td>
           </tr>
         ))}
+        {/* Online Test Section with Google Form Embed */}
+        <section id="online-test" className="px-6 pb-12">
+          <div className="max-w-6xl mx-auto">
+            <div className="bg-white shadow-md rounded-xl p-6">
+              <h2 className="text-2xl text-gray-800 font-bold mb-6">Online Test</h2>
+              <div className="overflow-hidden rounded-lg">
+                <iframe
+                  src="https://docs.google.com/forms/d/e/1FAIpQLSdNSwwcK9Cn1w3Hr8onp59uk8MC0x3glllC_5JU_LVn5hdcgQ/viewform?embedded=true"
+                  width="100%"
+                  height="800"
+                  frameBorder={0}
+                  marginHeight={0}
+                  marginWidth={0}
+                  title="Online Test Form"
+                  className="w-full h-[800px]"
+                >
+                  Loading…
+                </iframe>
+              </div>
+            </div>
+          </div>
+        </section>
       </tbody>
     </table>
   );
@@ -64,8 +86,8 @@ export default function CoursePage() {
   const featuresSubMenu = [
     { id: "library", name: "Library" },
     { id: "online-test", name: "Online Test" },
-    { id: "demo-class", name: "Demo Class" },
   ];
+
 
   const getDisplayName = (item: string) => {
     const names: { [key: string]: string } = {
@@ -146,6 +168,7 @@ export default function CoursePage() {
                           <button
                             key={subItem.id}
                             onClick={() => {
+                              // Always scroll to the in-page section (online-test is embedded on this page)
                               scrollToSection(subItem.id);
                               setFeaturesDropdownOpen(false);
                             }}
@@ -317,7 +340,7 @@ export default function CoursePage() {
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Overview</h2>
             <div className="text-gray-800 space-y-5">
               <p>
-                The Course on Computer Concepts (CCC) is a foundational computer literacy program designed to equip learners with essential IT skills for personal, academic, and professional use. It provides a strong understanding of computer operations, applications, and the internet, enabling participants to confidently use digital tools in everyday life.
+                The C++ Programming is a foundational computer literacy program designed to equip learners with essential IT skills for personal, academic, and professional use. It provides a strong understanding of computer operations, applications, and the internet, enabling participants to confidently use digital tools in everyday life.
               </p>
               <div>
                 <span className="font-semibold text-lg">🎯 Objectives</span>

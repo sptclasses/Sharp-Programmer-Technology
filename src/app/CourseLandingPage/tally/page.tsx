@@ -64,7 +64,6 @@ export default function CoursePage() {
   const featuresSubMenu = [
     { id: "library", name: "Library" },
     { id: "online-test", name: "Online Test" },
-    { id: "demo-class", name: "Demo Class" },
   ];
 
   const getDisplayName = (item: string) => {

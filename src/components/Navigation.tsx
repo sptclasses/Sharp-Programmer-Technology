@@ -10,7 +10,7 @@ interface NavigationProps {
   setMobileMenuOpen: (open: boolean) => void;
   scrollToSection: (sectionId: string) => void;
 }
-
+const googleForms="https://docs.google.com/forms/d/1zwSTL61VMXSHeI066tSOVly3Y9c_gIfbiknb20e0si8"
 export default function Navigation({
   activeSection,
   mobileMenuOpen,
@@ -25,6 +25,12 @@ export default function Navigation({
     { id: "library", name: "Library" },
     { id: "online-test", name: "Online Test" },
   ];
+
+  // We'll navigate to a dedicated /online-test page for the embedded form
+  const [onlineTestOpen, setOnlineTestOpen] = useState(false); // kept for backward-compat while migrating
+  const onlineTestSrc = "https://docs.google.com/forms/d/e/1FAIpQLSdNSwwcK9Cn1w3Hr8onp59uk8MC0x3glllC_5JU_LVn5hdcgQ/viewform?usp=header";
+  // Use next/navigation router for client navigation
+  // Lazy-import router within event handlers to avoid SSR issues
 
   const getDisplayName = (item: string) => {
     const names: { [key: string]: string } = {
@@ -80,6 +86,20 @@ export default function Navigation({
                         <button
                           key={subItem.id}
                           onClick={() => {
+                            // If Online Test selected, navigate to the full-page route
+                            if (subItem.id === 'online-test') {
+                              try {
+                                // dynamic import to get router client helper
+                                const { useRouter } = require('next/navigation');
+                                const router = (typeof window !== 'undefined' && require('next/navigation').useRouter) ? require('next/navigation').useRouter() : null;
+                                if (router && typeof router.push === 'function') router.push('/online-test');
+                                else window.location.href = '/online-test';
+                              } catch (e) {
+                                window.location.href = '/online-test';
+                              }
+                              setFeaturesDropdownOpen(false);
+                              return;
+                            }
                             scrollToSection(subItem.id);
                             setFeaturesDropdownOpen(false);
                           }}
@@ -151,6 +171,12 @@ export default function Navigation({
                         <button
                           key={subItem.id}
                           onClick={() => {
+                            if (subItem.id === 'online-test') {
+                              setOnlineTestOpen(true);
+                              setFeaturesDropdownOpen(false);
+                              setMobileMenuOpen(false);
+                              return;
+                            }
                             scrollToSection(subItem.id);
                             setFeaturesDropdownOpen(false);
                             setMobileMenuOpen(false);
@@ -182,6 +208,41 @@ export default function Navigation({
           </a>
         </div>
       )}
+      {/* Online Test Modal */}
+      {onlineTestOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/50" onClick={() => setOnlineTestOpen(false)} />
+          <div className="relative w-[95%] md:w-[1000px] max-h-[90vh] bg-white rounded-lg shadow-lg overflow-hidden">
+            <div className="flex items-center justify-between px-4 py-2 border-b">
+              <h3 className="text-lg font-semibold">Online Test</h3>
+              <button
+                className="text-gray-600 hover:text-gray-900"
+                onClick={() => setOnlineTestOpen(false)}
+                aria-label="Close"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="p-0" style={{ height: '100vh' }}>
+              <iframe
+                src={onlineTestSrc}
+                width="100%"
+                height="100%"
+                frameBorder={0}
+                marginHeight={0}
+                marginWidth={0}
+                title="Online Test Form"
+                className="w-full h-full"
+              >
+                Loading…
+              </iframe>
+            </div>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }
+
+
+// https://docs.google.com/forms/d/e/1FAIpQLSdNSwwcK9Cn1w3Hr8onp59uk8MC0x3glllC_5JU_LVn5hdcgQ/viewform?usp=header

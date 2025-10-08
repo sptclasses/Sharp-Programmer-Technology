@@ -64,7 +64,6 @@ export default function CoursePage() {
   const featuresSubMenu = [
     { id: "library", name: "Library" },
     { id: "online-test", name: "Online Test" },
-    { id: "demo-class", name: "Demo Class" },
   ];
 
   const getDisplayName = (item: string) => {
@@ -285,6 +284,9 @@ export default function CoursePage() {
             </span> &gt; Java Programming
           </p>
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Java Programming</h1>
+          <div className="mt-3">
+            <Link href={'/online-test/java'} className="inline-block bg-white text-purple-700 px-4 py-2 rounded-full font-semibold hover:shadow">Take Online Test</Link>
+          </div>
         </div>
       </div>
 
