@@ -10,8 +10,8 @@ interface FooterProps {
 export default function Footer({ scrollToSection }: FooterProps) {
   const socialLinks = [
     { icon: faFacebook, href: "#" },
-    { icon: faTwitter, href: "#" },
-    { icon: faLinkedin, href: "#" },
+    // { icon: faTwitter, href: "#" },
+    // { icon: faLinkedin, href: "#" },
     { icon: faInstagram, href: "#" },
   ];
 
@@ -59,13 +59,13 @@ export default function Footer({ scrollToSection }: FooterProps) {
             </div>
             <div className="space-y-2">
               <div className="flex justify-between">
-                <span className="font-semibold text-gray-300">Mon - Fri:</span>
+                <span className="font-semibold text-gray-300">Mon - Sat:</span>
                 <span className="text-gray-400">9:00 AM - 6:00 PM</span>
               </div>
-              <div className="flex justify-between">
+              {/* <div className="flex justify-between">
                 <span className="font-semibold text-gray-300">Saturday:</span>
-                <span className="text-gray-400">10:00 AM - 4:00 PM</span>
-              </div>
+                <span className="text-gray-400">9:00 AM - 6:00 PM</span>
+              </div> */}
               <div className="flex justify-between">
                 <span className="font-semibold text-gray-300">Sunday:</span>
                 <span className="text-red-400 font-semibold">Closed</span>

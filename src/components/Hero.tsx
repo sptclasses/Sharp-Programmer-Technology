@@ -61,7 +61,7 @@ export default function Hero({ scrollToSection }: HeroProps = {}) {
         </div>
 
         {/* Statistics */}
-        <div className="flex flex-wrap justify-center gap-8 md:gap-16 mt-12">
+        {/* <div className="flex flex-wrap justify-center gap-8 md:gap-16 mt-12">
           <div className="text-center">
             <div className="text-4xl md:text-5xl font-bold text-purple-400 mb-2">5</div>
             <div className="text-sm md:text-base opacity-90">
@@ -83,7 +83,7 @@ export default function Hero({ scrollToSection }: HeroProps = {}) {
               <span className="block text-xs opacity-75">by Students</span>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

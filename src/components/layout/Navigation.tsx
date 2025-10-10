@@ -9,6 +9,8 @@ interface NavigationProps {
   scrollToSection: (sectionId: string) => void;
 }
 
+const googleForms="https://docs.google.com/forms/d/1zwSTL61VMXSHeI066tSOVly3Y9c_gIfbiknb20e0si8"
+
 export default function Navigation({ activeSection, scrollToSection }: NavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 

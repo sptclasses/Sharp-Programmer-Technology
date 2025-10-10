@@ -36,3 +36,26 @@ body {
 .text-shadow-lg {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
+
+/* Hide scrollbars while preserving scroll (used by carousels) */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none; 
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; 
+}
+
+/* A4 preview helper: width/height in mm keeps accurate aspect ratio on screen and for print
+.a4-preview {
+  width: 210mm;
+  height: 297mm;
+  background: white;
+}
+
+@media print {
+  body * { visibility: hidden; }
+  .a4-preview, .a4-preview * { visibility: visible; }
+  .a4-preview { position: absolute; left: 0; top: 0; width: 210mm; height: 297mm; }
+  @page { size: A4; margin: 20mm; }
+} */

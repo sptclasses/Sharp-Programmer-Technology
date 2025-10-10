@@ -81,9 +81,9 @@ export default function Contact({ handleFormSubmit }: ContactProps) {
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900">Get In Touch</h2>
             <FontAwesomeIcon icon={faUsers} className="text-4xl text-blue-600" />
           </div>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+          {/* <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
             Ready to start your learning journey? Contact our expert team for personalized guidance and course recommendations.
-          </p>
+          </p> */}
           
           {/* Quick Stats
           <div className="flex items-center justify-center gap-8 mb-8">
@@ -214,8 +214,8 @@ export default function Contact({ handleFormSubmit }: ContactProps) {
         {/* FAQ Section - Below Contact Form, Centered */}
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-3 mb-12">
+            <h3 className="text-3xl md:text-4xl font-bold text-gray-900">FAQ</h3>
             <FontAwesomeIcon icon={faQuestionCircle} className="text-3xl text-blue-600" />
-            <h3 className="text-3xl md:text-4xl font-bold text-gray-900">Frequently Asked Questions</h3>
           </div>
           
           <div className="max-w-4xl mx-auto space-y-4">

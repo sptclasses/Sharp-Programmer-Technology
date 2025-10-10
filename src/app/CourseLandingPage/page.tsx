@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faGraduationCap, faPhone, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import CourseHandoutTable from "@/components/ui/CourseHandoutTable";
 
 // Data for Course Handout Table
 const courseHandoutData = [
@@ -11,45 +12,24 @@ const courseHandoutData = [
     sno: 1,
     chapter: "Introduction to Computers",
     duration: "2",
-    theoryLab: "1/1",
+    theory: "1",
+    lab: "1",
     outcomes: "Understand basic computer concepts"
   },
   {
     sno: 2,
     chapter: "Operating Systems",
     duration: "3",
-    theoryLab: "2/1",
+    theory: "2",
+    lab: "1",
     outcomes: "Learn OS basics and usage"
   },
   // Add more rows as needed
 ];
 
 // Table component for Course Handout
-function CourseHandoutTable() {
-  return (
-    <table className="min-w-full border text-sm text-black">
-      <thead>
-        <tr className="bg-gray-100">
-          <th className="border px-2 py-1">S. No.</th>
-          <th className="border px-2 py-1">Chapter Name</th>
-          <th className="border px-2 py-1">Duration (Hours)</th>
-          <th className="border px-2 py-1">Theory/Lab</th>
-          <th className="border px-2 py-1">Learning Outcomes</th>
-        </tr>
-      </thead>
-      <tbody>
-        {courseHandoutData.map((row, idx) => (
-          <tr key={idx}>
-            <td className="border px-2 py-1 text-center">{row.sno}</td>
-            <td className="border px-2 py-1">{row.chapter}</td>
-            <td className="border px-2 py-1 text-center">{row.duration}</td>
-            <td className="border px-2 py-1 text-center">{row.theoryLab}</td>
-            <td className="border px-2 py-1">{row.outcomes}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
+function HandoutTableBlock() {
+  return <CourseHandoutTable rows={courseHandoutData} />;
 }
 
 export default function CoursePage() {
@@ -57,6 +37,8 @@ export default function CoursePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [clickedItem, setClickedItem] = useState<string>("courses");
+  const [videoModalOpen, setVideoModalOpen] = useState(false);
+  const [videoUrl, setVideoUrl] = useState<string | null>(null);
 
   const tabs = ["Overview", "Course Handout", "Benefits", "Job Market", "Opportunities"];
   const navItems = ["home", "about", "courses", "features", "contact"];
@@ -315,42 +297,33 @@ export default function CoursePage() {
         <section id="overview" className="scroll-mt-32">
           <div className="bg-white shadow-md rounded-xl p-6">
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Overview</h2>
-            <div className="text-gray-800 space-y-5">
-              <p>
-                The Course on Computer Concepts (CCC) is a foundational computer literacy program designed to equip learners with essential IT skills for personal, academic, and professional use. It provides a strong understanding of computer operations, applications, and the internet, enabling participants to confidently use digital tools in everyday life.
-              </p>
-              <div>
-                <span className="font-semibold text-lg">🎯 Objectives</span>
-                <ul className="list-disc list-inside ml-5 mt-2 space-y-1">
-                  <li>To introduce the basic concepts of computers and information technology.</li>
-                  <li>To develop skills in using common computer applications.</li>
-                  <li>To promote digital literacy and e-Governance awareness.</li>
-                </ul>
+            <div className="grid md:grid-cols-2 gap-6 items-start">
+              <div className="text-gray-800 space-y-5">
+                <p>
+                  We offer a range of courses from basic computer literacy to advanced programming and digital skills. Each course is designed to combine theory with hands-on practice and real-world projects.
+                </p>
+                <div>
+                  <span className="font-semibold text-lg">Why Choose Us?</span>
+                  <ul className="list-disc list-inside ml-5 mt-2 space-y-1">
+                    <li>Experienced instructors and practical curriculum.</li>
+                    <li>Project-based learning and placement assistance.</li>
+                    <li>Flexible schedules and certification support.</li>
+                  </ul>
+                </div>
               </div>
-              <div>
-                <span className="font-semibold text-lg">📘 What You’ll Learn</span>
-                <ul className="list-disc list-inside ml-5 mt-2 space-y-1">
-                  <li>Fundamentals of Computers: Hardware, software, input/output devices, operating systems.</li>
-                  <li>Word Processing & Spreadsheets: Create, format, and analyze documents and data.</li>
-                  <li>Presentation Skills: Design and deliver digital presentations.</li>
-                  <li>Internet & Email: Use browsers, search engines, and communicate via email.</li>
-                  <li>Digital Financial Services: Online banking, UPI, and cybersecurity basics.</li>
-                </ul>
-              </div>
-              <div>
-                <span className="font-semibold text-lg">🧠 Who Should Enroll</span>
-                <ul className="list-disc list-inside ml-5 mt-2 space-y-1">
-                  <li>Students, job seekers, and professionals seeking basic computer proficiency.</li>
-                  <li>Anyone preparing for government or competitive exams where computer knowledge is required.</li>
-                </ul>
-              </div>
-              <div>
-                <span className="font-semibold text-lg">🕒 Duration</span>
-                <p className="ml-5 mt-2">Typically 80 hours (Theory + Practical) — can be completed in 2–3 months.</p>
-              </div>
-              <div>
-                <span className="font-semibold text-lg">🏆 Certification</span>
-                <p className="ml-5 mt-2">After successful completion, learners receive an NIELIT (DOEACC) CCC Certificate, recognized by government and private organizations across India.</p>
+
+              <div className="flex items-center justify-center">
+                <div className="relative w-full max-w-md">
+                    <div className="overflow-hidden rounded-lg shadow-lg bg-black/5 cursor-pointer">
+                      <img src="/images/ccc-removebg-preview.png" alt="Courses overview" className="w-full h-56 object-cover" />
+                      <button
+                        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-black rounded-full flex items-center justify-center shadow-md ring-4 ring-black/20 cursor-pointer text-white"
+                      onClick={() => { setVideoUrl('https://www.youtube.com/embed/dQw4w9WgXcQ'); setVideoModalOpen(true); }}
+                    >
+                      ▶
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -361,7 +334,7 @@ export default function CoursePage() {
           <div className="bg-white shadow-md rounded-xl p-6 overflow-x-auto">
             <h2 className="text-2xl text-black font-bold mb-6">Course Handout</h2>
             {/* Data-driven table for easy updates */}
-            <CourseHandoutTable />
+            <HandoutTableBlock />
           </div>
         </section>
 
@@ -426,6 +399,28 @@ export default function CoursePage() {
         </section>
 
       </div>
+      {/* Video Modal */}
+      {videoModalOpen && (
+        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-lg overflow-hidden w-full max-w-3xl">
+            <div className="flex justify-end p-2">
+              <button className="text-gray-700 font-bold px-3 py-1" onClick={() => { setVideoModalOpen(false); setVideoUrl(null); }}>Close</button>
+            </div>
+            <div className="w-full h-0" style={{ paddingBottom: '56.25%', position: 'relative' }}>
+              {videoUrl && (
+                <iframe
+                  src={videoUrl}
+                  title="Course overview video"
+                  className="absolute inset-0 w-full h-full"
+                  frameBorder={0}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
