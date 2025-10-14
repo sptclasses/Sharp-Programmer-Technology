@@ -7,11 +7,7 @@ import {
   faEnvelope, 
   faPhone, 
   faMapMarkerAlt, 
-  faClock, 
-  faQuestionCircle,
-  faHeadset,
   faPaperPlane,
-  faUsers
 } from "@fortawesome/free-solid-svg-icons";
 // import { constants } from "buffer";
 
@@ -77,9 +73,9 @@ export default function Contact({ handleFormSubmit }: ContactProps) {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <FontAwesomeIcon icon={faHeadset} className="text-4xl text-purple-600" />
+            {/* <FontAwesomeIcon icon={faHeadset} className="text-4xl text-purple-600" /> */}
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900">Get In Touch</h2>
-            <FontAwesomeIcon icon={faUsers} className="text-4xl text-blue-600" />
+            {/* <FontAwesomeIcon icon={faUsers} className="text-4xl text-blue-600" /> */}
           </div>
           {/* <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
             Ready to start your learning journey? Contact our expert team for personalized guidance and course recommendations.
@@ -215,7 +211,7 @@ export default function Contact({ handleFormSubmit }: ContactProps) {
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-3 mb-12">
             <h3 className="text-3xl md:text-4xl font-bold text-gray-900">FAQ</h3>
-            <FontAwesomeIcon icon={faQuestionCircle} className="text-3xl text-blue-600" />
+            {/* <FontAwesomeIcon icon={faQuestionCircle} className="text-3xl text-blue-600" /> */}
           </div>
           
           <div className="max-w-4xl mx-auto space-y-4">

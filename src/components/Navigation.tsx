@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPhone, faChevronDown, faGraduationCap } from "@fortawesome/free-solid-svg-icons";
+import { faPhone, faChevronDown,} from "@fortawesome/free-solid-svg-icons";
 
 interface NavigationProps {
   activeSection: string;
@@ -48,8 +48,7 @@ export default function Navigation({
       <div className="max-w-full mx-auto px-5 flex items-center py-4">
         {/* Logo and Company Name - Left Side */}
         <div className="flex items-center gap-3 text-xl font-bold text-white mr-auto">
-          <FontAwesomeIcon icon={faGraduationCap} className="text-2xl text-purple-400" />
-          <span>Sharp Programming Technology</span>
+          <span>Sharp Programer Technology</span>
         </div>
         
         {/* Navigation Items and Phone - Right Side */}

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faGraduationCap, faPhone, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faGraduationCap, faPhone, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import CourseHandoutTable from "@/components/ui/CourseHandoutTable";
 
 // Data for Course Handout Table
@@ -364,7 +364,7 @@ export default function CoursePage() {
 					>
 						<h2 className="text-2xl text-gray-800 font-bold mb-6">Career Opportunities</h2>
 						<p className="text-gray-700 mb-6 leading-relaxed">
-							After completing this course, you'll be ready for diverse roles in software development, systems programming, and more.
+							After completing this course, you&apos;ll be ready for diverse roles in software development, systems programming, and more.
 						</p>
 						<ul className="list-disc list-inside text-gray-700 space-y-3 ml-5">
 							<li>Work as a freelance developer or join leading companies</li>

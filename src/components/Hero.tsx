@@ -24,7 +24,7 @@ export default function Hero({ scrollToSection }: HeroProps = {}) {
   }, [slides.length]);
 
   return (
-  <section id="home" className="relative min-h-[60vh] h-[90vh] flex items-center justify-center text-center overflow-hidden pt-24 md:pt-40 lg:pt-48 pb-8 sm:pb-0">
+  <section id="home" className="relative min-h-[70vh] sm:min-h-[80vh] md:h-[90vh] flex items-center justify-center text-center overflow-hidden pt-16 sm:pt-24 md:pt-40 lg:pt-48 pb-8 sm:pb-0">
       <div className="absolute inset-0 z-0">
         <div className="relative w-full h-full">
           {slides.map((slide, index) => (
@@ -40,15 +40,18 @@ export default function Hero({ scrollToSection }: HeroProps = {}) {
         </div>
         <div className="absolute inset-0 bg-black/60"></div>
       </div>
+      {/* Master the technical and soft skills that truly empower your future. text-purple-400*/}
       <div className="relative z-10 text-white max-w-4xl px-5">
         <h1
           className="text-xl xs:text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 leading-snug sm:leading-tight md:leading-tight"
           style={{ fontSize: 'clamp(1.1rem, 4vw, 3.5rem)' }}
         >
-          <span className="text-purple-400">Go beyond the code.</span> Master the technical and soft skills that truly empower your future.
+          <span className="bg-gradient-to-r from-yellow-400 to-amber-500 text-transparent bg-clip-text drop-shadow-md font-bold ">Kanpur&apos;s No. 1 NIELIT Coaching Academy</span> 
         </h1>
        <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 opacity-90 max-w-2xl mx-auto">
-          Your growth in technology is our mission. With expert guidance and comprehensive resources, we&apos;re here to help you excel and achieve your goals.
+            Build your career with Kanpur&apos;s most trusted NIELIT coaching institute. 
+  Learn from certified mentors, access government-recognized courses, 
+  and gain the skills to excel in the digital era.
         </p>
         
         <div className="mb-12">

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faGraduationCap, faPhone, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faGraduationCap, faPhone, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import CourseHandoutTable from "@/components/ui/CourseHandoutTable";
 
 // Data for Course Handout Table
@@ -486,7 +486,7 @@ export default function CoursePage() {
           >
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Career Opportunities</h2>
             <p className="text-gray-700 mb-6 leading-relaxed">
-              After completing this comprehensive course, you'll have access to diverse career paths and exciting opportunities in the tech industry.
+              After completing this comprehensive course, you&apos;ll have access to diverse career paths and exciting opportunities in the tech industry.
             </p>
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-gray-800">Your Future Paths:</h3>

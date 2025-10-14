@@ -152,13 +152,15 @@ export default function Courses() {
   );
   */
 
-  // NEW COURSE DESIGN BASED ON PROVIDED IMAGE
-  const [currentSlide, setCurrentSlide] = useState(0);
+  // NEW COURSE DESIGN WITH SMOOTH INFINITE LOOP
+  const [currentSlide, setCurrentSlide] = useState(2); // Start at index 2 (first real course after clones)
+  const [isTransitioning, setIsTransitioning] = useState(false);
   
   const nielitCourses = [
     {
       id: "ccc",
-      icon: <FontAwesomeIcon icon={faDesktop} bounce />,
+      icon: "images/NIELIT_logo-removebg-preview.png",
+      iconType: "image",
       title: "CCC (Course on Computer Concepts)",
       description: "Basic computer literacy program covering essential computer, internet, and digital skills.",
       duration: "3 Months",
@@ -166,7 +168,8 @@ export default function Courses() {
     },
     {
       id: "o-level",
-      icon: <FontAwesomeIcon icon={faNetworkWired} bounce />,
+      icon: "images/NIELIT_logo-removebg-preview.png",
+      iconType: "image",
       title: "O-Level Certification",
       description: "Government-recognized IT certification course focusing on programming, networking, and database fundamentals.",
       duration: "1 Year",
@@ -177,7 +180,7 @@ export default function Courses() {
   const professionalCourses = [
     {
       id: "web-dev",
-      icon: <FontAwesomeIcon icon={faCode} bounce />,
+      icon: <FontAwesomeIcon icon={faCode} />,
       title: "Full Stack Web Development",
       description: "Learn to build dynamic websites and apps using HTML, CSS, JS, React, Node, and databases.",
       duration: "6 Months",
@@ -185,7 +188,8 @@ export default function Courses() {
     },
     {
       id: "digital-marketing",
-      icon: <FontAwesomeIcon icon={faMobile} bounce />,
+      icon: "images/a-sleek-vector-logo-design-featuring-a-s_leRUoo9vSqmRAmteQnLJyg_gdE9hBy2RGun-Ly39HR_Rw-removebg-preview.png",
+      iconType: "image",
       title: "Digital Marketing",
       description: "Master SEO, social media strategies, and advertising tools to enhance online business presence.",
       duration: "3 Months",
@@ -193,15 +197,15 @@ export default function Courses() {
     },
     {
       id: "tally",
-      icon: <FontAwesomeIcon icon={faCalculator} bounce />,
+      icon: <FontAwesomeIcon icon={faCalculator}  />,
       title: "Tally with GST",
-      description: "Learn accounting and GST billing using Tally ERP for small and medium enterprises.",
+      description: "Learn accounting and GST billing using Tally ERP for small and medium enterprises .",
       duration: "3 Months",
       slug: "tally"
     },
     {
       id: "python",
-      icon: <FontAwesomeIcon icon={faPython} bounce />,
+      icon: <FontAwesomeIcon icon={faPython}  />,
       title: "Python Programming",
       description: "Beginner to advanced-level Python course covering data structures, web automation, and APIs.",
       duration: "2 Months",
@@ -209,7 +213,7 @@ export default function Courses() {
     },
     {
       id: "cpp",
-      icon: <FontAwesomeIcon icon={faFileCode} bounce />,
+      icon: <FontAwesomeIcon icon={faFileCode}  />,
       title: "C++ Programming",
       description: "Learn the principles of Object-Oriented Programming and problem-solving with C++.",
       duration: "2 Months",
@@ -217,7 +221,7 @@ export default function Courses() {
     },
     {
       id: "java",
-      icon: <FontAwesomeIcon icon={faJava} bounce />,
+      icon: <FontAwesomeIcon icon={faJava}  />,
       title: "Java Programming",
       description: "Develop robust applications using Java's OOPs concepts, Swing, and database connectivity.",
       duration: "3 Months",
@@ -225,23 +229,59 @@ export default function Courses() {
     }
   ];
 
-  // Auto-slide functionality
-  const totalSlides = Math.ceil(professionalCourses.length / 2);
-  
+  // Create cloned courses for infinite loop
+  const lastTwoCourses = professionalCourses.slice(-2);
+  const firstTwoCourses = professionalCourses.slice(0, 2);
+  const clonedCourses = [
+    ...lastTwoCourses.map(course => ({ ...course, id: `${course.id}-clone-start` })),
+    ...professionalCourses,
+    ...firstTwoCourses.map(course => ({ ...course, id: `${course.id}-clone-end` }))
+  ];
+
+  const totalCourses = professionalCourses.length;
+  const maxSlide = totalCourses + 1; // +2 for clones at start, -1 for index
+
+  // Handle transition end to reset position for infinite loop
+  const handleTransitionEnd = () => {
+    setIsTransitioning(false);
+    
+    // If we're at the end clones, jump to the beginning
+    if (currentSlide >= totalCourses + 2) {
+      setCurrentSlide(2);
+    }
+    // If we're at the start clones, jump to the end
+    else if (currentSlide <= 1) {
+      setCurrentSlide(totalCourses + 1);
+    }
+  };
+
+  // Auto-slide functionality with infinite loop
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % totalSlides);
-    }, 4000); // Change slide every 4 seconds
+      setIsTransitioning(true);
+      setCurrentSlide(prev => prev + 1);
+    }, 3000);
     
     return () => clearInterval(timer);
-  }, [totalSlides]);
+  }, []);
 
   const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % totalSlides);
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrentSlide(prev => prev + 1);
   };
 
   const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrentSlide(prev => prev - 1);
+  };
+
+  // Calculate real slide index for dot indicator
+  const getRealSlideIndex = () => {
+    if (currentSlide <= 1) return totalCourses - 2 + currentSlide;
+    if (currentSlide >= totalCourses + 2) return currentSlide - totalCourses - 2;
+    return currentSlide - 2;
   };
 
   return (
@@ -262,20 +302,30 @@ export default function Courses() {
             <h2 className="text-2xl font-bold text-gray-900 mb-2">NIELIT Certified Courses</h2>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
             {nielitCourses.map((course) => (
-              <div key={course.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-8 h-60">
-                <div className="flex items-start space-x-6 h-full">
-                  <div className="text-4xl text-blue-600 flex-shrink-0">{course.icon}</div>
+              <div key={course.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-4 sm:p-6 lg:p-8 min-h-[240px] sm:min-h-[260px]">
+                <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6 h-full">
+                  <div className="flex-shrink-0">
+                    {course.iconType === "image" ? (
+                      <img 
+                        src={course.icon as string} 
+                        alt={`${course.title} icon`}
+                        className="w-16 h-16 sm:w-20 sm:h-20 object-contain rounded-lg"
+                      />
+                    ) : (
+                      <div className="text-3xl sm:text-4xl text-blue-600">{course.icon}</div>
+                    )}
+                  </div>
                   <div className="flex-1 flex flex-col justify-between h-full">
                     <div>
-                      <h3 className="text-xl font-semibold text-gray-900 mb-3">{course.title}</h3>
-                      <p className="text-gray-600 text-base mb-4">{course.description}</p>
+                      <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3">{course.title}</h3>
+                      <p className="text-gray-600 text-sm sm:text-base mb-3 sm:mb-4 leading-relaxed">{course.description}</p>
                     </div>
-                    <div className="flex justify-between items-center mt-auto">
-                      <span className="text-base text-gray-500 font-medium">Duration: {course.duration}</span>
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-3 sm:space-y-0 mt-auto pt-3">
+                      <span className="text-sm sm:text-base text-gray-500 font-medium">Duration: {course.duration}</span>
                       <Link href={`/CourseLandingPage/${course.slug}`}>
-                        <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 cursor-pointer rounded-lg text-base font-medium transition-colors duration-300">
+                        <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 cursor-pointer rounded-lg text-sm sm:text-base font-medium transition-colors duration-300 w-full sm:w-auto">
                           Learn More
                         </button>
                       </Link>
@@ -315,35 +365,45 @@ export default function Courses() {
             {/* Carousel Content */}
             <div className="overflow-hidden">
               <div 
-                className="flex transition-transform duration-500 ease-in-out"
-                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                className={`flex ${isTransitioning ? 'transition-transform duration-500 ease-in-out' : ''}`}
+                style={{ transform: `translateX(-${currentSlide * 50}%)` }}
+                onTransitionEnd={handleTransitionEnd}
               >
-                {Array.from({ length: totalSlides }).map((_, slideIndex) => (
-                  <div key={slideIndex} className="w-full flex-shrink-0">
-                    <div className="grid md:grid-cols-2 gap-8">
-                      {professionalCourses
-                        .slice(slideIndex * 2, slideIndex * 2 + 2)
-                        .map((course) => (
-                          <div key={course.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-8 h-60">
-                            <div className="flex items-start space-x-6 h-full">
-                              <div className="text-4xl text-blue-600">{course.icon}</div>
-                              <div className="flex-1 flex flex-col justify-between h-full">
-                                <div>
-                                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{course.title}</h3>
-                                  <p className="text-gray-600 text-base mb-4">{course.description}</p>
-                                </div>
-                                <div className="flex justify-between items-center mt-auto">
-                                  <span className="text-base text-gray-500 font-medium">Duration: {course.duration}</span>
-                                  <Link href={`/CourseLandingPage/${course.slug}`}>
-                                    <button className="bg-blue-500 hover:bg-blue-600 cursor-pointer text-white px-6 py-3 rounded-lg text-base font-medium transition-colors duration-300">
-                                      Learn More
-                                    </button>
-                                  </Link>
-                                </div>
-                              </div>
+                {clonedCourses.map((course, index) => (
+                  <div 
+                    key={course.id} 
+                    className="w-1/2 flex-shrink-0 px-4"
+                  >
+                    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-4 sm:p-6 lg:p-8 min-h-[240px] sm:min-h-[260px]">
+                      <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6 h-full">
+                        <div className="flex-shrink-0 flex items-start">
+                          {course.iconType === 'image' ? (
+                            <img 
+                              src={course.icon as string} 
+                              alt={`${course.title} icon`}
+                              className="w-20 h-20 sm:w-24 sm:h-24 object-contain"
+                            />
+                          ) : (
+                            <div className="text-3xl sm:text-4xl text-blue-600">
+                              {course.icon}
                             </div>
+                          )}
+                        </div>
+                        <div className="flex-1 flex flex-col justify-between h-full">
+                          <div>
+                            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3">{course.title}</h3>
+                            <p className="text-gray-600 text-sm sm:text-base mb-3 sm:mb-4 leading-relaxed">{course.description}</p>
                           </div>
-                        ))}
+                          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-3 sm:space-y-0 mt-auto pt-3">
+                            <span className="text-sm sm:text-base text-gray-500 font-medium">Duration: {course.duration}</span>
+                            <Link href={`/CourseLandingPage/${course.slug}`}>
+                              <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 cursor-pointer rounded-lg text-sm sm:text-base font-medium transition-colors duration-300 w-full sm:w-auto">
+                                Learn More
+                              </button>
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -351,13 +411,17 @@ export default function Courses() {
             </div>
 
             {/* Dots Indicator */}
-            <div className="flex justify-center mt-8 space-x-2 ">
-              {Array.from({ length: totalSlides }).map((_, index) => (
+            <div className="flex justify-center mt-8 space-x-2">
+              {Array.from({ length: totalCourses - 1 }).map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className={`w-3 h-3 rounded-full  cursor-pointer transition-colors duration-300 ${
-                    index === currentSlide ? 'bg-blue-500' : 'bg-gray-300'
+                  onClick={() => {
+                    if (isTransitioning) return;
+                    setIsTransitioning(true);
+                    setCurrentSlide(index + 2);
+                  }}
+                  className={`w-3 h-3 rounded-full cursor-pointer transition-colors duration-300 ${
+                    index === getRealSlideIndex() ? 'bg-blue-500' : 'bg-gray-300'
                   }`}
                   aria-label={`Go to slide ${index + 1}`}
                 />

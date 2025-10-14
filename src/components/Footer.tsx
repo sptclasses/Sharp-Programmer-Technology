@@ -1,7 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGraduationCap, faClock, faEnvelope, faPhone, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
-import { faFacebook, faTwitter, faLinkedin, faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { faClock, } from "@fortawesome/free-solid-svg-icons";
+import { faFacebook, faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 interface FooterProps {
   scrollToSection: (sectionId: string) => void;
@@ -28,11 +28,12 @@ export default function Footer({ scrollToSection }: FooterProps) {
     <footer className="bg-gray-900 text-white py-16">
       <div className="max-w-full mx-auto pl-5 pr-5">
         {/* Single Row Footer */}
-  <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8">
+  {/* <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8"> */}
+  <div className="grid grid-cols-1 md:grid-cols-5 gap-y-10 md:gap-x-10 mb-8">
+
           {/* Sharp Programmer Technology Section */}
           <div>
             <div className="flex items-center gap-3 text-xl font-bold text-purple-400 mb-4">
-              <FontAwesomeIcon icon={faGraduationCap} className="text-2xl" />
               <span>Sharp Programmer Technology</span>
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed">
@@ -62,10 +63,6 @@ export default function Footer({ scrollToSection }: FooterProps) {
                 <span className="font-semibold text-gray-300">Mon - Sat:</span>
                 <span className="text-gray-400">9:00 AM - 6:00 PM</span>
               </div>
-              {/* <div className="flex justify-between">
-                <span className="font-semibold text-gray-300">Saturday:</span>
-                <span className="text-gray-400">9:00 AM - 6:00 PM</span>
-              </div> */}
               <div className="flex justify-between">
                 <span className="font-semibold text-gray-300">Sunday:</span>
                 <span className="text-red-400 font-semibold">Closed</span>
@@ -74,7 +71,7 @@ export default function Footer({ scrollToSection }: FooterProps) {
           </div>
 
           {/* Courses */}
-          <div>
+          <div className="md:ml-10">
             <h3 className="text-lg font-semibold mb-4 text-gray-100">Courses</h3>
             <ul className="space-y-2">
               {courses.map((course, index) => (
@@ -91,7 +88,7 @@ export default function Footer({ scrollToSection }: FooterProps) {
           </div>
 
           {/* Company */}
-          <div className="md:col-span-1 md:pr-2">
+          <div className="md:col-span-1 md:pr-2 md:ml-4">
             <h3 className="text-lg font-semibold mb-4 text-gray-100">Company</h3>
             <ul className="space-y-2">
               {companyLinks.map((item, index) => (

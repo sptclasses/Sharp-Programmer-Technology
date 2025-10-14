@@ -6,13 +6,46 @@ export default function About() {
   const [isMuted, setIsMuted] = useState(true);
   const videoEmbed = "https://www.youtube.com/embed/g6gWkSl5IVA";
   return (
-    <section id="about" className="py-20 mt-12 font-['Inter','Poppins',sans-serif]" style={{ backgroundColor: '#f9f9fb' }}>
-      <div className="mx-auto" style={{ width: '1330px', height: '436px' }}>
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-center h-full">
-          <div className="text-left">
-            <h2 className="text-4xl font-bold mb-2 text-gray-900">A brief about</h2>
-            <h2 className="text-5xl font-bold -mt-2 mb-8" style={{ color: '#7b2ff7' }}>SPT</h2>
-            <p className="text-lg mb-6 text-gray-600 leading-relaxed text-justify">
+    <>
+      <style jsx>{`
+        .about-grid {
+          gap: 2rem;
+        }
+        @media (min-width: 1024px) {
+          .about-grid {
+            gap: 1rem;
+          }
+        }
+        @media (min-width: 1300px) {
+          .about-grid {
+            gap: 4rem;
+          }
+        }
+        .video-container {
+          margin-left: 0;
+          margin-right: 0;
+          max-width: 100%;
+        }
+        @media (min-width: 1024px) {
+          .video-container {
+            margin-left: 45px;
+          }
+        }
+        @media (min-width: 1300px) {
+          .video-container {
+            margin-left: 90px;
+            margin-right: 30px;
+            max-width: none;
+          }
+        }
+      `}</style>
+      <section id="about" className="py-20 mt-12 font-['Inter','Poppins',sans-serif]" style={{ backgroundColor: '#f9f9fb' }}>
+        <div className="mx-auto px-4 sm:px-6 lg:px-8 xl:px-0" style={{ width: 'min(1650px, 100vw)', height: 'auto' }}>
+          <div className="grid md:grid-cols-2 items-center about-grid" style={{ minHeight: '436px' }}>
+            <div className="text-left px-4 sm:px-0">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-4xl font-bold mb-2 text-gray-900">A brief about</h2>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-5xl font-bold -mt-2 mb-8" style={{ color: '#7b2ff7' }}>SPT</h2>
+            <p className="text-base sm:text-lg lg:text-lg xl:text-lg mb-6 text-gray-600 leading-relaxed text-justify">
               We are a government-certified institution dedicated to providing high-quality education and comprehensive
               library facilities. Our mission is to foster learning and development through innovative teaching methods and
               state-of-the-art resources.
@@ -21,14 +54,15 @@ export default function About() {
               With years of experience in education, we have helped thousands of students achieve their academic and
               professional goals through our carefully designed courses and extensive library resources.
             </p>
+
           </div>
           <div className="flex items-center justify-center">
-            <div className="relative w-full max-w-lg" style={{ marginLeft: '90px' }}>
+            <div className="relative w-full video-container">
               <div className="overflow-hidden rounded-2xl shadow-2xl bg-black/5">
                 {/* Auto-playing video without sound */}
                 <iframe
                   src={`${videoEmbed}?autoplay=1&mute=${isMuted ? 1 : 0}&loop=1&rel=0&controls=0`}
-                  className="w-full h-80 md:h-72 lg:h-80 rounded-2xl"
+                  className="w-full h-64 sm:h-80 md:h-72 lg:h-90 xl:h-90 rounded-2xl"
                   frameBorder="0"
                   allow="autoplay; muted"
                   title="About video"
@@ -78,6 +112,7 @@ export default function About() {
           )}
         </div>
       </div>
-    </section>
+      </section>
+    </>
   );
 }
