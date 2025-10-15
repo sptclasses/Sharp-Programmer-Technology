@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faChevronDown,} from "@fortawesome/free-solid-svg-icons";
 import AnimatedLogo from "./AnimatedLogo";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 
 interface NavigationProps {
   activeSection: string;
@@ -90,7 +90,16 @@ export default function Navigation({
                           onClick={() => {
                             // If Online Test selected, navigate to the full-page route
                             if (subItem.id === 'online-test') {
-                              router.push('/online-test');
+                           try {
+                                // dynamic import to get router client helper
+                                const router = typeof window !== "undefined" ? useRouter() : null;
+                                // const { useRouter } = require('next/navigation');
+                                // const router = (typeof window !== 'undefined' && require('next/navigation').useRouter) ? require('next/navigation').useRouter() : null;
+                                if (router && typeof router.push === 'function') router.push('/online-test');
+                                else window.location.href = '/online-test';
+                              } catch (e) {
+                                window.location.href = '/online-test';
+                              }
                               setFeaturesDropdownOpen(false);
                               return;
                             }
