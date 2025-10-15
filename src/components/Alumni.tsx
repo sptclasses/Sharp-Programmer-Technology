@@ -168,11 +168,13 @@ export default function Alumni() {
                 key={i}
                 className="shape-particle"
                 style={{
-                  ['--ox']: b.ox,
-                  ['--oy']: b.oy,
-                  ['--tx']: b.tx,
-                  ['--ty']: b.ty,
-                  ['--rot']: b.rot,
+                  ...{
+                    '--ox': b.ox,
+                    '--oy': b.oy,
+                    '--tx': b.tx,
+                    '--ty': b.ty,
+                    '--rot': b.rot,
+                  } as React.CSSProperties,
                   width: b.size,
                   height: b.size,
                   backgroundColor: b.color,
