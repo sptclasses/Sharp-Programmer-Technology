@@ -167,22 +167,22 @@ export default function Alumni() {
               <span
                 key={i}
                 className="shape-particle"
-                style={{
-                  ...{
-                    '--ox': b.ox,
-                    '--oy': b.oy,
-                    '--tx': b.tx,
-                    '--ty': b.ty,
-                    '--rot': b.rot,
-                  } as React.CSSProperties,
-                  width: b.size,
-                  height: b.size,
-                  backgroundColor: b.color,
-                  animationDelay: b.delay,
-                  borderRadius: b.radius,
-                  clipPath: b.clip ?? undefined,
-                  mixBlendMode: 'multiply',
-                }}
+                style={
+                  {
+                    ['--ox' as string]: b.ox,
+                    ['--oy' as string]: b.oy,
+                    ['--tx' as string]: b.tx,
+                    ['--ty' as string]: b.ty,
+                    ['--rot' as string]: b.rot,
+                    width: b.size,
+                    height: b.size,
+                    backgroundColor: b.color,
+                    animationDelay: b.delay,
+                    borderRadius: b.radius,
+                    clipPath: b.clip ?? undefined,
+                    mixBlendMode: 'multiply',
+                  } as React.CSSProperties
+                }
               />
             ))}
           </div>
