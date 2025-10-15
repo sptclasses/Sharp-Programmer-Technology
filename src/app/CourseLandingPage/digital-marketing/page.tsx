@@ -103,6 +103,7 @@ export default function CoursePage() {
   const [clickedItem, setClickedItem] = useState<string>("courses");
   const [videoModalOpen, setVideoModalOpen] = useState(false);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
+  const [isMuted, setIsMuted] = useState(true);
 
   const tabs = ["Overview", "Course Handout", "Benefits", "Job Market", "Opportunities"];
   const navItems = ["home", "about", "courses", "features", "contact"];
@@ -323,7 +324,7 @@ export default function CoursePage() {
 
       {/* Hero */}
   <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white pt-32 pb-12 md:pt-40 md:pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 mt-16">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl ml-40">
           <p className="text-xs sm:text-sm opacity-80 mb-2 cursor-pointer">
             <span>
               <Link href="/" className="text-white cursor-pointer hover:-translate-y-1 font-bold transition-transform">Home</Link>
@@ -361,7 +362,7 @@ export default function CoursePage() {
           >
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Overview</h2>
             <div className="grid md:grid-cols-2 gap-6 items-start">
-              <div className="text-gray-800 space-y-5">
+              <div className="text-gray-800 space-y-5 text-justify">
                 <p>
                   The Digital Marketing program covers SEO, social media marketing, content strategy, paid advertising, and analytics. It's built for small business owners, marketers, and students who want practical digital marketing skills.
                 </p>
@@ -376,15 +377,29 @@ export default function CoursePage() {
               </div>
 
               <div className="flex items-center justify-center">
-                <div className="relative w-full max-w-md">
-                  <div className="overflow-hidden rounded-lg shadow-lg bg-black/5">
-                    <img src="/images/Introduction_to_Digital_Marketing-1680153233.png" alt="Digital Marketing overview" className="w-full h-56 object-cover" />
+                <div className="relative w-full video-container -mt-15 pt-0">
+                  <div className="overflow-hidden rounded-2xl shadow-2xl bg-black/5">
+                    <iframe
+                      src={`https://www.youtube.com/embed/g6gWkSl5IVA?autoplay=1&mute=${isMuted ? 1 : 0}&loop=1&rel=0&controls=0`}
+                      className="w-full h-64 sm:h-80 md:h-72 lg:h-90 xl:h-100 rounded-2xl mt-0 pt-0"
+                      frameBorder="0"
+                      allow="autoplay; muted"
+                      title="Course Overview Video"
+                    />
                     <button
-                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-black rounded-full flex items-center justify-center shadow-md ring-4 ring-black/20 cursor-pointer text-white"
-                      aria-label="Play Digital Marketing overview"
-                      onClick={() => { setVideoUrl('https://www.youtube.com/embed/dQw4w9WgXcQ'); setVideoModalOpen(true); }}
+                      onClick={() => setIsMuted((prev) => !prev)}
+                      className="absolute bottom-4 left-4 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center shadow-lg hover:bg-white transition-colors cursor-pointer"
+                      aria-label={isMuted ? "Unmute video" : "Mute video"}
                     >
-                      ▶
+                      {isMuted ? (
+                        <svg className="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 640 640">
+                          <path d="M80 416L128 416L262.1 535.2C268.5 540.9 276.7 544 285.2 544C304.4 544 320 528.4 320 509.2L320 130.8C320 111.6 304.4 96 285.2 96C276.7 96 268.5 99.1 262.1 104.8L128 224L80 224C53.5 224 32 245.5 32 272L32 368C32 394.5 53.5 416 80 416zM399 239C389.6 248.4 389.6 263.6 399 272.9L446 319.9L399 366.9C389.6 376.3 389.6 391.5 399 400.8C408.4 410.1 423.6 410.2 432.9 400.8L479.9 353.8L526.9 400.8C536.3 410.2 551.5 410.2 560.8 400.8C570.1 391.4 570.2 376.2 560.8 366.9L513.8 319.9L560.8 272.9C570.2 263.5 570.2 248.3 560.8 239C551.4 229.7 536.2 229.6 526.9 239L479.9 286L432.9 239C423.5 229.6 408.3 229.6 399 239z"/>
+                        </svg>
+                      ) : (
+                        <svg className="w-5 h-5 text-gray-700" fill="currentColor" viewBox="0 0 640 640">
+                          <path d="M144 416L192 416L326.1 535.2C332.5 540.9 340.7 544 349.2 544C368.4 544 384 528.4 384 509.2L384 130.8C384 111.6 368.4 96 349.2 96C340.7 96 332.5 99.1 326.1 104.8L192 224L144 224C117.5 224 96 245.5 96 272L96 368C96 394.5 117.5 416 144 416zM476.6 245.5C466.3 237.1 451.2 238.7 442.8 249C434.4 259.3 436 274.4 446.3 282.8C457.1 291.6 464 305 464 320C464 335 457.1 348.4 446.3 357.3C436 365.7 434.5 380.8 442.8 391.1C451.1 401.4 466.3 402.9 476.6 394.6C498.1 376.9 512 350.1 512 320C512 289.9 498.1 263.1 476.5 245.5z"/>
+                        </svg>
+                      )}
                     </button>
                   </div>
                 </div>

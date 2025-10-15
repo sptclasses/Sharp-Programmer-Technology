@@ -140,23 +140,25 @@ export default function Contact({ handleFormSubmit }: ContactProps) {
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="phone" className="block text-gray-700 font-semibold mb-2">
-                      Phone Number
+                      Phone Number *
                     </label>
                     <input
                       type="tel"
                       id="phone"
                       name="phone"
+                      required
                       className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:border-purple-600 focus:outline-none transition-all duration-300 hover:border-gray-300 bg-gray-50 focus:bg-white"
                       placeholder="+91 XXXXX XXXXX"
                     />
                   </div>
                   <div>
                     <label htmlFor="subject" className="block text-gray-700 font-semibold mb-2">
-                      Course Interest
+                      Course Interest *
                     </label>
                     <select
                       id="subject"
                       name="subject"
+                      required
                       className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:border-purple-600 focus:outline-none transition-all duration-300 hover:border-gray-300 bg-gray-50 focus:bg-white"
                     >
                       <option value="">Select your interest</option>
@@ -175,14 +177,13 @@ export default function Contact({ handleFormSubmit }: ContactProps) {
                 
                 <div>
                   <label htmlFor="message" className="block text-gray-700 font-semibold mb-2">
-                    Your Message *
+                    Your Message
                   </label>
                   <textarea
                     id="message"
                     name="message"
                     rows={5}
                     placeholder="Tell us about your goals, questions, or how we can help you..."
-                    required
                     className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:border-purple-600 focus:outline-none transition-all duration-300 hover:border-gray-300 bg-gray-50 focus:bg-white resize-none"
                   />
                 </div>
@@ -199,7 +200,7 @@ export default function Contact({ handleFormSubmit }: ContactProps) {
                     type="reset"
                     className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 hover:transform hover:-translate-y-1 cursor-pointer border-2 border-gray-200 hover:border-gray-300"
                   >
-                    Reset Form
+                    Reset
                   </button>
                 </div>
               </form>
@@ -211,15 +212,15 @@ export default function Contact({ handleFormSubmit }: ContactProps) {
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-3 mb-12">
             <h3 className="text-3xl md:text-4xl font-bold text-gray-900">FAQ</h3>
-            {/* <FontAwesomeIcon icon={faQuestionCircle} className="text-3xl text-blue-600" /> */}
+            {/* <FontAwesomeIcon icon={faQuestionCircle} className="text-3xl text-blue-600" />w-300 mx-auto space-y-4  */}
           </div>
           
-          <div className="max-w-4xl mx-auto space-y-4">
+          <div className="w-full max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl xl:max-w-[1250px] mx-auto space-y-4 px-4">
             {faqs.map((faq, index) => (
               <div key={index} className="border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 ease-in-out transform hover:-translate-y-1">
                 <button onClick={() => toggleFAQ(index)}
                   className="w-full text-left bg-gradient-to-r from-purple-50 to-blue-50 p-4 flex justify-between items-center cursor-pointer">
-                  <h4 className="font-bold text-gray-900 text-lg">{faq.question}</h4>
+                  <h4 className=" text-gray-900 text-xl">{faq.question}</h4>
                   <span className="text-gray-500 text-lg cursor-pointer select-none">
                     {openIndex === index ? "-" : "+"}
                   </span>
@@ -230,7 +231,7 @@ export default function Contact({ handleFormSubmit }: ContactProps) {
                     openIndex === index ? "max-h-40 p-4" : "max-h-0 p-0"
                   } overflow-hidden`}
                 >
-                  <p className="text-gray-700 text-sm leading-relaxed">
+                  <p className="text-gray-700 text-lg leading-relaxed text-left">
                     {faq.answer}
                   </p>
                 </div>

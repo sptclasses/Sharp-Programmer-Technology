@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faChevronDown,} from "@fortawesome/free-solid-svg-icons";
+import AnimatedLogo from "./AnimatedLogo";
 
 interface NavigationProps {
   activeSection: string;
@@ -37,7 +38,7 @@ export default function Navigation({
       home: "Home",
       about: "About Us",
       courses: "Courses",
-      features: "Features",
+      features: "Facility",
       contact: "Contact Us"
     };
     return names[item] || item.charAt(0).toUpperCase() + item.slice(1);
@@ -47,8 +48,8 @@ export default function Navigation({
     <nav className="fixed top-0 w-full bg-gray-800/95 backdrop-blur-md z-50 shadow-lg transition-all duration-300">
       <div className="max-w-full mx-auto px-5 flex items-center py-4">
         {/* Logo and Company Name - Left Side */}
-        <div className="flex items-center gap-3 text-xl font-bold text-white mr-auto">
-          <span>Sharp Programer Technology</span>
+        <div className="flex items-center gap-3 mr-auto">
+          <AnimatedLogo />
         </div>
         
         {/* Navigation Items and Phone - Right Side */}

@@ -36,7 +36,7 @@ export default function Footer({ scrollToSection }: FooterProps) {
             <div className="flex items-center gap-3 text-xl font-bold text-purple-400 mb-4">
               <span>Sharp Programmer Technology</span>
             </div>
-            <p className="text-gray-300 mb-6 leading-relaxed">
+            <p className="text-gray-300 mb-6 leading-relaxed text-left">
               Empowering students through government-certified education and comprehensive library facilities.
             </p>
             <div className="flex gap-4">
@@ -53,9 +53,9 @@ export default function Footer({ scrollToSection }: FooterProps) {
           </div>
 
           {/* Contact Hours */}
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-              <FontAwesomeIcon icon={faClock} className="text-green-400" />
+          <div className="md:ml-16">
+            <div className="flex items-center gap-2 mb-4 ">
+              <FontAwesomeIcon icon={faClock} className="text-green-400 2xl:ml-15 md:ml-0" />
               <h3 className="text-lg font-semibold text-gray-100">Contact Hours</h3>
             </div>
             <div className="space-y-2">
@@ -71,7 +71,7 @@ export default function Footer({ scrollToSection }: FooterProps) {
           </div>
 
           {/* Courses */}
-          <div className="md:ml-10">
+          <div className="md:ml-22">
             <h3 className="text-lg font-semibold mb-4 text-gray-100">Courses</h3>
             <ul className="space-y-2">
               {courses.map((course, index) => (
@@ -88,7 +88,7 @@ export default function Footer({ scrollToSection }: FooterProps) {
           </div>
 
           {/* Company */}
-          <div className="md:col-span-1 md:pr-2 md:ml-4">
+          <div className="md:col-span-1 md:pr-2 md:ml-17">
             <h3 className="text-lg font-semibold mb-4 text-gray-100">Company</h3>
             <ul className="space-y-2">
               {companyLinks.map((item, index) => (

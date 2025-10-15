@@ -155,6 +155,7 @@ export default function Courses() {
   // NEW COURSE DESIGN WITH SMOOTH INFINITE LOOP
   const [currentSlide, setCurrentSlide] = useState(2); // Start at index 2 (first real course after clones)
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   
   const nielitCourses = [
     {
@@ -255,15 +256,15 @@ export default function Courses() {
     }
   };
 
-  // Auto-slide functionality with infinite loop
+  // Auto-slide functionality with infinite loop, pause on hover
   useEffect(() => {
+    if (isHovered) return;
     const timer = setInterval(() => {
       setIsTransitioning(true);
       setCurrentSlide(prev => prev + 1);
     }, 3000);
-    
     return () => clearInterval(timer);
-  }, []);
+  }, [isHovered]);
 
   const nextSlide = () => {
     if (isTransitioning) return;
@@ -290,7 +291,7 @@ export default function Courses() {
         
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Our courses</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">Our Courses</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Choose from our comprehensive range of courses designed to enhance your skills and boost your career
           </p>
@@ -304,7 +305,7 @@ export default function Courses() {
           
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
             {nielitCourses.map((course) => (
-              <div key={course.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-4 sm:p-6 lg:p-8 min-h-[240px] sm:min-h-[260px]">
+              <div key={course.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-4 sm:p-6 lg:p-8 min-h-[240px] sm:min-h-[260px] cursor-pointer">
                 <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6 h-full">
                   <div className="flex-shrink-0">
                     {course.iconType === "image" ? (
@@ -344,7 +345,11 @@ export default function Courses() {
           </div>
           
           {/* Carousel Container */}
-          <div className="relative">
+          <div
+            className="relative"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
             {/* Navigation Buttons */}
             <button
               onClick={prevSlide}
@@ -365,17 +370,17 @@ export default function Courses() {
             {/* Carousel Content */}
             <div className="overflow-hidden">
               <div 
-                className={`flex ${isTransitioning ? 'transition-transform duration-500 ease-in-out' : ''}`}
+                className={`flex items-stretch ${isTransitioning ? 'transition-transform duration-3000 ease-in-out' : ''}`}
                 style={{ transform: `translateX(-${currentSlide * 50}%)` }}
                 onTransitionEnd={handleTransitionEnd}
               >
                 {clonedCourses.map((course, index) => (
                   <div 
                     key={course.id} 
-                    className="w-1/2 flex-shrink-0 px-4"
+                    className="w-1/2 flex-shrink-0 px-4 h-full"
                   >
-                    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-4 sm:p-6 lg:p-8 min-h-[240px] sm:min-h-[260px]">
-                      <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6 h-full">
+                    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-4 sm:p-6 lg:p-8 min-h-[320px] lg:min-h-[260px] flex flex-col justify-between cursor-pointer h-full">
+                      <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6">
                         <div className="flex-shrink-0 flex items-start">
                           {course.iconType === 'image' ? (
                             <img 
@@ -389,20 +394,18 @@ export default function Courses() {
                             </div>
                           )}
                         </div>
-                        <div className="flex-1 flex flex-col justify-between h-full">
-                          <div>
-                            <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3">{course.title}</h3>
-                            <p className="text-gray-600 text-sm sm:text-base mb-3 sm:mb-4 leading-relaxed">{course.description}</p>
-                          </div>
-                          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-3 sm:space-y-0 mt-auto pt-3">
-                            <span className="text-sm sm:text-base text-gray-500 font-medium">Duration: {course.duration}</span>
-                            <Link href={`/CourseLandingPage/${course.slug}`}>
-                              <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 cursor-pointer rounded-lg text-sm sm:text-base font-medium transition-colors duration-300 w-full sm:w-auto">
-                                Learn More
-                              </button>
-                            </Link>
-                          </div>
+                        <div className="flex-1">
+                          <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3">{course.title}</h3>
+                          <p className="text-gray-600 text-sm sm:text-base mb-3 sm:mb-4 leading-relaxed">{course.description}</p>
                         </div>
+                      </div>
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-3 sm:space-y-0 mt-4">
+                        <span className="text-sm sm:text-base text-gray-500 font-medium">Duration: {course.duration}</span>
+                        <Link href={`/CourseLandingPage/${course.slug}`}>
+                          <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 cursor-pointer rounded-lg text-sm sm:text-base font-medium transition-colors duration-300 w-full sm:w-auto">
+                            Learn More
+                          </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
