@@ -364,7 +364,7 @@ export default function CoursePage() {
             <div className="grid md:grid-cols-2 gap-6 items-start">
               <div className="text-gray-800 space-y-5 text-justify">
                 <p>
-                  The Digital Marketing program covers SEO, social media marketing, content strategy, paid advertising, and analytics. It's built for small business owners, marketers, and students who want practical digital marketing skills.
+                  The Digital Marketing program covers SEO, social media marketing, content strategy, paid advertising, and analytics. It&apos;s built for small business owners, marketers, and students who want practical digital marketing skills.
                 </p>
                 <div>
                   <span className="font-semibold text-lg">🎯 Objectives</span>

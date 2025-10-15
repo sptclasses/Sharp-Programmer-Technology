@@ -19,6 +19,7 @@ export default function Navigation({
   setMobileMenuOpen,
   scrollToSection,
 }: NavigationProps) {
+  const router = useRouter();
   const [featuresDropdownOpen, setFeaturesDropdownOpen] = useState(false);
   const navItems = ["home", "about", "courses", "features", "contact"];
 
