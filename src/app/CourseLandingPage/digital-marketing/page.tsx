@@ -330,7 +330,7 @@ export default function CoursePage() {
               <Link href="/" className="text-white cursor-pointer hover:-translate-y-1 font-bold transition-transform">Home</Link>
             </span> &gt; Digital Marketing
           </p>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Digital Marketing</h1>
+            The Digital Marketing program covers SEO, social media marketing, content strategy, paid advertising, and analytics. It&apos;s built for small business owners, marketers, and students who want practical digital marketing skills.
         </div>
       </div>
 
@@ -451,7 +451,7 @@ export default function CoursePage() {
           >
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Job Market</h2>
             <p className="text-gray-700 mb-6 leading-relaxed">
-              The demand for full stack developers is rapidly growing across industries. Companies are seeking professionals who can handle both frontend and backend development, making you highly employable in today's competitive market.
+              The demand for full stack developers is rapidly growing across industries. Companies are seeking professionals who can handle both frontend and backend development, making you highly employable in today&apos;s competitive market.
             </p>
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-gray-800">Market Opportunities:</h3>

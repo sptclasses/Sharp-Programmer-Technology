@@ -12,13 +12,14 @@ interface NavigationProps {
   setMobileMenuOpen: (open: boolean) => void;
   scrollToSection: (sectionId: string) => void;
 }
-const googleForms="https://docs.google.com/forms/d/1zwSTL61VMXSHeI066tSOVly3Y9c_gIfbiknb20e0si8"
+// Removed unused googleForms variable
 export default function Navigation({
   activeSection,
   mobileMenuOpen,
   setMobileMenuOpen,
   scrollToSection,
 }: NavigationProps) {
+  const router = useRouter();
   const router = useRouter();
   const [featuresDropdownOpen, setFeaturesDropdownOpen] = useState(false);
   const navItems = ["home", "about", "courses", "features", "contact"];
@@ -100,13 +101,13 @@ export default function Navigation({
                           className="block w-full text-left px-4 py-3 text-gray-800 hover:bg-purple-50 hover:text-purple-600 transition-colors cursor-pointer first:rounded-t-lg last:rounded-b-lg"
                         >
                           {subItem.name}
+                        <button
+                          className="text-gray-600 hover:text-gray-900"
+                          onClick={() => setOnlineTestOpen(false)}
+                          aria-label="Close"
+                        >
+                          ✕
                         </button>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <button
-                    onClick={() => scrollToSection(item)}
                     className={`font-medium transition-all duration-300 relative cursor-pointer ${
                       activeSection === item
                         ? "text-blue-400"
@@ -204,6 +205,7 @@ export default function Navigation({
       )}
       {/* Online Test Modal */}
       {onlineTestOpen && (
+
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div className="absolute inset-0 bg-black/50" onClick={() => setOnlineTestOpen(false)} />
           <div className="relative w-[95%] md:w-[1000px] max-h-[90vh] bg-white rounded-lg shadow-lg overflow-hidden">
