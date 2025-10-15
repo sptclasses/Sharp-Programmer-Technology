@@ -36,8 +36,7 @@ export default function CoursePage() {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const [activeSection, setActiveSection] = useState("home");
 	const [clickedItem, setClickedItem] = useState<string>("courses");
-	const [videoModalOpen, setVideoModalOpen] = useState(false);
-	const [videoUrl, setVideoUrl] = useState<string | null>(null);
+		// Removed unused videoModalOpen and videoUrl state
 	const [isMuted, setIsMuted] = useState(true);
 
 	const tabs = ["Overview", "Course Handout", "Benefits", "Job Market", "Opportunities"];
