@@ -477,7 +477,7 @@ export default function CoursePage() {
           >
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Job Market</h2>
             <p className="text-gray-700 mb-6 leading-relaxed">
-              The demand for full stack developers is rapidly growing across industries. Companies are seeking professionals who can handle both frontend and backend development, making you highly employable in today's competitive market.
+              The demand for full stack developers is rapidly growing across industries. Companies are seeking professionals who can handle both frontend and backend development, making you highly employable in today&apos;s competitive market.
             </p>
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-gray-800">Market Opportunities:</h3>

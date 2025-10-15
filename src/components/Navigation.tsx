@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faChevronDown,} from "@fortawesome/free-solid-svg-icons";
 import AnimatedLogo from "./AnimatedLogo";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 interface NavigationProps {
   activeSection: string;
@@ -90,16 +90,7 @@ export default function Navigation({
                           onClick={() => {
                             // If Online Test selected, navigate to the full-page route
                             if (subItem.id === 'online-test') {
-                           try {
-                                // dynamic import to get router client helper
-                                const router = typeof window !== "undefined" ? useRouter() : null;
-                                // const { useRouter } = require('next/navigation');
-                                // const router = (typeof window !== 'undefined' && require('next/navigation').useRouter) ? require('next/navigation').useRouter() : null;
-                                if (router && typeof router.push === 'function') router.push('/online-test');
-                                else window.location.href = '/online-test';
-                              } catch (e) {
-                                window.location.href = '/online-test';
-                              }
+                              router.push('/online-test');
                               setFeaturesDropdownOpen(false);
                               return;
                             }
@@ -213,6 +204,7 @@ export default function Navigation({
       )}
       {/* Online Test Modal */}
       {onlineTestOpen && (
+        
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div className="absolute inset-0 bg-black/50" onClick={() => setOnlineTestOpen(false)} />
           <div className="relative w-[95%] md:w-[1000px] max-h-[90vh] bg-white rounded-lg shadow-lg overflow-hidden">
