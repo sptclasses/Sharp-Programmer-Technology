@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGraduationCap, faPhone, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import CourseHandoutTable from "@/components/ui/CourseHandoutTable";
@@ -309,7 +310,7 @@ export default function CoursePage() {
               <div className="flex items-center justify-center">
                 <div className="relative w-full max-w-md">
                     <div className="overflow-hidden rounded-lg shadow-lg bg-black/5 cursor-pointer">
-                      <img src="/images/ccc-removebg-preview.png" alt="Courses overview" className="w-full h-56 object-cover" />
+                      <Image src="/images/ccc-removebg-preview.png" alt="Courses overview" className="w-full h-56 object-cover" width={800} height={320} />
                       <button
                         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-black rounded-full flex items-center justify-center shadow-md ring-4 ring-black/20 cursor-pointer text-white"
                       onClick={() => { setVideoUrl('https://www.youtube.com/embed/dQw4w9WgXcQ'); setVideoModalOpen(true); }}
@@ -355,7 +356,7 @@ export default function CoursePage() {
           <div className="bg-white shadow-md rounded-xl p-6">
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Job Market</h2>
             <p className="text-gray-700 mb-6 leading-relaxed">
-              The demand for full stack developers is rapidly growing across industries. Companies are seeking professionals who can handle both frontend and backend development, making you highly employable in today's competitive market.
+              The demand for full stack developers is rapidly growing across industries. Companies are seeking professionals who can handle both frontend and backend development, making you highly employable in today&apos;s competitive market.
             </p>
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-gray-800">Market Opportunities:</h3>

@@ -3,8 +3,9 @@
 import React, { useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUsers, faTrophy, faBriefcase, faStar } from "@fortawesome/free-solid-svg-icons";
+import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
 
-type ResultItem = { icon: any; number: string; label: string };
+type ResultItem = { icon: IconDefinition; number: string; label: string };
 
 export default function Results(): React.ReactElement {
   const results: ResultItem[] = [
