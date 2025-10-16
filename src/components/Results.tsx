@@ -251,7 +251,7 @@ function drawStar(ctx: CanvasRenderingContext2D, cx: number, cy: number, spikes:
   let rot = Math.PI / 2 * 3;
   let x = cx;
   let y = cy;
-  let step = Math.PI / spikes;
+  const step = Math.PI / spikes;
   ctx.beginPath();
   ctx.moveTo(cx, cy - outerRadius);
   for (let i = 0; i < spikes; i++) {
