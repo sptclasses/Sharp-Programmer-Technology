@@ -53,15 +53,15 @@ export default function Footer({ scrollToSection }: FooterProps) {
           </div>
 
           {/* Contact Hours */}
-          <div className="md:ml-16">
+          <div className="md:ml-4">
             <div className="flex items-center gap-2 mb-4 ">
-              <FontAwesomeIcon icon={faClock} className="text-green-400 2xl:ml-15 md:ml-0" />
+              <FontAwesomeIcon icon={faClock} className="text-green-400 md:ml-0 xl:ml-0" />
               <h3 className="text-lg font-semibold text-gray-100">Contact Hours</h3>
             </div>
             <div className="space-y-2">
               <div className="flex justify-between">
-                <span className="font-semibold text-gray-300">Mon - Sat:</span>
-                <span className="text-gray-400">9:00 AM - 6:00 PM</span>
+                <span className="font-semibold text-gray-300 xl:text-base">Mon - Sat:</span>
+                <span className="text-gray-400 xl:text-base">9:00 AM - 6:00 PM</span>
               </div>
               <div className="flex justify-between">
                 <span className="font-semibold text-gray-300">Sunday:</span>

@@ -399,7 +399,7 @@ export default function CoursePage() {
                   <div className="overflow-hidden rounded-2xl shadow-2xl bg-black/5">
                     <iframe
                       src={`https://www.youtube.com/embed/g6gWkSl5IVA?autoplay=1&mute=${isMuted ? 1 : 0}&loop=1&rel=0&controls=0`}
-                     className="w-full h-96 sm:h-80 md:h-72 lg:h-90 xl:h-100 rounded-2xl mt-0 pt-0"
+                     className="w-full h-96 sm:h-80 md:h-72 lg:h-90 xl:h-90 rounded-2xl mt-0 pt-0"
                       frameBorder="0"
                       allow="autoplay; muted"
                       title="Course Overview Video"
