@@ -323,7 +323,7 @@ export default function CoursePage() {
 
       {/* Hero */}
   <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white pt-32 pb-12 md:pt-40 md:pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 mt-16">
-  <div className="max-w-5xl ml-0 lg:ml-40">
+  <div className="mx-auto px-0 w-full lg:max-w-[calc(100%-400px)]">
           <p className="text-xs sm:text-sm opacity-80 mb-2 cursor-pointer">
             <span>
               <Link href="/" className="text-white cursor-pointer hover:-translate-y-1 font-bold transition-transform">Home</Link>
@@ -332,10 +332,11 @@ export default function CoursePage() {
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Course On Computer Concepts</h1>
         </div>
       </div>
-
+a
       {/* Navigation Tabs */}
       <div className="border-b border-gray-200 px-6 sticky top-20 bg-white z-40">
-        <div className="flex gap-8 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
+        <div className="mx-auto px- w-full lg:max-w-[calc(100%-400px)]">
+          <div className="flex gap-8 w-full">
           {tabs.map((tab) => (
             <button
               key={tab}
@@ -345,6 +346,7 @@ export default function CoursePage() {
               {tab}
             </button>
           ))}
+          </div>
         </div>
       </div>
 
@@ -352,7 +354,7 @@ export default function CoursePage() {
       <div className="space-y-0">
         {/* Overview Section (text left, video right) - Light shade */}
         <section id="overview" className="scroll-mt-32 bg-white py-12">
-          <div className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
+          <div className="mx-auto px-6 w-full lg:max-w-[calc(100%-400px)]">
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Overview</h2>
             <div className="grid md:grid-cols-2 gap-25 items-start">
               <div className="text-gray-800 space-y-5 text-justify">
@@ -428,7 +430,7 @@ export default function CoursePage() {
 
         {/* Course Handout Section - Gray shade */}
         <section id="course-handout" className="scroll-mt-32 bg-gray-50 py-12">
-          <div className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
+          <div className="mx-auto px-6 w-full lg:max-w-[calc(100%-400px)]">
             <h2 className="text-2xl text-black font-bold mb-6">Course Handout</h2>
             {/* Data-driven table for easy updates */}
             <div className="overflow-x-auto">
@@ -438,8 +440,8 @@ export default function CoursePage() {
         </section>
 
         {/* Benefits Section - Light shade */}
-        <section id="benefits" className="scroll-mt-32 bg-white py-12">
-            <div className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
+    <section id="benefits" className="scroll-mt-32 bg-white py-12">
+      <div className="mx-auto px-6 w-full lg:max-w-[calc(100%-400px)]">
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Benefits</h2>
             <div className="space-y-4">
               <ul className="list-disc list-inside text-gray-700 space-y-3">
@@ -456,8 +458,8 @@ export default function CoursePage() {
         </section>
 
         {/* Job Market Section - Gray shade */}
-        <section id="job-market" className="scroll-mt-32 bg-gray-50 py-12">
-            <div className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
+    <section id="job-market" className="scroll-mt-32 bg-gray-50 py-12">
+      <div className="mx-auto px-6 w-full lg:max-w-[calc(100%-400px)]">
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Job Market</h2>
             <p className="text-gray-700 mb-6 leading-relaxed">
               The demand for full stack developers is rapidly growing across industries. Companies are seeking professionals who can handle both frontend and backend development, making you highly employable in today&apos;s competitive market.
@@ -477,7 +479,7 @@ export default function CoursePage() {
 
         {/* Opportunities Section - Light shade */}
         <section id="opportunities" className="scroll-mt-32 bg-white py-12">
-          <div className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
+          <div className="mx-auto px-6 w-full lg:max-w-[calc(100%-400px)]">
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Career Opportunities</h2>
             <p className="text-gray-700 mb-6 leading-relaxed">
               After completing this comprehensive course, you&apos;ll have access to diverse career paths and exciting opportunities in the tech industry.
