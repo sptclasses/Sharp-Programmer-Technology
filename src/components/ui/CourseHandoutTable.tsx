@@ -34,7 +34,7 @@ export default function CourseHandoutTable({ rows, className = "", caption }: Pr
           <thead>
             <tr className="bg-gradient-to-r from-gray-50 to-white">
               {[
-                "S. No.",
+                "S.No.",
                 "Chapter Name",
                 "Duration (Hours)",
                 "Theory (Hrs)",
