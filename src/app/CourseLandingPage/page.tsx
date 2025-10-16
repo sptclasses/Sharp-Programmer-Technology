@@ -5,7 +5,6 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGraduationCap, faPhone, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import CourseHandoutTable from "@/components/ui/CourseHandoutTable";
-import Image from "next/image";
 
 // Data for Course Handout Table
 const courseHandoutData = [
@@ -273,15 +272,12 @@ export default function CoursePage() {
 
       {/* Navigation Tabs */}
       <div className="border-b border-gray-200 px-6 sticky top-20 bg-white z-40">
-        <div
-          className="flex gap-8"
-          style={{ width: 'calc(100% - 400px)', marginLeft: '160px', maxWidth: '100%' }}
-        >
+        <div className="flex gap-8 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => scrollToTab(tab)}
-              className="py-4 font-medium text-gray-500 hover:text-purple-600 cursor-pointer transition-colors"
+              className="py-4 font-medium text-gray-500 hover:text-purple-600 cursor-pointer transition-colors text-xs sm:text-sm md:text-base"
             >
               {tab}
             </button>
@@ -290,10 +286,7 @@ export default function CoursePage() {
       </div>
 
       {/* Course Content - All Sections Visible */}
-      <div
-        className="py-12 space-y-16"
-        style={{ width: 'calc(100% - 400px)', marginLeft: '160px', maxWidth: '100%' }}
-      >
+      <div className="py-12 space-y-16 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
         {/* Overview Section */}
         <section id="overview" className="scroll-mt-32">
           <div className="bg-white shadow-md rounded-xl p-6">
@@ -316,7 +309,7 @@ export default function CoursePage() {
               <div className="flex items-center justify-center">
                 <div className="relative w-full max-w-md">
                     <div className="overflow-hidden rounded-lg shadow-lg bg-black/5 cursor-pointer">
-                      <Image src="/images/ccc-removebg-preview.png" alt="Courses overview" width={600} height={224} className="w-full h-56 object-cover" />
+                      <img src="/images/ccc-removebg-preview.png" alt="Courses overview" className="w-full h-56 object-cover" />
                       <button
                         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-black rounded-full flex items-center justify-center shadow-md ring-4 ring-black/20 cursor-pointer text-white"
                       onClick={() => { setVideoUrl('https://www.youtube.com/embed/dQw4w9WgXcQ'); setVideoModalOpen(true); }}
@@ -362,7 +355,7 @@ export default function CoursePage() {
           <div className="bg-white shadow-md rounded-xl p-6">
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Job Market</h2>
             <p className="text-gray-700 mb-6 leading-relaxed">
-              The demand for full stack developers is rapidly growing across industries. Companies are seeking professionals who can handle both frontend and backend development, making you highly employable in today&apos;s competitive market.
+              The demand for full stack developers is rapidly growing across industries. Companies are seeking professionals who can handle both frontend and backend development, making you highly employable in today's competitive market.
             </p>
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-gray-800">Market Opportunities:</h3>

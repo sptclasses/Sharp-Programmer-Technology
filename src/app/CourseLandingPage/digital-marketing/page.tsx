@@ -324,27 +324,24 @@ export default function CoursePage() {
 
       {/* Hero */}
   <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white pt-32 pb-12 md:pt-40 md:pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 mt-16">
-        <div className="max-w-5xl ml-40">
+  <div className="max-w-5xl ml-0 lg:ml-40">
           <p className="text-xs sm:text-sm opacity-80 mb-2 cursor-pointer">
             <span>
               <Link href="/" className="text-white cursor-pointer hover:-translate-y-1 font-bold transition-transform">Home</Link>
             </span> &gt; Digital Marketing
           </p>
-            The Digital Marketing program covers SEO, social media marketing, content strategy, paid advertising, and analytics. It&apos;s built for small business owners, marketers, and students who want practical digital marketing skills.
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Digital Marketing</h1>
         </div>
       </div>
 
       {/* Navigation Tabs */}
       <div className="border-b border-gray-200 px-6 sticky top-20 bg-white z-40">
-        <div
-          className="flex gap-8"
-          style={{ width: 'calc(100% - 400px)', marginLeft: '160px', maxWidth: '100%' }}
-        >
+                    <div className="flex gap-8 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => scrollToTab(tab)}
-              className="py-4 font-medium text-gray-500 hover:text-purple-600 cursor-pointer transition-colors"
+              className="py-4 font-medium text-gray-500 hover:text-purple-600 cursor-pointer transition-colors text-xs sm:text-sm md:text-base"
             >
               {tab}
             </button>
@@ -356,15 +353,12 @@ export default function CoursePage() {
       <div className="space-y-0">
         {/* Overview Section (text left, video right) - Light shade */}
         <section id="overview" className="scroll-mt-32 bg-white py-12">
-          <div 
-            className="mx-auto px-6"
-            style={{ width: 'calc(100% - 400px)', marginLeft: '160px', maxWidth: '100%' }}
-          >
+            <div className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Overview</h2>
-            <div className="grid md:grid-cols-2 gap-6 items-start">
+            <div className="grid md:grid-cols-2 gap-25 items-start">
               <div className="text-gray-800 space-y-5 text-justify">
                 <p>
-                  The Digital Marketing program covers SEO, social media marketing, content strategy, paid advertising, and analytics. It&apos;s built for small business owners, marketers, and students who want practical digital marketing skills.
+                  The Digital Marketing program covers SEO, social media marketing, content strategy, paid advertising, and analytics. It's built for small business owners, marketers, and students who want practical digital marketing skills.
                 </p>
                 <div>
                   <span className="font-semibold text-lg">🎯 Objectives</span>
@@ -377,11 +371,11 @@ export default function CoursePage() {
               </div>
 
               <div className="flex items-center justify-center">
-                <div className="relative w-full video-container -mt-15 pt-0">
+            <div className="relative w-11/12 sm:w-11/12 md:w-full video-container mt-4 md:mt-0 pt-0 md:bottom-12 mx-auto">
                   <div className="overflow-hidden rounded-2xl shadow-2xl bg-black/5">
                     <iframe
                       src={`https://www.youtube.com/embed/g6gWkSl5IVA?autoplay=1&mute=${isMuted ? 1 : 0}&loop=1&rel=0&controls=0`}
-                      className="w-full h-64 sm:h-80 md:h-72 lg:h-90 xl:h-100 rounded-2xl mt-0 pt-0"
+                       className="w-full h-96 sm:h-80 md:h-72 lg:h-90 xl:h-100 rounded-2xl mt-0 pt-0"
                       frameBorder="0"
                       allow="autoplay; muted"
                       title="Course Overview Video"
@@ -410,10 +404,7 @@ export default function CoursePage() {
 
         {/* Course Handout Section - Gray shade */}
         <section id="course-handout" className="scroll-mt-32 bg-gray-50 py-12">
-          <div 
-            className="mx-auto px-6"
-            style={{ width: 'calc(100% - 400px)', marginLeft: '160px', maxWidth: '100%' }}
-          >
+            <div className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
             <h2 className="text-2xl text-black font-bold mb-6">Course Handout</h2>
             {/* Data-driven table for easy updates */}
             <div className="overflow-x-auto">
@@ -425,8 +416,7 @@ export default function CoursePage() {
         {/* Benefits Section - Light shade */}
         <section id="benefits" className="scroll-mt-32 bg-white py-12">
           <div 
-            className="mx-auto px-6"
-            style={{ width: 'calc(100% - 400px)', marginLeft: '160px', maxWidth: '100%' }}
+            className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full"
           >
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Benefits</h2>
             <div className="space-y-4">
@@ -446,8 +436,7 @@ export default function CoursePage() {
         {/* Job Market Section - Gray shade */}
         <section id="job-market" className="scroll-mt-32 bg-gray-50 py-12">
           <div 
-            className="mx-auto px-6"
-            style={{ width: 'calc(100% - 400px)', marginLeft: '160px', maxWidth: '100%' }}
+            className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full"
           >
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Job Market</h2>
             <p className="text-gray-700 mb-6 leading-relaxed">
@@ -469,8 +458,7 @@ export default function CoursePage() {
         {/* Opportunities Section - Light shade */}
         <section id="opportunities" className="scroll-mt-32 bg-white py-12">
           <div 
-            className="mx-auto px-6"
-            style={{ width: 'calc(100% - 400px)', marginLeft: '160px', maxWidth: '100%' }}
+            className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full"
           >
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Career Opportunities</h2>
             <p className="text-gray-700 mb-6 leading-relaxed">
