@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Image from "next/image";
 
 export default function About() {
   const [open, setOpen] = useState(false);
@@ -44,7 +43,7 @@ export default function About() {
           <div className="grid md:grid-cols-2 items-center about-grid" style={{ minHeight: '436px' }}>
             <div className="text-left px-4 sm:px-0">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-4xl font-bold mb-2 text-gray-900">A brief about</h2>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-5xl font-bold -mt-2 mb-8" style={{ color: '#7b2ff7' }}>SPT</h2>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-5xl font-bold -mt-2 mb-8" style={{ color: '#f5300eff' }}>SPT</h2>
             <p className="text-base sm:text-lg lg:text-lg xl:text-lg mb-6 text-gray-600 leading-relaxed text-justify">
               We are a government-certified institution dedicated to providing high-quality education and comprehensive
               library facilities. Our mission is to foster learning and development through innovative teaching methods and
