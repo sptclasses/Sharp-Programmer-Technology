@@ -157,7 +157,7 @@ body {
 
 /* Global tweaks for very large screens (>=1600px)
    Keep other breakpoints intact; only adjust wide containers and commonly used layout max-widths */
-@media (min-width: 1600px) {
+@media (min-width: 1400px) {
   /* Limit very wide container widths for readability */
   /* .mx-auto, .max-w-full {
     max-width: 1700px;
