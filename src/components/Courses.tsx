@@ -186,7 +186,8 @@ export default function Courses() {
   const professionalCourses = [
     {
       id: "web-dev",
-      icon: <FontAwesomeIcon icon={faCode} />,
+      icon: "images/FullStack-removebg-preview.png",
+      iconType: "image",
       title: "Full Stack Web Development",
       description: "Learn to build dynamic websites and apps using HTML, CSS, JS, React, Node, and databases.",
       duration: "6 Months",
@@ -203,7 +204,8 @@ export default function Courses() {
     },
     {
       id: "tally",
-      icon: <FontAwesomeIcon icon={faCalculator}  />,
+      icon: "images/Tally.png",
+      iconType: "image",
       title: "Tally with GST",
       description: "Learn accounting and GST billing using Tally ERP for small and medium enterprises .",
       duration: "3 Months",
@@ -211,7 +213,8 @@ export default function Courses() {
     },
     {
       id: "python",
-      icon: <FontAwesomeIcon icon={faPython}  />,
+      icon: "images/Python-Emblem.png",
+      iconType: "image",
       title: "Python Programming",
       description: "Beginner to advanced-level Python course covering data structures, web automation, and APIs.",
       duration: "2 Months",
@@ -219,7 +222,8 @@ export default function Courses() {
     },
     {
       id: "cpp",
-      icon: <FontAwesomeIcon icon={faFileCode}  />,
+      icon: "images/C++.png",
+      iconType: "image",
       title: "C++ Programming",
       description: "Learn the principles of Object-Oriented Programming and problem-solving with C++.",
       duration: "2 Months",
@@ -227,7 +231,8 @@ export default function Courses() {
     },
     {
       id: "java",
-      icon: <FontAwesomeIcon icon={faJava}  />,
+      icon: "images/JAVA.png",
+      iconType: "image",
       title: "Java Programming",
       description: "Develop robust applications using Java's OOPs concepts, Swing, and database connectivity.",
       duration: "3 Months",
@@ -328,34 +333,42 @@ export default function Courses() {
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
             {nielitCourses.map((course) => (
               <div key={course.id} className=" bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-4 sm:p-6 lg:p-8 min-h-[240px] sm:min-h-[260px] cursor-pointer">
-                <div className=" flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6 h-full  ">
+                <div className="flex flex-col h-full">
+  {/* Logo + Heading Row */}
+  <div className="flex items-center space-x-3 mb-3">
+    {course.iconType === "image" ? (
+      <img
+        src={course.icon as string}
+        alt={`${course.title} icon`}
+        className="w-15 h-10 sm:w-20 sm:h-12 object-contain"
+      />
+    ) : (
+      <div className="text-3xl sm:text-4xl text-blue-600">{course.icon}</div>
+    )}
+    <h3 className="text-lg sm:text-xl font-semibold text-gray-900 ml-5">
+      {course.title}
+    </h3>
+  </div>
 
-                  <div className="flex-shrink-0">
-                    {course.iconType === "image" ? (
-                      <img 
-                        src={course.icon as string} 
-                        alt={`${course.title} icon`}
-                        className="w-16 h-16 sm:w-20 sm:h-20 object-contain rounded-lg "
-                      />
-                    ) : (
-                      <div className="text-3xl sm:text-4xl text-blue-600">{course.icon}</div>
-                    )}
-                  </div>
-                  <div className=" flex-1 flex flex-col justify-between h-full">
-                    <div>
-                      <h3 className=" text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3">{course.title}</h3>
-                      <p className=" bottom-25 text-gray-600 text-sm sm:text-base mb-3 sm:mb-4 leading-relaxed">{course.description}</p>
-                    </div>
-                    <div className=" flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-3 sm:space-y-0 mt-auto pt-3">
-                      <span className=" text-sm sm:text-base text-gray-500 font-medium">Duration: {course.duration}</span>
-                      <Link href={`/CourseLandingPage/${course.slug}`}>
-                        <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 cursor-pointer rounded-lg text-sm sm:text-base font-medium transition-colors duration-300 w-full sm:w-auto">
-                          Learn More
-                        </button>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
+  {/* Description + Button Section */}
+  <div className="flex flex-col justify-between flex-1 lg:ml-22 sm:ml-0 px-4">
+    <p className="text-gray-600 text-sm sm:text-base mb-3 sm:mb-4 leading-relaxed">
+      {course.description}
+    </p>
+
+    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-3 sm:space-y-0 mt-auto pt-3">
+      <span className="text-sm sm:text-base text-gray-500 font-medium">
+        Duration: {course.duration}
+      </span>
+      <Link href={`/CourseLandingPage/${course.slug}`}>
+        <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-sm sm:text-base font-medium transition-colors duration-300 w-full sm:w-auto">
+          Learn More
+        </button>
+      </Link>
+    </div>
+  </div>
+</div>
+
               </div>
             ))}
           </div>
@@ -404,33 +417,41 @@ export default function Courses() {
                         style={{ flexBasis: slidePercent === 100 ? '100%' : '50%' }}
                       >
                         <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-3 sm:p-5 lg:p-8 min-h-[260px] sm:min-h-[300px] lg:min-h-[260px] flex flex-col justify-between cursor-pointer h-full">
-                      <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6">
-                        <div className="flex-shrink-0 flex items-start">
-                          {course.iconType === 'image' ? (
-                            <img 
-                              src={course.icon as string} 
-                              alt={`${course.title} icon`}
-                              className="w-20 h-20 sm:w-24 sm:h-24 object-contain"
-                            />
-                          ) : (
-                            <div className="text-3xl sm:text-4xl text-blue-600">
-                              {course.icon}
-                            </div>
-                          )}
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3">{course.title}</h3>
-                          <p className="text-gray-600 text-sm sm:text-base mb-3 sm:mb-4 leading-relaxed">{course.description}</p>
-                        </div>
-                      </div>
-                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-3 sm:space-y-0 mt-4">
-                        <span className="text-sm sm:text-base text-gray-500 font-medium">Duration: {course.duration}</span>
-                        <Link href={`/CourseLandingPage/${course.slug}`}>
-                          <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 cursor-pointer rounded-lg text-sm sm:text-base font-medium transition-colors duration-300 w-full sm:w-auto">
-                            Learn More
-                          </button>
-                        </Link>
-                      </div>
+                                     <div className="flex flex-col h-full">
+  {/* Logo + Heading Row */}
+  <div className="flex items-center space-x-3 mb-3">
+    {course.iconType === "image" ? (
+      <img
+        src={course.icon as string}
+        alt={`${course.title} icon`}
+        className="w-15 h-10 sm:w-20 sm:h-12 object-contain"
+      />
+    ) : (
+      <div className="text-3xl sm:text-4xl text-blue-600">{course.icon}</div>
+    )}
+    <h3 className="text-lg sm:text-xl font-semibold text-gray-900 ml-5">
+      {course.title}
+    </h3>
+  </div>
+
+  {/* Description + Button Section */}
+  <div className="flex flex-col justify-between flex-1 lg:ml-22  sm:ml-0 px-4">
+    <p className="text-gray-600 text-sm sm:text-base mb-3 sm:mb-4 leading-relaxed">
+      {course.description}
+    </p>
+
+    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-3 sm:space-y-0 mt-auto pt-3">
+      <span className="text-sm sm:text-base text-gray-500 font-medium">
+        Duration: {course.duration}
+      </span>
+      <Link href={`/CourseLandingPage/${course.slug}`}>
+        <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-sm sm:text-base font-medium transition-colors duration-300 w-full sm:w-auto">
+          Learn More
+        </button>
+      </Link>
+    </div>
+  </div>
+</div>
                     </div>
                   </div>
                 ))}
