@@ -156,6 +156,10 @@ export default function Courses() {
   const [currentSlide, setCurrentSlide] = useState(2); // Start at index 2 (first real course after clones)
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [slidePercent, setSlidePercent] = useState<number>(() => {
+    if (typeof window === 'undefined') return 50;
+    return window.matchMedia('(max-width: 639.98px)').matches ? 100 : 50;
+  });
   
   const nielitCourses = [
     {
@@ -266,6 +270,23 @@ export default function Courses() {
     return () => clearInterval(timer);
   }, [isHovered]);
 
+  // update slidePercent when viewport crosses mobile breakpoint
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mq = window.matchMedia('(max-width: 639.98px)');
+    const handler = (e: MediaQueryListEvent | MediaQueryList) => {
+      setSlidePercent(e.matches ? 100 : 50);
+    };
+    // initial
+    handler(mq);
+    if (mq.addEventListener) mq.addEventListener('change', handler as any);
+    else mq.addListener(handler as any);
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener('change', handler as any);
+      else mq.removeListener(handler as any);
+    };
+  }, []);
+
   const nextSlide = () => {
     if (isTransitioning) return;
     setIsTransitioning(true);
@@ -305,26 +326,27 @@ export default function Courses() {
           
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
             {nielitCourses.map((course) => (
-              <div key={course.id} className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-4 sm:p-6 lg:p-8 min-h-[240px] sm:min-h-[260px] cursor-pointer">
-                <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6 h-full">
+              <div key={course.id} className=" bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-4 sm:p-6 lg:p-8 min-h-[240px] sm:min-h-[260px] cursor-pointer">
+                <div className=" flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6 h-full  ">
+
                   <div className="flex-shrink-0">
                     {course.iconType === "image" ? (
                       <img 
                         src={course.icon as string} 
                         alt={`${course.title} icon`}
-                        className="w-16 h-16 sm:w-20 sm:h-20 object-contain rounded-lg"
+                        className="w-16 h-16 sm:w-20 sm:h-20 object-contain rounded-lg "
                       />
                     ) : (
                       <div className="text-3xl sm:text-4xl text-blue-600">{course.icon}</div>
                     )}
                   </div>
-                  <div className="flex-1 flex flex-col justify-between h-full">
+                  <div className=" flex-1 flex flex-col justify-between h-full">
                     <div>
-                      <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3">{course.title}</h3>
-                      <p className="text-gray-600 text-sm sm:text-base mb-3 sm:mb-4 leading-relaxed">{course.description}</p>
+                      <h3 className=" text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3">{course.title}</h3>
+                      <p className=" bottom-25 text-gray-600 text-sm sm:text-base mb-3 sm:mb-4 leading-relaxed">{course.description}</p>
                     </div>
-                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-3 sm:space-y-0 mt-auto pt-3">
-                      <span className="text-sm sm:text-base text-gray-500 font-medium">Duration: {course.duration}</span>
+                    <div className=" flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-3 sm:space-y-0 mt-auto pt-3">
+                      <span className=" text-sm sm:text-base text-gray-500 font-medium">Duration: {course.duration}</span>
                       <Link href={`/CourseLandingPage/${course.slug}`}>
                         <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 cursor-pointer rounded-lg text-sm sm:text-base font-medium transition-colors duration-300 w-full sm:w-auto">
                           Learn More
@@ -370,16 +392,17 @@ export default function Courses() {
             {/* Carousel Content */}
             <div className="overflow-hidden">
               <div 
-                className={`flex items-stretch ${isTransitioning ? 'transition-transform duration-3000 ease-in-out' : ''}`}
-                style={{ transform: `translateX(-${currentSlide * 50}%)` }}
+                className={`flex items-stretch ${isTransitioning ? 'transition-transform duration-1000 ease-in-out' : ''}`}
+                style={{ transform: `translateX(-${currentSlide * slidePercent}%)` }}
                 onTransitionEnd={handleTransitionEnd}
               >
                 {clonedCourses.map((course, index) => (
-                  <div 
-                    key={course.id} 
-                    className="w-1/2 flex-shrink-0 px-4 h-full"
-                  >
-                    <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-4 sm:p-6 lg:p-8 min-h-[320px] lg:min-h-[260px] flex flex-col justify-between cursor-pointer h-full">
+                      <div 
+                        key={course.id} 
+                        className={`${slidePercent === 100 ? 'w-full' : 'w-1/2'} flex-shrink-0 px-4 h-full`}
+                        style={{ flexBasis: slidePercent === 100 ? '100%' : '50%' }}
+                      >
+                        <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-4 sm:p-6 lg:p-8 min-h-[320px] lg:min-h-[260px] flex flex-col justify-between cursor-pointer h-full">
                       <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6">
                         <div className="flex-shrink-0 flex items-start">
                           {course.iconType === 'image' ? (
