@@ -280,10 +280,10 @@ export default function Courses() {
     // initial: call with current matches value
     handler({ matches: mq.matches } as MediaQueryListEvent);
     if (mq.addEventListener) mq.addEventListener('change', handler);
-    else mq.addListener(handler as unknown as (this: MediaQueryList, ev: MediaQueryListEvent) => any);
+    else mq.addListener(handler as unknown as (this: MediaQueryList, ev: MediaQueryListEvent) => void);
     return () => {
       if (mq.removeEventListener) mq.removeEventListener('change', handler);
-      else mq.removeListener(handler as unknown as (this: MediaQueryList, ev: MediaQueryListEvent) => any);
+      else mq.removeListener(handler as unknown as (this: MediaQueryList, ev: MediaQueryListEvent) => void);
     };
   }, []);
 
