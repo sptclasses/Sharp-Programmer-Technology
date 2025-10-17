@@ -40,7 +40,7 @@ export default function CoursePage() {
 	const [videoUrl, setVideoUrl] = useState<string | null>(null);
 	const [isMuted, setIsMuted] = useState(true);
 
-	const tabs = ["Overview", "Course Handout", "Benefits", "Job Market", "Opportunities"];
+	const tabs = ["Overview", "Course Handout", "Benefits", "Job Market", "Opportunities", "Eligibility"];
 	const navItems = ["home", "about", "courses", "features", "contact"];
 
 	const featuresSubMenu = [
@@ -389,7 +389,17 @@ export default function CoursePage() {
 						</ul>
 					</div>
 				</section>
+				</div>
+
+				{/* Eligibility Section */}
+				<section id="eligibility" className="scroll-mt-32 bg-gray-50 py-12">
+					<div className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
+						<h2 className="text-2xl text-gray-800 font-bold mb-6">Eligibility</h2>
+						<p className="text-gray-700 mb-6 leading-relaxed">
+							Eligibility: No minimum qualification is required for applying and appearing for the examination in Course on Computer Concepts [CCC].
+						</p>
+					</div>
+				</section>
 			</div>
-		</div>
-	);
-}
+		  );
+		}

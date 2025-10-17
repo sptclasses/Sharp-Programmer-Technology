@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // ...existing code...
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGraduationCap, faPhone, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import CourseHandoutTable from "@/components/ui/CourseHandoutTable";
+import AnimatedLogo from '@/components/AnimatedLogo';
 
 // Data for Course Handout Table
 const courseHandoutData = [
@@ -103,9 +104,10 @@ export default function CoursePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [clickedItem, setClickedItem] = useState<string>("courses");
+  const [selectedTab, setSelectedTab] = useState<string>("Overview");
   const [isMuted, setIsMuted] = useState(true);
 
-  const tabs = ["Overview", "Course Handout", "Benefits", "Job Market", "Opportunities"];
+  const tabs = ["Overview", "Course Handout", "Benefits", "Job Market", "Opportunities", "Eligibility"];
   const navItems = ["home", "about", "courses", "features", "contact"];
 
   const featuresSubMenu = [
@@ -140,16 +142,54 @@ export default function CoursePage() {
     }
   };
 
+  // Scroll spy: observe sections and update selectedTab when they enter the viewport
+  useEffect(() => {
+    const sections = [
+      { id: 'overview', tab: 'Overview' },
+      { id: 'course-handout', tab: 'Course Handout' },
+      { id: 'benefits', tab: 'Benefits' },
+      { id: 'job-market', tab: 'Job Market' },
+      { id: 'opportunities', tab: 'Opportunities' },
+      { id: 'eligibility', tab: 'Eligibility' },
+    ];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // choose the most visible/first intersecting entry
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const match = sections.find((s) => s.id === entry.target.id);
+            if (match) {
+              setSelectedTab(match.tab);
+            }
+          }
+        });
+      },
+      {
+        root: null,
+        // adjust rootMargin so the tab highlights when section is comfortably in view
+        rootMargin: '-30% 0px -40% 0px',
+        threshold: 0.15,
+      }
+    );
+
+    sections.forEach((s) => {
+      const el = document.getElementById(s.id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Navbar */}
       <nav className="fixed top-0 w-full bg-gray-800/95 backdrop-blur-md z-50 shadow-lg transition-all duration-300">
         <div className="max-w-full mx-auto px-5 flex items-center py-4">
           {/* Logo */}
-          <div className="flex items-center gap-3 text-xl font-bold text-white mr-auto">
-            <FontAwesomeIcon icon={faGraduationCap} className="text-2xl text-purple-400" />
-            <span>Sharp Programming Technology</span>
-          </div>
+          <div className="flex items-center gap-3 mr-auto">
+                    <AnimatedLogo />
+                  </div>
 
           {/* Navigation Items */}
           <div className="flex items-center gap-8">
@@ -243,7 +283,7 @@ export default function CoursePage() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden flex flex-col gap-1 cursor-pointer ml-4"
+            className="md:hidden flex flex-col gap-1 cursor-pointer ml-0 px-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             <span className="w-6 h-0.5 bg-white transition-all duration-300"></span>
@@ -322,7 +362,7 @@ export default function CoursePage() {
       </nav>
 
       {/* Hero */}
-  <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white pt-32 pb-12 md:pt-40 md:pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 mt-16">
+  <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white mb-2 pt-32 pb-12 md:pt-40 md:pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 mt-16">
   <div className="container-1200 px-0 w-full">
           <p className="text-xs sm:text-sm opacity-80 mb-2 cursor-pointer">
             <span>
@@ -332,20 +372,22 @@ export default function CoursePage() {
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Course On Computer Concepts</h1>
         </div>
       </div>
-a
-      {/* Navigation Tabs */}
-      <div className="border-b border-gray-200 px-6 sticky top-20 bg-white z-40">
-  <div className="container-1200 px- w-full">
-          <div className="flex gap-8 w-full">
-          {tabs.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => scrollToTab(tab)}
-              className="py-4 font-medium text-gray-500 hover:text-purple-600 cursor-pointer transition-colors text-xs sm:text-sm md:text-base"
-            >
-              {tab}
-            </button>
-          ))}
+
+  {/* Navigation Tabs - mobile: horizontally scrollable pill buttons */}
+  <div className="border-b border-gray-200 px-2 sticky top-24 md:top-20 bg-white z-40">
+        <div className="container-1200 px-0 w-full pt-4 pb-4">
+          <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
+            <div className="flex gap-3 md:gap-6 w-max md:w-full">
+              {tabs.map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => { setSelectedTab(tab); scrollToTab(tab); }}
+                  className={`inline-block whitespace-nowrap px-4 py-2 rounded-full text-sm md:text-base font-medium transition-colors ${selectedTab === tab ? 'bg-purple-600 text-white' : 'text-gray-600 hover:text-purple-600 hover:bg-purple-50'}`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -500,6 +542,15 @@ a
         </section>
 
       </div>
+      {/* Eligibility Section */}
+      <section id="eligibility" className="scroll-mt-32 bg-gray-50 py-12">
+        <div className="container-1200 mx-auto px-6 w-full">
+          <h2 className="text-2xl text-gray-800 font-bold mb-6">Eligibility</h2>
+          <p className="text-gray-700 mb-6 leading-relaxed">
+            Eligibility: No minimum qualification is required for applying and appearing for the examination in Course on Computer Concepts [CCC].
+          </p>
+        </div>
+      </section>
     </div>
   );
 }
