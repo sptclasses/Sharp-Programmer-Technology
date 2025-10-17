@@ -155,15 +155,12 @@ body {
   100% { transform: translate(calc(var(--tx) - 50%), calc(var(--ty) - 50%)) scale(1) rotate(var(--rot)); opacity: 0; }
 }
 
-/* Global tweaks for very large screens (>=1600px)
-   Keep other breakpoints intact; only adjust wide containers and commonly used layout max-widths */
+/* Global tweaks for very large screens (>=1600px)*/
 @media (min-width: 1200px) {
   /* Limit very wide container widths for readability */
   /* .mx-auto, .max-w-full {
     max-width: 1700px;
   } */
-
-  /* Slightly increase horizontal padding for big screens */
   .px-4 { padding-left: 28px !important; padding-right: 28px !important; }
   .px-6 { padding-left: 36px !important; padding-right: 36px !important; }
 
@@ -173,43 +170,66 @@ body {
     margin-right: 0;
   }
 
-  /* Video column helper: keep video sizes reasonable on very wide screens */
+  /* Video column */
   .video-fixed-560 {
     max-width: 560px;
     width: 100%;
   }
 }
 
-/* Adjust Alumni section for screens 1600px and below without changing larger screens */
+/* container-1200: default to Tailwind's 6xl (72rem) for widths below 1200px,
+   and switch to the previous calc-based wide layout at >=1200px.
+   Use by adding `container-1200` to your block-level container elements.
+*/
+.container-1200 {
+  /* Default: fluid for small screens*/ 
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Use 72rem (6xl) specifically between 1200px and 1599.98px */
+@media (min-width: 1200px) and (max-width: 1599.98px) {
+  .container-1200 {
+    max-width: 90rem; /* Tailwind max-w-6xl */
+  }
+}
+
+/* For very large screens, restore the calc-based wide layout */
+@media (min-width: 1600px) {
+  .container-1200 {
+    max-width: calc(100% - 400px);
+  }
+}
+
 @media (max-width: 1600px) {
-  /* Slightly tighten the alumni grid gaps and reduce card padding for <=1600px screens */
+ 
   #alumni .grid {
-    gap: 1.25rem; /* reduce gap from 2rem to 1.25rem */
+    gap: 1.25rem;
   }
 
   #alumni .group > div {
-    padding: 0.75rem; /* reduce inner card padding */
+    padding: 0.75rem; 
   }
 
-  /* Make avatar a bit smaller on narrower screens */
   #alumni .w-20.h-20 {
     width: 64px;
     height: 64px;
   }
 
-  /* Reduce header sizes slightly for <=1600px */
+
   #alumni h2 {
-    font-size: 2.25rem; /* approx 36px */
+    font-size: 2.25rem; 
   }
 
-  /* Make certificate preview a bit tighter */
+
   #alumni [style*="aspectRatio"] {
     aspect-ratio: 297 / 210;
     max-height: 240px;
   }
 
-  /* Slightly smaller trophy icons */
+
   #alumni .text-4xl {
-    font-size: 1.6rem; /* approx 25.6px */
+    font-size: 1.6rem;
   }
 }
