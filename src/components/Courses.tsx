@@ -158,7 +158,8 @@ export default function Courses() {
   const [isHovered, setIsHovered] = useState(false);
   const [slidePercent, setSlidePercent] = useState<number>(() => {
     if (typeof window === 'undefined') return 50;
-    return window.matchMedia('(max-width: 639.98px)').matches ? 100 : 50;
+    // use single card on narrow phones (<= 420px) such as 360x640 and 375x667
+    return window.matchMedia('(max-width: 420px)').matches ? 100 : 50;
   });
   
   const nielitCourses = [
@@ -402,7 +403,7 @@ export default function Courses() {
                         className={`${slidePercent === 100 ? 'w-full' : 'w-1/2'} flex-shrink-0 px-4 h-full`}
                         style={{ flexBasis: slidePercent === 100 ? '100%' : '50%' }}
                       >
-                        <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-4 sm:p-6 lg:p-8 min-h-[320px] lg:min-h-[260px] flex flex-col justify-between cursor-pointer h-full">
+                        <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-3 sm:p-5 lg:p-8 min-h-[260px] sm:min-h-[300px] lg:min-h-[260px] flex flex-col justify-between cursor-pointer h-full">
                       <div className="flex flex-col sm:flex-row items-start space-y-4 sm:space-y-0 sm:space-x-6">
                         <div className="flex-shrink-0 flex items-start">
                           {course.iconType === 'image' ? (
