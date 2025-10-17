@@ -274,16 +274,16 @@ export default function Courses() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const mq = window.matchMedia('(max-width: 639.98px)');
-    const handler = (e: MediaQueryListEvent | MediaQueryList) => {
+    const handler = (e: MediaQueryListEvent) => {
       setSlidePercent(e.matches ? 100 : 50);
     };
-    // initial
-    handler(mq);
-    if (mq.addEventListener) mq.addEventListener('change', handler as any);
-    else mq.addListener(handler as any);
+    // initial: call with current matches value
+    handler({ matches: mq.matches } as MediaQueryListEvent);
+    if (mq.addEventListener) mq.addEventListener('change', handler);
+    else mq.addListener(handler as unknown as (this: MediaQueryList, ev: MediaQueryListEvent) => any);
     return () => {
-      if (mq.removeEventListener) mq.removeEventListener('change', handler as any);
-      else mq.removeListener(handler as any);
+      if (mq.removeEventListener) mq.removeEventListener('change', handler);
+      else mq.removeListener(handler as unknown as (this: MediaQueryList, ev: MediaQueryListEvent) => any);
     };
   }, []);
 
