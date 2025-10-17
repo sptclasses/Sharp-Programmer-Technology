@@ -6,6 +6,7 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGraduationCap, faPhone, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import CourseHandoutTable from "@/components/ui/CourseHandoutTable";
+import AnimatedLogo from '@/components/AnimatedLogo';
 
 // Data for Course Handout Table
 const courseHandoutData = [
@@ -146,10 +147,9 @@ export default function CoursePage() {
       <nav className="fixed top-0 w-full bg-gray-800/95 backdrop-blur-md z-50 shadow-lg transition-all duration-300">
         <div className="max-w-full mx-auto px-5 flex items-center py-4">
           {/* Logo */}
-          <div className="flex items-center gap-3 text-xl font-bold text-white mr-auto">
-            <FontAwesomeIcon icon={faGraduationCap} className="text-2xl text-purple-400" />
-            <span>Sharp Programming Technology</span>
-          </div>
+          <div className="flex items-center gap-3 mr-auto">
+                    <AnimatedLogo />
+                  </div>
 
           {/* Navigation Items */}
           <div className="flex items-center gap-8">
@@ -243,7 +243,7 @@ export default function CoursePage() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden flex flex-col gap-1 cursor-pointer ml-4"
+            className="md:hidden flex flex-col gap-1 cursor-pointer ml-0 px-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             <span className="w-6 h-0.5 bg-white transition-all duration-300"></span>
@@ -334,9 +334,9 @@ export default function CoursePage() {
       </div>
 a
       {/* Navigation Tabs */}
-      <div className="border-b border-gray-200 px-6 sticky top-20 bg-white z-40">
+      <div className="border-b border-gray-200 px-2 sticky top-20 bg-white z-40 ">
   <div className="container-1200 px- w-full">
-          <div className="flex gap-8 w-full">
+          <div className="flex gap-6 w-full ">
           {tabs.map((tab) => (
             <button
               key={tab}
