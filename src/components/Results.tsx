@@ -232,11 +232,11 @@ export default function Results(): React.ReactElement {
                   key={index}
                   className={`relative overflow-hidden p-8 rounded-3xl shadow-xl hover:shadow-2xl transform transition-transform duration-300 hover:-translate-y-2 ${cardClass}`}
                 >
-                  <div className="text-4xl md:text-5xl mb-4">
+                  <div className="text-4xl md:text-5xl mb-4 text-center">
                     <FontAwesomeIcon icon={result.icon} />
                   </div>
-                  <h3 className="text-3xl font-bold mb-2">{result.number}</h3>
-                  <p className="text-lg opacity-90">{result.label}</p>
+                  <h3 className="text-3xl font-bold mb-2 text-center">{result.number}</h3>
+                  <p className="text-lg opacity-90 text-center">{result.label}</p>
                 </div>
               );
             })}

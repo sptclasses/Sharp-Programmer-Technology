@@ -90,6 +90,7 @@ const courseHandoutData = [
     lab: "6",
     outcomes: "Learn OS basics and usage"
   },
+  
   // Add more rows as needed
 ];
 
@@ -363,7 +364,7 @@ export default function CoursePage() {
 
       {/* Hero */}
   <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white mb-2 pt-32 pb-12 md:pt-40 md:pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 mt-16">
-  <div className="container-1200 px-0 w-full">
+  <div className="container-1200 px-3 w-full">
           <p className="text-xs sm:text-sm opacity-80 mb-2 cursor-pointer">
             <span>
               <Link href="/" className="text-white cursor-pointer hover:-translate-y-1 font-bold transition-transform">Home</Link>
