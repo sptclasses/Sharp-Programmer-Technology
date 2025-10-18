@@ -33,7 +33,7 @@ export default function Footer({ scrollToSection }: FooterProps) {
 
           {/* Sharp Programmer Technology Section */}
           <div>
-            <div className="flex items-center gap-3 text-xl font-bold text-purple-400 mb-4">
+            <div className="flex items-center gap-3 text-xl font-bold text-white mb-4">
               <span>Sharp Programmer Technology</span>
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed text-left">

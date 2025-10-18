@@ -43,7 +43,7 @@ export default function CourseHandoutTable({ rows, className = "", caption }: Pr
               ].map((col) => (
                 <th
                   key={col}
-                  className="sticky top-0 z-[1] px-4 py-3 text-xs font-semibold uppercase tracking-wider text-gray-600 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white"
+                  className="sticky top-0 z-[1] px-4 py-3 sm:text-xs lg:text-base font-bold uppercase tracking-wider text-gray-600 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white text-center"
                 >
                   {col}
                 </th>
@@ -75,7 +75,7 @@ export default function CourseHandoutTable({ rows, className = "", caption }: Pr
       </div>
 
       {/* soft bottom fade */}
-      <div className="pointer-events-none h-6 bg-gradient-to-t from-white to-transparent" />
+     
     </div>
   );
 }
