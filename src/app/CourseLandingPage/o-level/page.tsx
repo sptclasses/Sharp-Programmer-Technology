@@ -329,9 +329,9 @@ export default function CoursePage() {
           <p className="text-xs sm:text-sm opacity-80 mb-2 cursor-pointer">
             <span>
               <Link href="/" className="text-white cursor-pointer hover:-translate-y-1 font-bold transition-transform">Home</Link>
-            </span> &gt; O'Level
+            </span> &gt; O&apos;Level
           </p>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">O'Level</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">O&apos;Level</h1>
         </div>
       </div>
 
@@ -363,7 +363,7 @@ export default function CoursePage() {
             <div className="grid md:grid-cols-2 gap-25 items-start">
               <div className="text-gray-800 space-y-5 text-justify">
                 <p>
-                 The ‘O’ Level (IT) Course under the DOEACC Scheme is offered by the National Institute of Electronics and Information Technology (NIELIT), an autonomous body under the Ministry of Electronics and Information Technology (MeitY), Government of India.
+                 The O&apos;Level (IT) Course under the DOEACC Scheme is offered by the National Institute of Electronics and Information Technology (NIELIT), an autonomous body under the Ministry of Electronics and Information Technology (MeitY), Government of India.
                 </p>
                 <p>This course is aligned with NSQF Level 5 and aims to develop foundational IT skills required for various job roles in the digital and technical industries.</p>
                 <div>
