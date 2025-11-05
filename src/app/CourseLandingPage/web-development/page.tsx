@@ -1,97 +1,134 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+// ...existing code...
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGraduationCap, faPhone, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import Image from 'next/image';
+import {  faPhone, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import CourseHandoutTable from "@/components/ui/CourseHandoutTable";
+import AnimatedLogo from '@/components/AnimatedLogo';
 
 // Data for Course Handout Table
 const courseHandoutData = [
   {
     sno: 1,
-    chapter: "Introduction to Computers",
-    duration: "2",
-    theory: "1",
-    lab: "1",
-    outcomes: "Understand basic computer concepts"
+    chapter: "Introduction to Web Development",
+    duration: "3",
+    theory: "3",
+    lab: "0",
+    outcomes: "Understand the web development ecosystem, front-end vs back-end roles, and the workflow of a full stack project."
   },
   {
     sno: 2,
-    chapter: "Operating Systems",
-    duration: "3",
+    chapter: "HTML5 – Structure and Semantics",
+    duration: "5",
     theory: "2",
-    lab: "1",
-    outcomes: "Learn OS basics and usage"
+    lab: "3",
+    outcomes: "Create and structure web pages using semantic HTML elements, forms, tables, and multimedia embedding."
   },
   {
     sno: 3,
-    chapter: "Word Processing",
-    duration: "12",
-    theory: "4",
-    lab: "8",
-    outcomes: "Learn OS basics and usage"
+    chapter: "CSS3 – Styling and Layouts",
+    duration: "6",
+    theory: "2",
+    lab: "4",
+    outcomes: "Apply CSS for responsive design, use Flexbox and Grid layouts, and manage typography, colors, and animations."
   },
-   {
+  {
     sno: 4,
-    chapter: "Spread Sheet",
-    duration: "12",
-    theory: "3",
-    lab: "9",
-    outcomes: "Learn OS basics and usage"
-  },
-   {
-    sno: 5,
-    chapter: "Presentation",
-    duration: "12",
-    theory: "3",
-    lab: "9",
-    outcomes: "Learn OS basics and usage"
-  },
-   {
-    sno: 6,
-    chapter: "Introduction To Internet and WWW",
+    chapter: "JavaScript Fundamentals",
     duration: "7",
     theory: "3",
     lab: "4",
-    outcomes: "Learn OS basics and usage"
+    outcomes: "Understand JavaScript syntax, variables, functions, DOM manipulation, and event handling for interactivity."
   },
-   {
+  {
+    sno: 5,
+    chapter: "Advanced JavaScript and ES6+ Features",
+    duration: "6",
+    theory: "2",
+    lab: "4",
+    outcomes: "Learn advanced JS features like arrow functions, promises, async/await, modules, and destructuring for cleaner code."
+  },
+  {
+    sno: 6,
+    chapter: "Frontend Framework – React.js",
+    duration: "8",
+    theory: "3",
+    lab: "5",
+    outcomes: "Build component-based UIs using React.js, manage state with hooks, props, and use lifecycle methods efficiently."
+  },
+  {
     sno: 7,
-    chapter: "E-mail, Social, Networking And E-Governance Services",
-    duration: "9",
-    theory: "3",
-    lab: "9",
-    outcomes: "Learn OS basics and usage"
+    chapter: "Version Control with Git and GitHub",
+    duration: "4",
+    theory: "2",
+    lab: "2",
+    outcomes: "Use Git for version control, manage branches, commits, merges, and collaborate on projects via GitHub."
   },
-   {
+  {
     sno: 8,
-    chapter: "Digital Financial tools and Applications",
+    chapter: "Backend Development with Node.js and Express.js",
     duration: "8",
     theory: "3",
     lab: "5",
-    outcomes: "Learn OS basics and usage"
+    outcomes: "Set up server-side applications using Node.js and Express.js, handle routes, middleware, and RESTful APIs."
   },
-   {
+  {
     sno: 9,
-    chapter: "Overview Of Cyber Security",
-    duration: "8",
-    theory: "3",
-    lab: "5",
-    outcomes: "Learn OS basics and usage"
+    chapter: "Database Management – MongoDB",
+    duration: "6",
+    theory: "2",
+    lab: "4",
+    outcomes: "Perform CRUD operations using MongoDB, design schemas, and integrate databases with backend applications."
   },
-   {
+  {
     sno: 10,
-    chapter: "Overview of Future Skills and AI",
-    duration: "9",
-    theory: "3",
-    lab: "6",
-    outcomes: "Learn OS basics and usage"
+    chapter: "Authentication and Security",
+    duration: "5",
+    theory: "2",
+    lab: "3",
+    outcomes: "Implement user authentication using JWT or OAuth, manage sessions, and secure web applications against common attacks."
   },
+  {
+    sno: 11,
+    chapter: "REST APIs and Integration",
+    duration: "5",
+    theory: "2",
+    lab: "3",
+    outcomes: "Design and consume RESTful APIs, integrate external services, and handle JSON data in full-stack projects."
+  },
+  {
+    sno: 12,
+    chapter: "Deployment and DevOps Basics",
+    duration: "5",
+    theory: "2",
+    lab: "3",
+    outcomes: "Deploy web applications on cloud platforms like AWS, Vercel, or Render, and understand CI/CD basics."
+  },
+  {
+    sno: 13,
+    chapter: "Testing and Debugging",
+    duration: "4",
+    theory: "2",
+    lab: "2",
+    outcomes: "Perform frontend and backend testing using tools like Jest, Postman, and Chrome DevTools for quality assurance."
+  },
+  {
+    sno: 14,
+    chapter: "Capstone Project – Full Stack Application",
+    duration: "8",
+    theory: "2",
+    lab: "6",
+    outcomes: "Integrate frontend and backend to develop a complete web application with responsive UI, API, and database connectivity."
+  }
+  
   // Add more rows as needed
 ];
 
 // Table component for Course Handout
+// local adapter to use the reusable UI component
 function HandoutTableBlock() {
   return <CourseHandoutTable rows={courseHandoutData} />;
 }
@@ -101,8 +138,7 @@ export default function CoursePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [clickedItem, setClickedItem] = useState<string>("courses");
-  const [videoModalOpen, setVideoModalOpen] = useState(false);
-  const [videoUrl, setVideoUrl] = useState<string | null>(null);
+  const [selectedTab, setSelectedTab] = useState<string>("Overview");
   const [isMuted, setIsMuted] = useState(true);
 
   const tabs = ["Overview", "Course Handout", "Benefits", "Job Market", "Opportunities", "Eligibility"];
@@ -113,12 +149,13 @@ export default function CoursePage() {
     { id: "online-test", name: "Online Test" },
   ];
 
+
   const getDisplayName = (item: string) => {
     const names: { [key: string]: string } = {
       home: "Home",
       about: "About Us",
       courses: "Courses",
-      features: "Features",
+      features: "Facility",
       contact: "Contact Us",
     };
     return names[item] || item.charAt(0).toUpperCase() + item.slice(1);
@@ -139,16 +176,54 @@ export default function CoursePage() {
     }
   };
 
+  // Scroll spy: observe sections and update selectedTab when they enter the viewport
+  useEffect(() => {
+    const sections = [
+      { id: 'overview', tab: 'Overview' },
+      { id: 'course-handout', tab: 'Course Handout' },
+      { id: 'benefits', tab: 'Benefits' },
+      { id: 'job-market', tab: 'Job Market' },
+      { id: 'opportunities', tab: 'Opportunities' },
+      { id: 'eligibility', tab: 'Eligibility' },
+    ];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // choose the most visible/first intersecting entry
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const match = sections.find((s) => s.id === entry.target.id);
+            if (match) {
+              setSelectedTab(match.tab);
+            }
+          }
+        });
+      },
+      {
+        root: null,
+        // adjust rootMargin so the tab highlights when section is comfortably in view
+        rootMargin: '-30% 0px -40% 0px',
+        threshold: 0.15,
+      }
+    );
+
+    sections.forEach((s) => {
+      const el = document.getElementById(s.id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Navbar */}
       <nav className="fixed top-0 w-full bg-gray-800/95 backdrop-blur-md z-50 shadow-lg transition-all duration-300">
         <div className="max-w-full mx-auto px-5 flex items-center py-4">
           {/* Logo */}
-          <div className="flex items-center gap-3 text-xl font-bold text-white mr-auto">
-            <FontAwesomeIcon icon={faGraduationCap} className="text-2xl text-purple-400" />
-            <span>Sharp Programming Technology</span>
-          </div>
+          <div className="flex items-center gap-3 mr-auto">
+                    <AnimatedLogo />
+                  </div>
 
           {/* Navigation Items */}
           <div className="flex items-center gap-8">
@@ -242,7 +317,7 @@ export default function CoursePage() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden flex flex-col gap-1 cursor-pointer ml-4"
+            className="md:hidden flex flex-col gap-1 cursor-pointer ml-0 px-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             <span className="w-6 h-0.5 bg-white transition-all duration-300"></span>
@@ -259,9 +334,7 @@ export default function CoursePage() {
                 {item === "features" ? (
                   <div>
                     <button
-                      onClick={() =>
-                        setFeaturesDropdownOpen(!featuresDropdownOpen)
-                      }
+                      onClick={() => setFeaturesDropdownOpen(!featuresDropdownOpen)}
                       className="flex items-center justify-between w-full text-left px-5 py-2 font-medium text-white hover:text-blue-400 transition-colors cursor-pointer"
                     >
                       <span>{getDisplayName(item)}</span>
@@ -323,29 +396,50 @@ export default function CoursePage() {
       </nav>
 
       {/* Hero */}
-  <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white pt-32 pb-12 md:pt-40 md:pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 mt-16">
-  <div className="max-w-5xl ml-0 lg:ml-40">
-          <p className="text-xs sm:text-sm opacity-80 mb-2 cursor-pointer">
+  <div className="relative text-white mb-2 mt-16">
+    <div className="relative w-full h-72 sm:h-80 md:h-96 lg:h-[480px]">
+      <Image
+        src="/images/Cource Banner.png"
+        alt="Web Designing - course visual"
+        fill
+        priority
+        className="object-cover"
+      />
+
+      {/* Dark overlay for text legibility */}
+      <div className="absolute inset-0 bg-black/0"></div>
+
+      {/* Content over the image */}
+      <div className="absolute inset-0 flex items-center">
+        <div className="container-1200 px-9 w-full">
+          <p className="text-xs sm:text-sm opacity-90 mb-2 cursor-pointer text-black">
             <span>
-              <Link href="/" className="text-white cursor-pointer hover:-translate-y-1 font-bold transition-transform">Home</Link>
+              <Link href="/" className="text-black cursor-pointer hover:-translate-y-1 font-bold transition-transform">Home</Link>
             </span> &gt; Full Stack Web Development
           </p>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Full Stack Web Development</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black">Full Stack Web Development</h1>
+          
         </div>
       </div>
+    </div>
+  </div>
 
-      {/* Navigation Tabs */}
-      <div className="border-b border-gray-200 px-6 sticky top-20 bg-white z-40">
-                    <div className="flex gap-8 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
-          {tabs.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => scrollToTab(tab)}
-              className="py-4 font-medium text-gray-500 hover:text-purple-600 cursor-pointer transition-colors text-xs sm:text-sm md:text-base"
-            >
-              {tab}
-            </button>
-          ))}
+  {/* Navigation Tabs - mobile: horizontally scrollable pill buttons */}
+  <div className="border-b border-gray-200 px-2 sticky top-24 md:top-20 bg-white z-40">
+        <div className="container-1200 px-0 w-full pt-4 pb-4">
+          <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
+            <div className="flex gap-3 md:gap-6 w-max md:w-full">
+              {tabs.map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => { setSelectedTab(tab); scrollToTab(tab); }}
+                  className={`inline-block whitespace-nowrap px-4 py-2 rounded-full text-sm md:text-base font-medium transition-colors ${selectedTab === tab ? 'bg-purple-600 text-white' : 'text-gray-600 hover:text-purple-600 hover:bg-purple-50'}`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -353,29 +447,58 @@ export default function CoursePage() {
       <div className="space-y-0">
         {/* Overview Section (text left, video right) - Light shade */}
         <section id="overview" className="scroll-mt-32 bg-white py-12">
-                        <div className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
+          <div className="container-1200 mx-auto px-6 w-full">
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Overview</h2>
             <div className="grid md:grid-cols-2 gap-25 items-start">
               <div className="text-gray-800 space-y-5 text-justify">
                 <p>
-                  Our Full Stack Web Development program teaches modern web technologies including HTML, CSS, JavaScript, React, Node.js, and databases. The course blends theory with hands-on projects to prepare learners for real-world development roles.
+                 The Full Stack Web Development course provides end-to-end knowledge of designing, developing, and deploying dynamic web applications. It covers both front-end and back-end technologies, enabling learners to build complete web solutions from scratch.
                 </p>
+                <p>The course focuses on HTML, CSS, JavaScript, React.js, Node.js, Express.js, and MongoDB, with emphasis on responsive design, database integration, API development, and cloud deployment.Students also gain practical experience with version control (Git/GitHub) and DevOps fundamentals.</p>
                 <div>
                   <span className="font-semibold text-lg">🎯 Objectives</span>
                   <ul className="list-disc list-inside ml-5 mt-2 space-y-1">
-                    <li>Build responsive, accessible web applications.</li>
-                    <li>Understand RESTful APIs and backend services.</li>
-                    <li>Deploy full-stack applications to cloud platforms.</li>
+                    <li>To introduce the structure and workflow of web applications.</li>
+                    <li>To develop skills in front-end technologies (HTML, CSS, JavaScript, React.js).</li>
+                    <li>To build server-side applications using Node.js and Express.js.</li>
+					          <li>To design and manage databases using MongoDB.</li>
+					          <li>To implement authentication, RESTful APIs, and integrate front-end with back-end.</li>
+                    <li>To gain hands-on experience through real-world projects and live deployment.</li>
                   </ul>
                 </div>
+                {/* <div>
+                  <span className="font-semibold text-lg">📘 What You’ll Learn</span>
+                  <ul className="list-disc list-inside ml-5 mt-2 space-y-1">
+                    <li>Fundamentals of Computers: Hardware, software, input/output devices, operating systems.</li>
+                    <li>Word Processing & Spreadsheets: Create, format, and analyze documents and data.</li>
+                    <li>Presentation Skills: Design and deliver digital presentations.</li>
+                    <li>Internet & Email: Use browsers, search engines, and communicate via email.</li>
+                    <li>Digital Financial Services: Online banking, UPI, and cybersecurity basics.</li>
+                  </ul>
+                </div>
+                <div>
+                  <span className="font-semibold text-lg">🧠 Who Should Enroll</span>
+                  <ul className="list-disc list-inside ml-5 mt-2 space-y-1">
+                    <li>Students, job seekers, and professionals seeking basic computer proficiency.</li>
+                    <li>Anyone preparing for government or competitive exams where computer knowledge is required.</li>
+                  </ul>
+                </div>
+                <div>
+                  <span className="font-semibold text-lg">🕒 Duration</span>
+                  <p className="ml-5 mt-2">Typically 80 hours (Theory + Practical) — can be completed in 2–3 months.</p>
+                </div>
+                <div>
+                  <span className="font-semibold text-lg">🏆 Certification</span>
+                  <p className="ml-5 mt-2">After successful completion, learners receive an NIELIT (DOEACC) CCC Certificate, recognized by government and private organizations across India.</p>
+                </div> */}
               </div>
 
               <div className="flex items-center justify-center">
-                  <div className="relative w-11/12 sm:w-11/12 md:w-full video-container mt-4 md:mt-0 pt-0 md:bottom-12 mx-auto">
+               <div className="relative w-11/12 sm:w-11/12 md:w-10/12 video-container mt-4 md:mt-0 pt-0 xl:bottom-0 md:bottom-0 2xl:bottom-12 mx-auto">
                   <div className="overflow-hidden rounded-2xl shadow-2xl bg-black/5">
                     <iframe
                       src={`https://www.youtube.com/embed/g6gWkSl5IVA?autoplay=1&mute=${isMuted ? 1 : 0}&loop=1&rel=0&controls=0`}
-                      className="w-full h-96 sm:h-80 md:h-72 lg:h-90 xl:h-90 rounded-2xl mt-0 pt-0"
+                     className="w-full h-96 sm:h-80 md:h-72 lg:h-80 xl:h-90 rounded-2xl mt-0 pt-0"
                       frameBorder="0"
                       allow="autoplay; muted"
                       title="Course Overview Video"
@@ -404,7 +527,7 @@ export default function CoursePage() {
 
         {/* Course Handout Section - Gray shade */}
         <section id="course-handout" className="scroll-mt-32 bg-gray-50 py-12">
-            <div className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
+          <div className="container-1200 mx-auto px-6 w-full">
             <h2 className="text-2xl text-black font-bold mb-6">Course Handout</h2>
             {/* Data-driven table for easy updates */}
             <div className="overflow-x-auto">
@@ -414,40 +537,36 @@ export default function CoursePage() {
         </section>
 
         {/* Benefits Section - Light shade */}
-        <section id="benefits" className="scroll-mt-32 bg-white py-12">
-          <div 
-            className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full"
-          >
+    <section id="benefits" className="scroll-mt-32 bg-white py-12">
+  <div className="container-1200 mx-auto px-6 w-full">
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Benefits</h2>
             <div className="space-y-4">
               <ul className="list-disc list-inside text-gray-700 space-y-3">
-                <li className="text-sm">Gain in-demand full stack development skills</li>
-                <li className="text-sm">Access to real-world projects and hands-on experience</li>
-                <li className="text-sm">Expert mentorship and career guidance</li>
-                <li className="text-sm">Flexible learning at your own pace</li>
-                <li className="text-sm">Certificate upon successful completion</li>
-                <li className="text-sm">Job placement assistance and career support</li>
-                <li className="text-sm">Access to exclusive developer community</li>
+                <li className="text-sm">Acquire complete development skills—from UI design to backend architecture.</li>
+                <li className="text-sm">Learn industry-relevant tools such as React, Node.js, MongoDB, and Git.</li>
+                <li className="text-sm">Build and deploy real-world projects for your professional portfolio.</li>
+                <li className="text-sm">Become job-ready for front-end, back-end, or full-stack developer roles.</li>
+                <li className="text-sm">Gain problem-solving and teamwork skills essential for modern software development.</li>
+                <li className="text-sm">Option to work as a freelancer or build your own web-based startup.</li>
               </ul>
             </div>
           </div>
         </section>
 
         {/* Job Market Section - Gray shade */}
-        <section id="job-market" className="scroll-mt-32 bg-gray-50 py-12">
-          <div className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
+    <section id="job-market" className="scroll-mt-32 bg-gray-50 py-12">
+  <div className="container-1200 mx-auto px-6 w-full">
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Job Market</h2>
-            <p className="text-gray-700 mb-6 leading-relaxed">
+            {/* <p className="text-gray-700 mb-6 leading-relaxed">
               The demand for full stack developers is rapidly growing across industries. Companies are seeking professionals who can handle both frontend and backend development, making you highly employable in today&apos;s competitive market.
-            </p>
+            </p> */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-800">Market Opportunities:</h3>
+              {/* <h3 className="text-lg font-semibold text-gray-800">Market Opportunities:</h3> */}
               <ul className="list-disc list-inside text-gray-700 space-y-3">
-                <li className="text-sm">Opportunities in tech startups and established companies</li>
-                <li className="text-sm">Remote and onsite job options available globally</li>
-                <li className="text-sm">Competitive salaries ranging from ₹4-15 LPA</li>
-                <li className="text-sm">Career growth potential and leadership opportunities</li>
-                <li className="text-sm">Roles: Full Stack Developer, Frontend Developer, Backend Developer, DevOps Engineer</li>
+                <li className="text-sm">The demand for Full Stack Developers continues to grow worldwide as companies look for professionals who can handle multiple layers of application development</li>
+                <li className="text-sm">In India, the average entry-level salary for a full stack developer ranges from ₹5 LPA to ₹8 LPA, while experienced professionals can earn above ₹12–15 LPA.</li>
+                <li className="text-sm">Major industries hiring full stack developers include e-commerce, IT services, fintech, SaaS, and digital startups.</li>
+                <li className="text-sm">Full stack developers are especially valued in agile teams for their flexibility and broad technical expertise.</li>
               </ul>
             </div>
           </div>
@@ -455,21 +574,21 @@ export default function CoursePage() {
 
         {/* Opportunities Section - Light shade */}
         <section id="opportunities" className="scroll-mt-32 bg-white py-12">
-          <div className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
+          <div className="container-1200 mx-auto px-6 w-full">
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Career Opportunities</h2>
-            <p className="text-gray-700 mb-6 leading-relaxed">
+            {/* <p className="text-gray-700 mb-6 leading-relaxed">
               After completing this comprehensive course, you&apos;ll have access to diverse career paths and exciting opportunities in the tech industry.
-            </p>
+            </p> */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-800">Your Future Paths:</h3>
+              <h3 className="text-lg font-semibold text-gray-800">After completing this course, learners can pursue roles such as:</h3>
               <ul className="list-disc list-inside text-gray-700 space-y-3">
-                <li className="text-sm">Work as a freelance developer with international clients</li>
-                <li className="text-sm">Join leading tech companies or innovative startups</li>
-                <li className="text-sm">Build your own products, SaaS applications, or tech business</li>
-                <li className="text-sm">Continue learning advanced technologies like AI/ML, Cloud Computing</li>
-                <li className="text-sm">Contribute to open source projects and build your reputation</li>
-                <li className="text-sm">Become a technical mentor or instructor</li>
-                <li className="text-sm">Transition into product management or technical leadership roles</li>
+                <li className="text-sm">Full Stack Developer (MERN/MEAN)</li>
+                <li className="text-sm">Front-End Developer (React.js, Angular, Vue.js)</li>
+                <li className="text-sm">Back-End Developer (Node.js, Express.js)</li>
+                <li className="text-sm">Web Application Developer</li>
+                <li className="text-sm">Software Engineer / Junior Developer</li>
+                <li className="text-sm">DevOps Engineer (entry-level)</li>
+                <li className="text-sm">Freelance Web Developer or Consultant</li>
               </ul>
             </div>
           </div>
@@ -478,35 +597,14 @@ export default function CoursePage() {
       </div>
       {/* Eligibility Section */}
       <section id="eligibility" className="scroll-mt-32 bg-gray-50 py-12">
-        <div className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
+        <div className="container-1200 mx-auto px-6 w-full">
           <h2 className="text-2xl text-gray-800 font-bold mb-6">Eligibility</h2>
-          <p className="text-gray-700 mb-6 leading-relaxed">
-            Eligibility: No minimum qualification is required for applying and appearing for the examination in Course on Computer Concepts [CCC].
-          </p>
+          <ul className="list-disc list-inside text-gray-700 space-y-3">
+                <li className="text-sm">Minimum qualification: 10+2 or equivalent.</li>
+                <li className="text-sm">Basic computer literacy is required; programming background is helpful but not mandatory.</li>
+              </ul>
         </div>
       </section>
-      {/* Video Modal */}
-      {videoModalOpen && (
-        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-lg overflow-hidden w-full max-w-3xl">
-            <div className="flex justify-end p-2">
-              <button className="text-gray-700 font-bold px-3 py-1" onClick={() => { setVideoModalOpen(false); setVideoUrl(null); }}>Close</button>
-            </div>
-            <div className="w-full h-0" style={{ paddingBottom: '56.25%', position: 'relative' }}>
-              {videoUrl && (
-                <iframe
-                  src={videoUrl}
-                  title="Course overview video"
-                  className="absolute inset-0 w-full h-full"
-                  frameBorder={0}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              )}
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

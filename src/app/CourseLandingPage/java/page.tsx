@@ -1,97 +1,134 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+// ...existing code...
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGraduationCap, faPhone, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import Image from 'next/image';
+import {  faPhone, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import CourseHandoutTable from "@/components/ui/CourseHandoutTable";
+import AnimatedLogo from '@/components/AnimatedLogo';
 
 // Data for Course Handout Table
 const courseHandoutData = [
   {
     sno: 1,
-    chapter: "Introduction to Computers",
-    duration: "2",
-    theory: "1",
-    lab: "1",
-    outcomes: "Understand basic computer concepts"
+    chapter: "Introduction to Java and Development Environment",
+    duration: "3",
+    theory: "3",
+    lab: "0",
+    outcomes: "Understand Java’s history, features, and its platform independence using JDK, JRE, and JVM setup."
   },
   {
     sno: 2,
-    chapter: "Operating Systems",
-    duration: "3",
-    theory: "2",
-    lab: "1",
-    outcomes: "Learn OS basics and usage"
+    chapter: "Java Syntax, Data Types, and Operators",
+    duration: "5",
+    theory: "3",
+    lab: "2",
+    outcomes: "Learn Java syntax, identifiers, primitive data types, type casting, and use of arithmetic and logical operators."
   },
   {
     sno: 3,
-    chapter: "Word Processing",
-    duration: "12",
-    theory: "4",
-    lab: "8",
-    outcomes: "Learn OS basics and usage"
+    chapter: "Control Structures and Looping Constructs",
+    duration: "6",
+    theory: "3",
+    lab: "3",
+    outcomes: "Implement conditional statements and iterative loops such as if, else, switch, for, while, and do-while."
   },
-   {
+  {
     sno: 4,
-    chapter: "Spread Sheet",
-    duration: "12",
-    theory: "3",
-    lab: "9",
-    outcomes: "Learn OS basics and usage"
+    chapter: "Arrays and Strings",
+    duration: "6",
+    theory: "2",
+    lab: "4",
+    outcomes: "Work with one-dimensional and two-dimensional arrays and apply string manipulation and comparison methods."
   },
-   {
+  {
     sno: 5,
-    chapter: "Presentation",
-    duration: "12",
-    theory: "3",
-    lab: "9",
-    outcomes: "Learn OS basics and usage"
+    chapter: "Methods and Parameter Passing",
+    duration: "4",
+    theory: "2",
+    lab: "2",
+    outcomes: "Define reusable methods, apply parameter passing, and implement method overloading in Java programs."
   },
-   {
+  {
     sno: 6,
-    chapter: "Introduction To Internet and WWW",
+    chapter: "Object-Oriented Programming Concepts",
+    duration: "8",
+    theory: "3",
+    lab: "5",
+    outcomes: "Apply OOP principles such as encapsulation, inheritance, polymorphism, and abstraction in Java applications."
+  },
+  {
+    sno: 7,
+    chapter: "Constructors, Static Members, and Packages",
+    duration: "5",
+    theory: "2",
+    lab: "3",
+    outcomes: "Understand constructors, static methods and variables, and organize reusable code using Java packages."
+  },
+  {
+    sno: 8,
+    chapter: "Interfaces and Abstract Classes",
+    duration: "5",
+    theory: "2",
+    lab: "3",
+    outcomes: "Differentiate between abstract classes and interfaces and implement multiple inheritance through interfaces."
+  },
+  {
+    sno: 9,
+    chapter: "Exception Handling",
+    duration: "4",
+    theory: "2",
+    lab: "2",
+    outcomes: "Handle runtime errors effectively using try-catch-finally blocks, throw/throws, and custom exceptions."
+  },
+  {
+    sno: 10,
+    chapter: "File Handling and Streams",
+    duration: "5",
+    theory: "2",
+    lab: "3",
+    outcomes: "Perform file input/output operations using Java I/O streams and serialization techniques."
+  },
+  {
+    sno: 11,
+    chapter: "Multithreading and Synchronization",
+    duration: "5",
+    theory: "2",
+    lab: "3",
+    outcomes: "Implement multithreading concepts, manage thread lifecycle, and use synchronization for thread safety."
+  },
+  {
+    sno: 12,
+    chapter: "Collections Framework and Generics",
     duration: "7",
     theory: "3",
     lab: "4",
-    outcomes: "Learn OS basics and usage"
+    outcomes: "Use Java Collections API including List, Set, and Map interfaces and apply generics for type-safe programming."
   },
-   {
-    sno: 7,
-    chapter: "E-mail, Social, Networking And E-Governance Services",
-    duration: "9",
-    theory: "3",
-    lab: "9",
-    outcomes: "Learn OS basics and usage"
+  {
+    sno: 13,
+    chapter: "Database Connectivity (JDBC)",
+    duration: "6",
+    theory: "2",
+    lab: "4",
+    outcomes: "Connect Java applications to relational databases using JDBC, execute SQL queries, and process result sets."
   },
-   {
-    sno: 8,
-    chapter: "Digital Financial tools and Applications",
-    duration: "8",
-    theory: "3",
+  {
+    sno: 14,
+    chapter: "Mini Project and Code Review",
+    duration: "6",
+    theory: "1",
     lab: "5",
-    outcomes: "Learn OS basics and usage"
-  },
-   {
-    sno: 9,
-    chapter: "Overview Of Cyber Security",
-    duration: "8",
-    theory: "3",
-    lab: "5",
-    outcomes: "Learn OS basics and usage"
-  },
-   {
-    sno: 10,
-    chapter: "Overview of Future Skills and AI",
-    duration: "9",
-    theory: "3",
-    lab: "6",
-    outcomes: "Learn OS basics and usage"
-  },
+    outcomes: "Integrate all course concepts into a practical Java project and perform debugging, testing, and documentation."
+  }
+  
   // Add more rows as needed
 ];
 
 // Table component for Course Handout
+// local adapter to use the reusable UI component
 function HandoutTableBlock() {
   return <CourseHandoutTable rows={courseHandoutData} />;
 }
@@ -101,8 +138,7 @@ export default function CoursePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [clickedItem, setClickedItem] = useState<string>("courses");
-  const [videoModalOpen, setVideoModalOpen] = useState(false);
-  const [videoUrl, setVideoUrl] = useState<string | null>(null);
+  const [selectedTab, setSelectedTab] = useState<string>("Overview");
   const [isMuted, setIsMuted] = useState(true);
 
   const tabs = ["Overview", "Course Handout", "Benefits", "Job Market", "Opportunities", "Eligibility"];
@@ -113,12 +149,13 @@ export default function CoursePage() {
     { id: "online-test", name: "Online Test" },
   ];
 
+
   const getDisplayName = (item: string) => {
     const names: { [key: string]: string } = {
       home: "Home",
       about: "About Us",
       courses: "Courses",
-      features: "Features",
+      features: "Facility",
       contact: "Contact Us",
     };
     return names[item] || item.charAt(0).toUpperCase() + item.slice(1);
@@ -139,16 +176,54 @@ export default function CoursePage() {
     }
   };
 
+  // Scroll spy: observe sections and update selectedTab when they enter the viewport
+  useEffect(() => {
+    const sections = [
+      { id: 'overview', tab: 'Overview' },
+      { id: 'course-handout', tab: 'Course Handout' },
+      { id: 'benefits', tab: 'Benefits' },
+      { id: 'job-market', tab: 'Job Market' },
+      { id: 'opportunities', tab: 'Opportunities' },
+      { id: 'eligibility', tab: 'Eligibility' },
+    ];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // choose the most visible/first intersecting entry
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const match = sections.find((s) => s.id === entry.target.id);
+            if (match) {
+              setSelectedTab(match.tab);
+            }
+          }
+        });
+      },
+      {
+        root: null,
+        // adjust rootMargin so the tab highlights when section is comfortably in view
+        rootMargin: '-30% 0px -40% 0px',
+        threshold: 0.15,
+      }
+    );
+
+    sections.forEach((s) => {
+      const el = document.getElementById(s.id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Navbar */}
       <nav className="fixed top-0 w-full bg-gray-800/95 backdrop-blur-md z-50 shadow-lg transition-all duration-300">
         <div className="max-w-full mx-auto px-5 flex items-center py-4">
           {/* Logo */}
-          <div className="flex items-center gap-3 text-xl font-bold text-white mr-auto">
-            <FontAwesomeIcon icon={faGraduationCap} className="text-2xl text-purple-400" />
-            <span>Sharp Programming Technology</span>
-          </div>
+          <div className="flex items-center gap-3 mr-auto">
+                    <AnimatedLogo />
+                  </div>
 
           {/* Navigation Items */}
           <div className="flex items-center gap-8">
@@ -242,7 +317,7 @@ export default function CoursePage() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden flex flex-col gap-1 cursor-pointer ml-4"
+            className="md:hidden flex flex-col gap-1 cursor-pointer ml-0 px-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             <span className="w-6 h-0.5 bg-white transition-all duration-300"></span>
@@ -259,9 +334,7 @@ export default function CoursePage() {
                 {item === "features" ? (
                   <div>
                     <button
-                      onClick={() =>
-                        setFeaturesDropdownOpen(!featuresDropdownOpen)
-                      }
+                      onClick={() => setFeaturesDropdownOpen(!featuresDropdownOpen)}
                       className="flex items-center justify-between w-full text-left px-5 py-2 font-medium text-white hover:text-blue-400 transition-colors cursor-pointer"
                     >
                       <span>{getDisplayName(item)}</span>
@@ -323,29 +396,50 @@ export default function CoursePage() {
       </nav>
 
       {/* Hero */}
-  <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white pt-32 pb-12 md:pt-40 md:pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 mt-16">
-  <div className="max-w-5xl ml-0 lg:ml-40">
-          <p className="text-xs sm:text-sm opacity-80 mb-2 cursor-pointer">
+  <div className="relative text-white mb-2 mt-16">
+    <div className="relative w-full h-72 sm:h-80 md:h-96 lg:h-[480px]">
+      <Image
+        src="/images/Cource Banner.png"
+        alt="Web Designing - course visual"
+        fill
+        priority
+        className="object-cover"
+      />
+
+      {/* Dark overlay for text legibility */}
+      <div className="absolute inset-0 bg-black/0"></div>
+
+      {/* Content over the image */}
+      <div className="absolute inset-0 flex items-center">
+        <div className="container-1200 px-9 w-full">
+          <p className="text-xs sm:text-sm opacity-90 mb-2 cursor-pointer text-black">
             <span>
-              <Link href="/" className="text-white cursor-pointer hover:-translate-y-1 font-bold transition-transform">Home</Link>
+              <Link href="/" className="text-black cursor-pointer hover:-translate-y-1 font-bold transition-transform">Home</Link>
             </span> &gt; Java Programming
           </p>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Java Programming</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black">Java Programming</h1>
+          
         </div>
       </div>
+    </div>
+  </div>
 
-      {/* Navigation Tabs */}
-      <div className="border-b border-gray-200 px-6 sticky top-20 bg-white z-40">
-                    <div className="flex gap-8 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
-          {tabs.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => scrollToTab(tab)}
-              className="py-4 font-medium text-gray-500 hover:text-purple-600 cursor-pointer transition-colors text-xs sm:text-sm md:text-base"
-            >
-              {tab}
-            </button>
-          ))}
+  {/* Navigation Tabs - mobile: horizontally scrollable pill buttons */}
+  <div className="border-b border-gray-200 px-2 sticky top-24 md:top-20 bg-white z-40">
+        <div className="container-1200 px-0 w-full pt-4 pb-4">
+          <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
+            <div className="flex gap-3 md:gap-6 w-max md:w-full">
+              {tabs.map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => { setSelectedTab(tab); scrollToTab(tab); }}
+                  className={`inline-block whitespace-nowrap px-4 py-2 rounded-full text-sm md:text-base font-medium transition-colors ${selectedTab === tab ? 'bg-purple-600 text-white' : 'text-gray-600 hover:text-purple-600 hover:bg-purple-50'}`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -353,29 +447,57 @@ export default function CoursePage() {
       <div className="space-y-0">
         {/* Overview Section (text left, video right) - Light shade */}
         <section id="overview" className="scroll-mt-32 bg-white py-12">
-                        <div className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
+          <div className="container-1200 mx-auto px-6 w-full">
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Overview</h2>
             <div className="grid md:grid-cols-2 gap-25 items-start">
               <div className="text-gray-800 space-y-5 text-justify">
                 <p>
-                  Our Java Programming course covers Java fundamentals, OOP concepts, and core libraries to build robust applications. Ideal for students targeting backend development and enterprise applications.
+                 Java is a general-purpose, object-oriented programming language designed to be platform-independent (Write Once, Run Anywhere) via the Java Virtual Machine.
                 </p>
+                <p>A Java programming course typically covers fundamentals (syntax, data types, control flow), object-oriented concepts (classes, objects, inheritance, polymorphism), as well as advanced topics like collections, multithreading, frameworks, and building real-world applications.</p>
                 <div>
                   <span className="font-semibold text-lg">🎯 Objectives</span>
                   <ul className="list-disc list-inside ml-5 mt-2 space-y-1">
-                    <li>Master Java syntax and object-oriented programming.</li>
-                    <li>Build console and GUI applications.</li>
-                    <li>Understand basic concurrency and collections.</li>
+                    <li>To introduce learners to Java programming fundamentals: syntax, data types, operators, control statements.</li>
+                    <li>To build competence in object-oriented programming using Java: classes, objects, inheritance, polymorphism, encapsulation.</li>
+                    <li>To teach advanced Java features: collections framework, exception handling, multithreading, I/O, generics.</li>
+					          <li>To enable learners to apply Java in practical application contexts: desktop apps, server-side applications, mobile/Android, enterprise systems.</li>
+					          <li>To prepare students to work in Java-based development environments and take up programming roles leveraging Java skills.</li>
                   </ul>
                 </div>
+                {/* <div>
+                  <span className="font-semibold text-lg">📘 What You’ll Learn</span>
+                  <ul className="list-disc list-inside ml-5 mt-2 space-y-1">
+                    <li>Fundamentals of Computers: Hardware, software, input/output devices, operating systems.</li>
+                    <li>Word Processing & Spreadsheets: Create, format, and analyze documents and data.</li>
+                    <li>Presentation Skills: Design and deliver digital presentations.</li>
+                    <li>Internet & Email: Use browsers, search engines, and communicate via email.</li>
+                    <li>Digital Financial Services: Online banking, UPI, and cybersecurity basics.</li>
+                  </ul>
+                </div>
+                <div>
+                  <span className="font-semibold text-lg">🧠 Who Should Enroll</span>
+                  <ul className="list-disc list-inside ml-5 mt-2 space-y-1">
+                    <li>Students, job seekers, and professionals seeking basic computer proficiency.</li>
+                    <li>Anyone preparing for government or competitive exams where computer knowledge is required.</li>
+                  </ul>
+                </div>
+                <div>
+                  <span className="font-semibold text-lg">🕒 Duration</span>
+                  <p className="ml-5 mt-2">Typically 80 hours (Theory + Practical) — can be completed in 2–3 months.</p>
+                </div>
+                <div>
+                  <span className="font-semibold text-lg">🏆 Certification</span>
+                  <p className="ml-5 mt-2">After successful completion, learners receive an NIELIT (DOEACC) CCC Certificate, recognized by government and private organizations across India.</p>
+                </div> */}
               </div>
 
-               <div className="flex items-center justify-center">
-                  <div className="relative w-11/12 sm:w-11/12 md:w-full video-container mt-4 md:mt-0 pt-0 md:bottom-12 mx-auto">
+              <div className="flex items-center justify-center">
+               <div className="relative w-11/12 sm:w-11/12 md:w-10/12 video-container mt-4 md:mt-0 pt-0 xl:bottom-0 md:bottom-0 2xl:bottom-12 mx-auto">
                   <div className="overflow-hidden rounded-2xl shadow-2xl bg-black/5">
                     <iframe
                       src={`https://www.youtube.com/embed/g6gWkSl5IVA?autoplay=1&mute=${isMuted ? 1 : 0}&loop=1&rel=0&controls=0`}
-                       className="w-full h-96 sm:h-80 md:h-72 lg:h-90 xl:h-90 rounded-2xl mt-0 pt-0"
+                     className="w-full h-96 sm:h-80 md:h-72 lg:h-80 xl:h-90 rounded-2xl mt-0 pt-0"
                       frameBorder="0"
                       allow="autoplay; muted"
                       title="Course Overview Video"
@@ -404,7 +526,7 @@ export default function CoursePage() {
 
         {/* Course Handout Section - Gray shade */}
         <section id="course-handout" className="scroll-mt-32 bg-gray-50 py-12">
-            <div className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
+          <div className="container-1200 mx-auto px-6 w-full">
             <h2 className="text-2xl text-black font-bold mb-6">Course Handout</h2>
             {/* Data-driven table for easy updates */}
             <div className="overflow-x-auto">
@@ -414,42 +536,34 @@ export default function CoursePage() {
         </section>
 
         {/* Benefits Section - Light shade */}
-        <section id="benefits" className="scroll-mt-32 bg-white py-12">
-          <div 
-            className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full"
-          >
+    <section id="benefits" className="scroll-mt-32 bg-white py-12">
+  <div className="container-1200 mx-auto px-6 w-full">
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Benefits</h2>
             <div className="space-y-4">
               <ul className="list-disc list-inside text-gray-700 space-y-3">
-                <li className="text-sm">Gain in-demand full stack development skills</li>
-                <li className="text-sm">Access to real-world projects and hands-on experience</li>
-                <li className="text-sm">Expert mentorship and career guidance</li>
-                <li className="text-sm">Flexible learning at your own pace</li>
-                <li className="text-sm">Certificate upon successful completion</li>
-                <li className="text-sm">Job placement assistance and career support</li>
-                <li className="text-sm">Access to exclusive developer community</li>
+                <li className="text-sm"><strong>Wide use & platform-independence:</strong> Java&apos;s “write once, run anywhere” principle means applications can run on many platforms.</li>
+                <li className="text-sm"><strong>Strong ecosystem and community:</strong> A large number of libraries, frameworks, tools, and a mature community make Java development efficient.</li>
+                <li className="text-sm"><strong>Good career foundation:</strong> Learning Java gives you a strong programming base and opens up many technical career paths.</li>
+                <li className="text-sm"><strong>High demand:</strong> Java programmers remain in demand in many domains (enterprise apps, backend services, Android, big data).</li>
+                <li className="text-sm"><strong>Transferable skills:</strong> The object-oriented and structured programming skills you learn in Java carry over to other languages and platforms.</li>
               </ul>
             </div>
           </div>
         </section>
 
         {/* Job Market Section - Gray shade */}
-        <section id="job-market" className="scroll-mt-32 bg-gray-50 py-12">
-          <div 
-            className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full"
-          >
+    <section id="job-market" className="scroll-mt-32 bg-gray-50 py-12">
+  <div className="container-1200 mx-auto px-6 w-full">
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Job Market</h2>
-            <p className="text-gray-700 mb-6 leading-relaxed">
+            {/* <p className="text-gray-700 mb-6 leading-relaxed">
               The demand for full stack developers is rapidly growing across industries. Companies are seeking professionals who can handle both frontend and backend development, making you highly employable in today&apos;s competitive market.
-            </p>
+            </p> */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-800">Market Opportunities:</h3>
+              {/* <h3 className="text-lg font-semibold text-gray-800">Market Opportunities:</h3> */}
               <ul className="list-disc list-inside text-gray-700 space-y-3">
-                <li className="text-sm">Opportunities in tech startups and established companies</li>
-                <li className="text-sm">Remote and onsite job options available globally</li>
-                <li className="text-sm">Competitive salaries ranging from ₹4-15 LPA</li>
-                <li className="text-sm">Career growth potential and leadership opportunities</li>
-                <li className="text-sm">Roles: Full Stack Developer, Frontend Developer, Backend Developer, DevOps Engineer</li>
+                <li className="text-sm">Java remains one of the most widely used languages in enterprise software, backend systems, and large organisations.</li>
+                <li className="text-sm">Roles for Java developers and related functions are actively listed and sought. For example: “12 Java career opportunities” article lists multiple roles and salary ranges.</li>
+                <li className="text-sm">With more businesses relying on scalable, cross-platform, backend and enterprise systems, Java remains relevant and has good growth potential.</li>
               </ul>
             </div>
           </div>
@@ -457,23 +571,20 @@ export default function CoursePage() {
 
         {/* Opportunities Section - Light shade */}
         <section id="opportunities" className="scroll-mt-32 bg-white py-12">
-          <div 
-            className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full"
-          >
+          <div className="container-1200 mx-auto px-6 w-full">
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Career Opportunities</h2>
-            <p className="text-gray-700 mb-6 leading-relaxed">
+            {/* <p className="text-gray-700 mb-6 leading-relaxed">
               After completing this comprehensive course, you&apos;ll have access to diverse career paths and exciting opportunities in the tech industry.
-            </p>
+            </p> */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-800">Your Future Paths:</h3>
+              <h3 className="text-lg font-semibold text-gray-800">With Java skills, you can pursue roles such as:</h3>
               <ul className="list-disc list-inside text-gray-700 space-y-3">
-                <li className="text-sm">Work as a freelance developer with international clients</li>
-                <li className="text-sm">Join leading tech companies or innovative startups</li>
-                <li className="text-sm">Build your own products, SaaS applications, or tech business</li>
-                <li className="text-sm">Continue learning advanced technologies like AI/ML, Cloud Computing</li>
-                <li className="text-sm">Contribute to open source projects and build your reputation</li>
-                <li className="text-sm">Become a technical mentor or instructor</li>
-                <li className="text-sm">Transition into product management or technical leadership roles</li>
+                <li className="text-sm">Java Developer / Software Engineer (Backend)</li>
+                <li className="text-sm">Full Stack Developer (Java + frameworks)</li>
+                <li className="text-sm">Android Mobile App Developer (Java-based)</li>
+                <li className="text-sm">Enterprise Application Developer (Java EE / Spring / Hibernate)</li>
+                <li className="text-sm">Solutions Architect / Technical Lead in Java-centric architecture</li>
+                <li className="text-sm">Freelance Java Developer / Consultant</li>
               </ul>
             </div>
           </div>
@@ -482,35 +593,14 @@ export default function CoursePage() {
       </div>
       {/* Eligibility Section */}
       <section id="eligibility" className="scroll-mt-32 bg-gray-50 py-12">
-        <div className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
+        <div className="container-1200 mx-auto px-6 w-full">
           <h2 className="text-2xl text-gray-800 font-bold mb-6">Eligibility</h2>
-          <p className="text-gray-700 mb-6 leading-relaxed">
-            Eligibility: No minimum qualification is required for applying and appearing for the examination in Course on Computer Concepts [CCC].
-          </p>
+          <ul className="list-disc list-inside text-gray-700 space-y-3">
+                <li className="text-sm">Often, no strict prerequisite other than basic computer literacy and logical thinking; many courses accept learners with little to no prior programming experience.</li>
+                <li className="text-sm">A background in mathematics or familiarity with programming concepts helps for more advanced Java topics (multithreading, data structures).</li>
+              </ul>
         </div>
       </section>
-      {/* Video Modal */}
-      {videoModalOpen && (
-        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-lg overflow-hidden w-full max-w-3xl">
-            <div className="flex justify-end p-2">
-              <button className="text-gray-700 font-bold px-3 py-1" onClick={() => { setVideoModalOpen(false); setVideoUrl(null); }}>Close</button>
-            </div>
-            <div className="w-full h-0" style={{ paddingBottom: '56.25%', position: 'relative' }}>
-              {videoUrl && (
-                <iframe
-                  src={videoUrl}
-                  title="Course overview video"
-                  className="absolute inset-0 w-full h-full"
-                  frameBorder={0}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              )}
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

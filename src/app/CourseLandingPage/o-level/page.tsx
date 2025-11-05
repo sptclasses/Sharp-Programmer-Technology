@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 // ...existing code...
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Image from 'next/image';
 import { faPhone, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import CourseHandoutTable from "@/components/ui/CourseHandoutTable";
 import AnimatedLogo from '@/components/AnimatedLogo';
@@ -324,16 +325,29 @@ export default function CoursePage() {
       </nav>
 
       {/* Hero */}
-  <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white mb-2 pt-32 pb-12 md:pt-40 md:pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 mt-16">
-  <div className="container-1200 px-3 w-full">
-          <p className="text-xs sm:text-sm opacity-80 mb-2 cursor-pointer">
+   <div className="relative text-white mb-2 mt-16">
+    <div className="relative w-full h-72 sm:h-80 md:h-96 lg:h-[480px]">
+      <Image
+        src="/images/Cource Banner.png"
+        alt="Web Designing - course visual"
+        fill
+        priority
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-black/0"></div>
+      <div className="absolute inset-0 flex items-center">
+        <div className="container-1200 px-9 w-full">
+          <p className="text-xs sm:text-sm opacity-90 mb-2 cursor-pointer text-black">
             <span>
-              <Link href="/" className="text-white cursor-pointer hover:-translate-y-1 font-bold transition-transform">Home</Link>
+              <Link href="/" className="text-black cursor-pointer hover:-translate-y-1 font-bold transition-transform">Home</Link>
             </span> &gt; O&apos;Level
           </p>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">O&apos;Level</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black">O&apos;Level</h1>
+          
         </div>
       </div>
+    </div>
+  </div>
 
   {/* Navigation Tabs - mobile: horizontally scrollable pill buttons */}
   <div className="border-b border-gray-200 px-2 sticky top-24 md:top-20 bg-white z-40">
