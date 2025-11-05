@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 // ...existing code...
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGraduationCap, faPhone, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import Image from 'next/image';
+import {  faPhone, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import CourseHandoutTable from "@/components/ui/CourseHandoutTable";
 import AnimatedLogo from '@/components/AnimatedLogo';
 
@@ -12,84 +13,84 @@ import AnimatedLogo from '@/components/AnimatedLogo';
 const courseHandoutData = [
   {
     sno: 1,
-    chapter: "Introduction to Computers",
-    duration: "2",
-    theory: "1",
-    lab: "1",
-    outcomes: "Understand basic computer concepts"
+    chapter: "Introduction to Computer",
+    duration: "6",
+    theory: "2",
+    lab: "4",
+    outcomes: "Identify computers and IT gadgets, explain their evolution and applications, understand hardware and software components including input/output devices, memory, storage, and system software."
   },
   {
     sno: 2,
-    chapter: "Operating Systems",
-    duration: "3",
-    theory: "2",
-    lab: "1",
-    outcomes: "Learn OS basics and usage"
+    chapter: "Introduction to Operating System",
+    duration: "7",
+    theory: "3",
+    lab: "4",
+    outcomes: "Understand basics of operating systems for desktop and mobile devices, manage files and folders, modify display and system settings, and use printers and file extensions."
   },
-   {
+  {
     sno: 3,
     chapter: "Word Processing",
     duration: "12",
     theory: "4",
     lab: "8",
-    outcomes: "Learn OS basics and usage"
+    outcomes: "Create, edit, and format documents, apply styles and layouts, insert tables, headers, and footers, print and export documents as PDFs, and use mail merge effectively."
   },
-   {
+  {
     sno: 4,
-    chapter: "Spread Sheet",
+    chapter: "Spreadsheet",
     duration: "12",
     theory: "3",
     lab: "9",
-    outcomes: "Learn OS basics and usage"
+    outcomes: "Work with spreadsheets to organize and analyze data, use formulas and functions such as SUM, COUNT, MAX, MIN, AVERAGE, and represent data using charts and graphs."
   },
-   {
+  {
     sno: 5,
     chapter: "Presentation",
+    duration: "8",
+    theory: "3",
+    lab: "5",
+    outcomes: "Create and design presentations using templates and themes, insert multimedia and tables, apply transitions and animations, and conduct professional slide shows."
+  },
+  {
+    sno: 6,
+    chapter: "Introduction to Internet and WWW",
     duration: "12",
     theory: "3",
     lab: "9",
-    outcomes: "Learn OS basics and usage"
+    outcomes: "Understand network concepts (LAN, WAN, topology), connect to the Internet, browse safely, use search engines, and download or print web content."
   },
-   {
-    sno: 6,
-    chapter: "Introduction To Internet and WWW",
-    duration: "7",
-    theory: "3",
-    lab: "4",
-    outcomes: "Learn OS basics and usage"
-  },
-   {
+  {
     sno: 7,
-    chapter: "E-mail, Social, Networking And E-Governance Services",
-    duration: "9",
-    theory: "3",
-    lab: "9",
-    outcomes: "Learn OS basics and usage"
-  },
-   {
-    sno: 8,
-    chapter: "Digital Financial tools and Applications",
-    duration: "8",
-    theory: "3",
-    lab: "5",
-    outcomes: "Learn OS basics and usage"
-  },
-   {
-    sno: 9,
-    chapter: "Overview Of Cyber Security",
-    duration: "8",
-    theory: "3",
-    lab: "5",
-    outcomes: "Learn OS basics and usage"
-  },
-   {
-    sno: 10,
-    chapter: "Overview of Future Skills and AI",
+    chapter: "E-mail, Social Networking and e-Governance Services",
     duration: "9",
     theory: "3",
     lab: "6",
-    outcomes: "Learn OS basics and usage"
+    outcomes: "Create and manage email accounts, send attachments, use social media platforms responsibly, access e-Governance and e-Commerce services, and use UMANG and Digital Locker apps."
   },
+  {
+    sno: 8,
+    chapter: "Digital Financial Tools and Applications",
+    duration: "8",
+    theory: "3",
+    lab: "5",
+    outcomes: "Understand and use digital financial tools like UPI, AEPS, USSD, cards, PoS, and e-wallets; perform NEFT, RTGS, IMPS transactions and online bill payments securely."
+  },
+  {
+    sno: 9,
+    chapter: "Overview of Cyber Security",
+    duration: "8",
+    theory: "3",
+    lab: "5",
+    outcomes: "Learn basic cybersecurity concepts, secure computers, mobile devices, emails, browsers, and social media accounts from common threats."
+  },
+  {
+    sno: 10,
+    chapter: "Future Skills and Artificial Intelligence",
+    duration: "9",
+    theory: "3",
+    lab: "6",
+    outcomes: "Gain awareness of emerging technologies like IoT, Big Data, Cloud Computing, Virtual Reality, Blockchain, 3D Printing, and Artificial Intelligence with practical insights into their applications."
+  }
   
   // Add more rows as needed
 ];
@@ -363,16 +364,33 @@ export default function CoursePage() {
       </nav>
 
       {/* Hero */}
-  <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white mb-2 pt-32 pb-12 md:pt-40 md:pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 mt-16">
-  <div className="container-1200 px-3 w-full">
-          <p className="text-xs sm:text-sm opacity-80 mb-2 cursor-pointer">
+  <div className="relative text-white mb-2 mt-16">
+    <div className="relative w-full h-72 sm:h-80 md:h-96 lg:h-[480px]">
+      <Image
+        src="/images/Cource Banner.png"
+        alt="Web Designing - course visual"
+        fill
+        priority
+        className="object-cover"
+      />
+
+      {/* Dark overlay for text legibility */}
+      <div className="absolute inset-0 bg-black/0"></div>
+
+      {/* Content over the image */}
+      <div className="absolute inset-0 flex items-center">
+        <div className="container-1200 px-9 w-full">
+          <p className="text-xs sm:text-sm opacity-90 mb-2 cursor-pointer text-black">
             <span>
-              <Link href="/" className="text-white cursor-pointer hover:-translate-y-1 font-bold transition-transform">Home</Link>
-            </span> &gt; Course On Computer Concepts
+              <Link href="/" className="text-black cursor-pointer hover:-translate-y-1 font-bold transition-transform">Home</Link>
+            </span> &gt; Course on Computer Concepts
           </p>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Course On Computer Concepts</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black">Course on Computer Concepts</h1>
+          
         </div>
       </div>
+    </div>
+  </div>
 
   {/* Navigation Tabs - mobile: horizontally scrollable pill buttons */}
   <div className="border-b border-gray-200 px-2 sticky top-24 md:top-20 bg-white z-40">

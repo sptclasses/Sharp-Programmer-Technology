@@ -1,97 +1,117 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+// ...existing code...
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {  faGraduationCap, faPhone, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import Image from 'next/image';
+import {  faPhone, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import CourseHandoutTable from "@/components/ui/CourseHandoutTable";
+import AnimatedLogo from '@/components/AnimatedLogo';
 
 // Data for Course Handout Table
 const courseHandoutData = [
   {
     sno: 1,
-    chapter: "Introduction to Computers",
-    duration: "2",
-    theory: "1",
-    lab: "1",
-    outcomes: "Understand basic computer concepts"
+    chapter: "Introduction to Digital Marketing",
+    duration: "3",
+    theory: "3",
+    lab: "0",
+    outcomes: "Understand the fundamentals of digital marketing, its scope, evolution, and how it differs from traditional marketing."
   },
   {
     sno: 2,
-    chapter: "Operating Systems",
-    duration: "3",
+    chapter: "Website Planning and Creation",
+    duration: "5",
     theory: "2",
-    lab: "1",
-    outcomes: "Learn OS basics and usage"
+    lab: "3",
+    outcomes: "Learn website structure, domain/hosting basics, and create a WordPress or CMS-based website for campaigns."
   },
-  {
+   {
     sno: 3,
-    chapter: "Word Processing",
-    duration: "12",
-    theory: "4",
-    lab: "8",
-    outcomes: "Learn OS basics and usage"
+    chapter: "Search Engine Optimization (SEO)",
+    duration: "8",
+    theory: "3",
+    lab: "5",
+    outcomes: "Understand on-page and off-page SEO, keyword research, backlinks, and analytics to improve search visibility."
   },
    {
     sno: 4,
-    chapter: "Spread Sheet",
-    duration: "12",
-    theory: "3",
-    lab: "9",
-    outcomes: "Learn OS basics and usage"
+    chapter: "Search Engine Marketing (SEM) & Google Ads",
+    duration: "6",
+    theory: "2",
+    lab: "4",
+    outcomes: "Learn to create, manage, and optimize paid campaigns using Google Ads and understand CPC, CTR, and conversion metrics."
   },
    {
     sno: 5,
-    chapter: "Presentation",
-    duration: "12",
+    chapter: "Social Media Marketing (SMM)",
+    duration: "8",
     theory: "3",
-    lab: "9",
-    outcomes: "Learn OS basics and usage"
+    lab: "5",
+    outcomes: "Develop social media strategies for platforms like Facebook, Instagram, LinkedIn, and YouTube; create paid ad campaigns."
   },
    {
     sno: 6,
-    chapter: "Introduction To Internet and WWW",
-    duration: "7",
+    chapter: "Content Marketing & Blogging",
+    duration: "6",
     theory: "3",
-    lab: "4",
-    outcomes: "Learn OS basics and usage"
+    lab: "3",
+    outcomes: "Create engaging content, understand blogging strategies, storytelling, and SEO copywriting."
   },
    {
     sno: 7,
-    chapter: "E-mail, Social, Networking And E-Governance Services",
-    duration: "9",
-    theory: "3",
-    lab: "9",
-    outcomes: "Learn OS basics and usage"
+    chapter: "Email Marketing & Automation",
+    duration: "4",
+    theory: "2",
+    lab: "2",
+    outcomes: "Build email campaigns, use tools like Mailchimp, and apply audience segmentation and automation workflows."
   },
    {
     sno: 8,
-    chapter: "Digital Financial tools and Applications",
-    duration: "8",
-    theory: "3",
-    lab: "5",
-    outcomes: "Learn OS basics and usage"
+    chapter: "Affiliate & Influencer Marketing",
+    duration: "4",
+    theory: "2",
+    lab: "2",
+    outcomes: "Learn performance-based marketing, affiliate partnerships, and influencer collaboration strategies."
   },
    {
     sno: 9,
-    chapter: "Overview Of Cyber Security",
-    duration: "8",
+    chapter: "Web Analytics & Conversion Optimization",
+    duration: "6",
     theory: "3",
-    lab: "5",
-    outcomes: "Learn OS basics and usage"
+    lab: "3",
+    outcomes: "Use tools like Google Analytics to track traffic, interpret key metrics, and optimize digital performance."
   },
    {
     sno: 10,
-    chapter: "Overview of Future Skills and AI",
-    duration: "9",
-    theory: "3",
-    lab: "6",
-    outcomes: "Learn OS basics and usage"
+    chapter: "Online Reputation Management (ORM)",
+    duration: "3",
+    theory: "2",
+    lab: "1",
+    outcomes: "Learn how to manage brand reputation across platforms, handle reviews, and respond effectively to feedback."
   },
+  {
+    sno: 11,
+    chapter: "Mobile Marketing & Video Marketing",
+    duration: "4",
+    theory: "2",
+    lab: "2",
+    outcomes: "Explore mobile-specific campaigns, app marketing, and the use of short-form and video ads."
+  },{
+    sno: 12,
+    chapter: "Digital Strategy & Capstone Project",
+    duration: "7",
+    theory: "2",
+    lab: "5",
+    outcomes: "Integrate all channels into a comprehensive digital strategy and execute a live campaign or project."
+  },
+  
   // Add more rows as needed
 ];
 
 // Table component for Course Handout
+// local adapter to use the reusable UI component
 function HandoutTableBlock() {
   return <CourseHandoutTable rows={courseHandoutData} />;
 }
@@ -101,8 +121,7 @@ export default function CoursePage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [clickedItem, setClickedItem] = useState<string>("courses");
-  const [videoModalOpen, setVideoModalOpen] = useState(false);
-  const [videoUrl, setVideoUrl] = useState<string | null>(null);
+  const [selectedTab, setSelectedTab] = useState<string>("Overview");
   const [isMuted, setIsMuted] = useState(true);
 
   const tabs = ["Overview", "Course Handout", "Benefits", "Job Market", "Opportunities", "Eligibility"];
@@ -113,12 +132,13 @@ export default function CoursePage() {
     { id: "online-test", name: "Online Test" },
   ];
 
+
   const getDisplayName = (item: string) => {
     const names: { [key: string]: string } = {
       home: "Home",
       about: "About Us",
       courses: "Courses",
-      features: "Features",
+      features: "Facility",
       contact: "Contact Us",
     };
     return names[item] || item.charAt(0).toUpperCase() + item.slice(1);
@@ -139,16 +159,54 @@ export default function CoursePage() {
     }
   };
 
+  // Scroll spy: observe sections and update selectedTab when they enter the viewport
+  useEffect(() => {
+    const sections = [
+      { id: 'overview', tab: 'Overview' },
+      { id: 'course-handout', tab: 'Course Handout' },
+      { id: 'benefits', tab: 'Benefits' },
+      { id: 'job-market', tab: 'Job Market' },
+      { id: 'opportunities', tab: 'Opportunities' },
+      { id: 'eligibility', tab: 'Eligibility' },
+    ];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        // choose the most visible/first intersecting entry
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const match = sections.find((s) => s.id === entry.target.id);
+            if (match) {
+              setSelectedTab(match.tab);
+            }
+          }
+        });
+      },
+      {
+        root: null,
+        // adjust rootMargin so the tab highlights when section is comfortably in view
+        rootMargin: '-30% 0px -40% 0px',
+        threshold: 0.15,
+      }
+    );
+
+    sections.forEach((s) => {
+      const el = document.getElementById(s.id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Navbar */}
       <nav className="fixed top-0 w-full bg-gray-800/95 backdrop-blur-md z-50 shadow-lg transition-all duration-300">
         <div className="max-w-full mx-auto px-5 flex items-center py-4">
           {/* Logo */}
-          <div className="flex items-center gap-3 text-xl font-bold text-white mr-auto">
-            <FontAwesomeIcon icon={faGraduationCap} className="text-2xl text-purple-400" />
-            <span>Sharp Programming Technology</span>
-          </div>
+          <div className="flex items-center gap-3 mr-auto">
+                    <AnimatedLogo />
+                  </div>
 
           {/* Navigation Items */}
           <div className="flex items-center gap-8">
@@ -242,7 +300,7 @@ export default function CoursePage() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden flex flex-col gap-1 cursor-pointer ml-4"
+            className="md:hidden flex flex-col gap-1 cursor-pointer ml-0 px-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             <span className="w-6 h-0.5 bg-white transition-all duration-300"></span>
@@ -259,9 +317,7 @@ export default function CoursePage() {
                 {item === "features" ? (
                   <div>
                     <button
-                      onClick={() =>
-                        setFeaturesDropdownOpen(!featuresDropdownOpen)
-                      }
+                      onClick={() => setFeaturesDropdownOpen(!featuresDropdownOpen)}
                       className="flex items-center justify-between w-full text-left px-5 py-2 font-medium text-white hover:text-blue-400 transition-colors cursor-pointer"
                     >
                       <span>{getDisplayName(item)}</span>
@@ -323,29 +379,50 @@ export default function CoursePage() {
       </nav>
 
       {/* Hero */}
-  <div className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white pt-32 pb-12 md:pt-40 md:pb-20 lg:pt-48 lg:pb-32 px-4 sm:px-6 mt-16">
-  <div className="max-w-5xl ml-0 lg:ml-40">
-          <p className="text-xs sm:text-sm opacity-80 mb-2 cursor-pointer">
+  <div className="relative text-white mb-2 mt-16">
+    <div className="relative w-full h-72 sm:h-80 md:h-96 lg:h-[480px]">
+      <Image
+        src="/images/Cource Banner.png"
+        alt="Web Designing - course visual"
+        fill
+        priority
+        className="object-cover"
+      />
+
+      {/* Dark overlay for text legibility */}
+      <div className="absolute inset-0 bg-black/0"></div>
+
+      {/* Content over the image */}
+      <div className="absolute inset-0 flex items-center">
+        <div className="container-1200 px-9 w-full">
+          <p className="text-xs sm:text-sm opacity-90 mb-2 cursor-pointer text-black">
             <span>
-              <Link href="/" className="text-white cursor-pointer hover:-translate-y-1 font-bold transition-transform">Home</Link>
+              <Link href="/" className="text-black cursor-pointer hover:-translate-y-1 font-bold transition-transform">Home</Link>
             </span> &gt; Digital Marketing
           </p>
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">Digital Marketing</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black">Digital Marketing</h1>
+          
         </div>
       </div>
+    </div>
+  </div>
 
-      {/* Navigation Tabs */}
-      <div className="border-b border-gray-200 px-6 sticky top-20 bg-white z-40">
-                    <div className="flex gap-8 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
-          {tabs.map((tab) => (
-            <button
-              key={tab}
-              onClick={() => scrollToTab(tab)}
-              className="py-4 font-medium text-gray-500 hover:text-purple-600 cursor-pointer transition-colors text-xs sm:text-sm md:text-base"
-            >
-              {tab}
-            </button>
-          ))}
+  {/* Navigation Tabs - mobile: horizontally scrollable pill buttons */}
+  <div className="border-b border-gray-200 px-2 sticky top-24 md:top-20 bg-white z-40">
+        <div className="container-1200 px-0 w-full pt-4 pb-4">
+          <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
+            <div className="flex gap-3 md:gap-6 w-max md:w-full">
+              {tabs.map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => { setSelectedTab(tab); scrollToTab(tab); }}
+                  className={`inline-block whitespace-nowrap px-4 py-2 rounded-full text-sm md:text-base font-medium transition-colors ${selectedTab === tab ? 'bg-purple-600 text-white' : 'text-gray-600 hover:text-purple-600 hover:bg-purple-50'}`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -353,29 +430,56 @@ export default function CoursePage() {
       <div className="space-y-0">
         {/* Overview Section (text left, video right) - Light shade */}
         <section id="overview" className="scroll-mt-32 bg-white py-12">
-            <div className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
+          <div className="container-1200 mx-auto px-6 w-full">
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Overview</h2>
             <div className="grid md:grid-cols-2 gap-25 items-start">
               <div className="text-gray-800 space-y-5 text-justify">
                 <p>
-                  The Digital Marketing program covers SEO, social media marketing, content strategy, paid advertising, and analytics. It&apos;s built for small business owners, marketers, and students who want practical digital marketing skills.
+                 A Digital Marketing course is designed to teach how to promote brands, products or services through online/digital channels — for example websites, search engines, social media, email, mobile apps and more.It covers a mix of strategy, tools, analytics and hands-on campaign work to generate traffic, convert leads, measure results and optimise digital presence.
                 </p>
                 <div>
                   <span className="font-semibold text-lg">🎯 Objectives</span>
                   <ul className="list-disc list-inside ml-5 mt-2 space-y-1">
-                    <li>Understand core digital marketing channels and tactics.</li>
-                    <li>Create data-driven campaigns and measure ROI.</li>
-                    <li>Build a personal or business digital presence.</li>
+                    <li>To introduce learners to the core concepts of digital marketing: how digital media works, what different channels exist and how they integrate.</li>
+                    <li>To equip students with practical skills in key areas such as Search Engine Optimisation (SEO), Social Media Marketing (SMM), Pay-Per-Click (PPC) advertising, Content Marketing, Email Marketing, Web Analytics and Affiliate/Influencer Marketing.</li>
+                    <li>To develop the ability to create, execute and monitor digital campaigns: from setting objectives, audience targeting, budget allocation, content creation, through tracking and optimising performance.</li>
+					          <li>To enable learners to understand digital marketing metrics and tools — such as Google Analytics, Ad platforms, social media insights — and use data-driven decisions to improve marketing ROI.</li>
+					          <li>To prepare students to apply digital marketing skills in real-world business contexts: startups, e-commerce, agencies, freelancing or in organisational teams.</li>
                   </ul>
                 </div>
+                {/* <div>
+                  <span className="font-semibold text-lg">📘 What You’ll Learn</span>
+                  <ul className="list-disc list-inside ml-5 mt-2 space-y-1">
+                    <li>Fundamentals of Computers: Hardware, software, input/output devices, operating systems.</li>
+                    <li>Word Processing & Spreadsheets: Create, format, and analyze documents and data.</li>
+                    <li>Presentation Skills: Design and deliver digital presentations.</li>
+                    <li>Internet & Email: Use browsers, search engines, and communicate via email.</li>
+                    <li>Digital Financial Services: Online banking, UPI, and cybersecurity basics.</li>
+                  </ul>
+                </div>
+                <div>
+                  <span className="font-semibold text-lg">🧠 Who Should Enroll</span>
+                  <ul className="list-disc list-inside ml-5 mt-2 space-y-1">
+                    <li>Students, job seekers, and professionals seeking basic computer proficiency.</li>
+                    <li>Anyone preparing for government or competitive exams where computer knowledge is required.</li>
+                  </ul>
+                </div>
+                <div>
+                  <span className="font-semibold text-lg">🕒 Duration</span>
+                  <p className="ml-5 mt-2">Typically 80 hours (Theory + Practical) — can be completed in 2–3 months.</p>
+                </div>
+                <div>
+                  <span className="font-semibold text-lg">🏆 Certification</span>
+                  <p className="ml-5 mt-2">After successful completion, learners receive an NIELIT (DOEACC) CCC Certificate, recognized by government and private organizations across India.</p>
+                </div> */}
               </div>
 
               <div className="flex items-center justify-center">
-            <div className="relative w-11/12 sm:w-11/12 md:w-full video-container mt-4 md:mt-0 pt-0 md:bottom-12 mx-auto">
+               <div className="relative w-11/12 sm:w-11/12 md:w-10/12 video-container mt-4 md:mt-0 pt-0 xl:bottom-0 md:bottom-0 2xl:bottom-12 mx-auto">
                   <div className="overflow-hidden rounded-2xl shadow-2xl bg-black/5">
                     <iframe
                       src={`https://www.youtube.com/embed/g6gWkSl5IVA?autoplay=1&mute=${isMuted ? 1 : 0}&loop=1&rel=0&controls=0`}
-                       className="w-full h-96 sm:h-80 md:h-72 lg:h-90 xl:h-90 rounded-2xl mt-0 pt-0"
+                     className="w-full h-96 sm:h-80 md:h-72 lg:h-80 xl:h-90 rounded-2xl mt-0 pt-0"
                       frameBorder="0"
                       allow="autoplay; muted"
                       title="Course Overview Video"
@@ -404,7 +508,7 @@ export default function CoursePage() {
 
         {/* Course Handout Section - Gray shade */}
         <section id="course-handout" className="scroll-mt-32 bg-gray-50 py-12">
-            <div className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
+          <div className="container-1200 mx-auto px-6 w-full">
             <h2 className="text-2xl text-black font-bold mb-6">Course Handout</h2>
             {/* Data-driven table for easy updates */}
             <div className="overflow-x-auto">
@@ -414,42 +518,35 @@ export default function CoursePage() {
         </section>
 
         {/* Benefits Section - Light shade */}
-        <section id="benefits" className="scroll-mt-32 bg-white py-12">
-          <div 
-            className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full"
-          >
+    <section id="benefits" className="scroll-mt-32 bg-white py-12">
+  <div className="container-1200 mx-auto px-6 w-full">
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Benefits</h2>
             <div className="space-y-4">
               <ul className="list-disc list-inside text-gray-700 space-y-3">
-                <li className="text-sm">Gain in-demand full stack development skills</li>
-                <li className="text-sm">Access to real-world projects and hands-on experience</li>
-                <li className="text-sm">Expert mentorship and career guidance</li>
-                <li className="text-sm">Flexible learning at your own pace</li>
-                <li className="text-sm">Certificate upon successful completion</li>
-                <li className="text-sm">Job placement assistance and career support</li>
-                <li className="text-sm">Access to exclusive developer community</li>
+                <li className="text-sm">You gain <strong>highly in-demand skills</strong> in an era where businesses increasingly move online, making digital marketing vital for growth.</li>
+                <li className="text-sm">The course offers <strong>career flexibility:</strong> roles can be remote, freelance, part-time or full-time, across a range of industries.</li>
+                <li className="text-sm">It helps you <strong>stay relevant:</strong> as digital trends evolve, having these skills ensures you remain competitive in the job market.</li>
+                <li className="text-sm">For entrepreneurs or business-owners, digital marketing skills enable you to <strong>manage or reduce outsourcing</strong> by handling campaigns in-house and making cost-effective promotional decisions.</li>
+                <li className="text-sm">It can lead to creative & analytical growth: you learn both content-creation and metrics/analytics, which broadens your toolkit.</li>
               </ul>
             </div>
           </div>
         </section>
 
         {/* Job Market Section - Gray shade */}
-        <section id="job-market" className="scroll-mt-32 bg-gray-50 py-12">
-          <div 
-            className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full"
-          >
+    <section id="job-market" className="scroll-mt-32 bg-gray-50 py-12">
+  <div className="container-1200 mx-auto px-6 w-full">
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Job Market</h2>
-            <p className="text-gray-700 mb-6 leading-relaxed">
+            {/* <p className="text-gray-700 mb-6 leading-relaxed">
               The demand for full stack developers is rapidly growing across industries. Companies are seeking professionals who can handle both frontend and backend development, making you highly employable in today&apos;s competitive market.
-            </p>
+            </p> */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-800">Market Opportunities:</h3>
+              {/* <h3 className="text-lg font-semibold text-gray-800">Market Opportunities:</h3> */}
               <ul className="list-disc list-inside text-gray-700 space-y-3">
-                <li className="text-sm">Opportunities in tech startups and established companies</li>
-                <li className="text-sm">Remote and onsite job options available globally</li>
-                <li className="text-sm">Competitive salaries ranging from ₹4-15 LPA</li>
-                <li className="text-sm">Career growth potential and leadership opportunities</li>
-                <li className="text-sm">Roles: Full Stack Developer, Frontend Developer, Backend Developer, DevOps Engineer</li>
+                <li className="text-sm">Demand for digital marketing professionals is strong across sectors: e-commerce, IT services, startups, retail, advertising agencies.</li>
+                <li className="text-sm">Because many businesses now allocate greater budgets to online advertising and digital presence, roles for digital marketers are increasing.</li>
+                <li className="text-sm">Salary ranges in India for fresh digital marketing professionals typically start around ₹3-6 lakhs per annum, and with experience can rise significantly.</li>
+				        <li className="text-sm">Job listings often value skills & practical experience (campaigns, analytics, tools) sometimes more than formal degree alone.</li>
               </ul>
             </div>
           </div>
@@ -457,23 +554,20 @@ export default function CoursePage() {
 
         {/* Opportunities Section - Light shade */}
         <section id="opportunities" className="scroll-mt-32 bg-white py-12">
-          <div 
-            className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full"
-          >
+          <div className="container-1200 mx-auto px-6 w-full">
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Career Opportunities</h2>
-            <p className="text-gray-700 mb-6 leading-relaxed">
+            {/* <p className="text-gray-700 mb-6 leading-relaxed">
               After completing this comprehensive course, you&apos;ll have access to diverse career paths and exciting opportunities in the tech industry.
-            </p>
+            </p> */}
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-gray-800">Your Future Paths:</h3>
+              <h3 className="text-lg font-semibold text-gray-800">Graduates of a digital marketing course can explore roles such as:</h3>
               <ul className="list-disc list-inside text-gray-700 space-y-3">
-                <li className="text-sm">Work as a freelance developer with international clients</li>
-                <li className="text-sm">Join leading tech companies or innovative startups</li>
-                <li className="text-sm">Build your own products, SaaS applications, or tech business</li>
-                <li className="text-sm">Continue learning advanced technologies like AI/ML, Cloud Computing</li>
-                <li className="text-sm">Contribute to open source projects and build your reputation</li>
-                <li className="text-sm">Become a technical mentor or instructor</li>
-                <li className="text-sm">Transition into product management or technical leadership roles</li>
+                <li className="text-sm">Digital Marketing Executive / Specialist</li>
+                <li className="text-sm">SEO/SEM Analyst or Manager</li>
+                <li className="text-sm">PPC (Pay-Per-Click) & Paid Media Specialist</li>
+                <li className="text-sm">Email Marketing & Automation Specialist</li>
+                <li className="text-sm">Web Analytics & Data Insights Professional</li>
+                <li className="text-sm">Affiliate / Influencer Marketing Manager</li>
               </ul>
             </div>
           </div>
@@ -482,35 +576,13 @@ export default function CoursePage() {
       </div>
       {/* Eligibility Section */}
       <section id="eligibility" className="scroll-mt-32 bg-gray-50 py-12">
-        <div className="mx-auto px-6 w-full lg:w-[calc(100%-400px)] lg:ml-40 max-w-full">
+        <div className="container-1200 mx-auto px-6 w-full">
           <h2 className="text-2xl text-gray-800 font-bold mb-6">Eligibility</h2>
           <p className="text-gray-700 mb-6 leading-relaxed">
-            Eligibility: No minimum qualification is required for applying and appearing for the examination in Course on Computer Concepts [CCC].
+           Digital Marketing courses have minimal formal prerequisites: often any graduate or even those who have completed 12th can enrol.
           </p>
         </div>
       </section>
-      {/* Video Modal */}
-      {videoModalOpen && (
-        <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-lg overflow-hidden w-full max-w-3xl">
-            <div className="flex justify-end p-2">
-              <button className="text-gray-700 font-bold px-3 py-1" onClick={() => { setVideoModalOpen(false); setVideoUrl(null); }}>Close</button>
-            </div>
-            <div className="w-full h-0" style={{ paddingBottom: '56.25%', position: 'relative' }}>
-              {videoUrl && (
-                <iframe
-                  src={videoUrl}
-                  title="Course overview video"
-                  className="absolute inset-0 w-full h-full"
-                  frameBorder={0}
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              )}
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
