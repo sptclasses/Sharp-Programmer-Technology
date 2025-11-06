@@ -190,8 +190,8 @@ export default function CoursePage() {
         <div className="max-w-full mx-auto px-5 flex items-center py-4">
           {/* Logo */}
           <div className="flex items-center gap-3 mr-auto">
-                    <AnimatedLogo />
-                  </div>
+              <h1 className="text-white text-xl font-bold">Sharp Programmer Technology (SPT)</h1>
+          </div>
 
           {/* Navigation Items */}
           <div className="flex items-center gap-8">
@@ -365,14 +365,31 @@ export default function CoursePage() {
 
       {/* Hero */}
   <div className="relative text-white mb-2 mt-16">
-    <div className="relative w-full h-72 sm:h-80 md:h-96 lg:h-[480px]">
-      <Image
-        src="/images/Cource Banner.png"
-        alt="Web Designing - course visual"
-        fill
-        priority
-        className="object-cover"
-      />
+    <div className="relative w-full h-40 sm:h-56 md:h-72 lg:h-96">
+      {/* Desktop/large screens: full-bleed background (shown from sm and up) */}
+      <div className="hidden sm:block absolute inset-0">
+        <Image
+          src="/images/Cource Banner.png"
+          alt="Course banner"
+          fill
+          priority
+          className="object-cover object-center"
+        />
+      </div>
+
+      {/* Mobile: show a separate image sized for phones */}
+      <div className="sm:hidden absolute inset-0 flex items-center justify-center">
+        <div className="w-20/20 ">
+          <Image
+            src="/images/mobile2.png"
+            alt="Course banner mobile"
+            width={800}
+            height={320}
+            className="w-full h-auto object-contain"
+            priority
+          />
+        </div>
+      </div>
 
       {/* Dark overlay for text legibility */}
       <div className="absolute inset-0 bg-black/0"></div>
@@ -386,7 +403,6 @@ export default function CoursePage() {
             </span> &gt; Course on Computer Concepts
           </p>
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-black">Course on Computer Concepts</h1>
-          
         </div>
       </div>
     </div>

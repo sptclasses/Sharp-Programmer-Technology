@@ -361,7 +361,7 @@ export default function Courses() {
         Duration: {course.duration}
       </span>
       <Link href={`/CourseLandingPage/${course.slug}`}>
-        <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-sm sm:text-base font-medium transition-colors duration-300 w-full sm:w-auto">
+        <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-sm sm:text-base font-medium transition-colors duration-300 w-full sm:w-auto cursor-pointer">
           Learn More
         </button>
       </Link>
@@ -445,7 +445,7 @@ export default function Courses() {
         Duration: {course.duration}
       </span>
       <Link href={`/CourseLandingPage/${course.slug}`}>
-        <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-sm sm:text-base font-medium transition-colors duration-300 w-full sm:w-auto">
+        <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg text-sm sm:text-base font-medium transition-colors duration-300 w-full sm:w-auto cursor-pointer">
           Learn More
         </button>
       </Link>
