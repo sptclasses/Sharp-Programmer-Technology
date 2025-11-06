@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faChevronDown,} from "@fortawesome/free-solid-svg-icons";
-import AnimatedLogo from "./AnimatedLogo";
 import { useRouter } from "next/navigation";
 
 interface NavigationProps {
@@ -51,7 +50,7 @@ export default function Navigation({
       <div className="max-w-full mx-auto px-5 flex items-center py-4">
         {/* Logo and Company Name - Left Side */}
         <div className="flex items-center gap-3 mr-auto">
-          <AnimatedLogo />
+          <h1 className="text-white text-xl font-bold">Sharp Programmer Technology (SPT)</h1>
         </div>
         
         {/* Navigation Items and Phone - Right Side */}
