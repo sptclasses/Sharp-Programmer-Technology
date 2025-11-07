@@ -132,9 +132,9 @@ export default function Alumni() {
         {/* Header */}
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-3 mb-4">
-            <FontAwesomeIcon icon={faTrophy} className="text-4xl text-yellow-500" />
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">Our Stars</h2>
-            <FontAwesomeIcon icon={faTrophy} className="text-4xl text-yellow-500" />
+            <FontAwesomeIcon icon={faTrophy} className="text-5xl text-yellow-500 " />
+            <h2 className="text-5xl md:text-5xl font-bold text-gray-900 ourStars">Our Stars</h2>
+            <FontAwesomeIcon icon={faTrophy} className="text-5xl text-yellow-500 " />
           </div>
           {/* <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Meet our outstanding alumni who transformed their careers with Sharp Programming Technology

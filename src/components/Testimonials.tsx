@@ -85,8 +85,8 @@ export default function Testimonials() {
             type="button"
             aria-label="Previous slide"
             onClick={() => scrollByDirection(-1)}
-            className="absolute left-0 z-10 bg-white/80 hover:bg-purple-100 text-purple-700 rounded-full shadow-lg p-3 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400"
-            style={{ top: '50%', transform: 'translateY(-50%)' }}
+            className="absolute  left-0 z-10 bg-white/70 hover:bg-purple-100 text-purple-700 rounded-full shadow-lg p-3 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-purple-400"
+            style={{ top: '50%' , transform: 'translateY(-50%)' }}
           >
             <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
           </button>
@@ -103,12 +103,12 @@ export default function Testimonials() {
                 className="snap-start shrink-0 basis-full md:basis-1/2 lg:basis-1/3 h-auto"
               >
                 {/* Decorative gradient border wrapper */}
-                <div className="relative rounded-3xl p-[1px] bg-gradient-to-br from-purple-500/60 via-pink-500/60 to-yellow-500/60 shadow-xl hover:shadow-2xl transition-transform duration-300 hover:-translate-y-1 h-full">
+                <div className="relative rounded-3xl p-[1px] bg-black shadow-xl hover:shadow-2xl transition-transform duration-300  top-10 h-full">
                   {/* subtle glow */}
-                  <div className="absolute -inset-0.5 rounded-3xl blur-2xl bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-yellow-500/10 pointer-events-none" />
+                  {/* <div className="absolute -inset-0.5 rounded-3xl blur-2xl bg-gradient-to-br from-purple-500/10 via-pink-500/10 to-yellow-500/10 pointer-events-none" /> */}
 
                   {/* Card body */}
-                  <div className="relative rounded-3xl bg-white/90 backdrop-blur-xl p-4 sm:p-6 h-full min-h-[280px] flex flex-col">
+                  <div className="relative rounded-3xl bg-white/100 backdrop-blur-xl p-4 sm:p-6 h-full min-h-[280px] flex flex-col">
                     <div className="flex items-center gap-3 sm:gap-4 mb-4">
                       <div className={`w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br ${t.gradient} rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-lg shadow-md ring-4 ring-white/60 overflow-hidden flex-shrink-0`}>
                         {typeof t.initials === 'string' && (t.initials.startsWith('/') || t.initials.startsWith('http')) ? (

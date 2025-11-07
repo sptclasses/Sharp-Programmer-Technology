@@ -455,7 +455,7 @@ export default function CoursePage() {
       </div>
 
       <div className="absolute inset-0 bg-black/0"></div>
-      <div className="absolute inset-0 flex items-center">
+      <div className="absolute inset-0 flex items-center courseText courseMobileText">
         <div className="container-1200 px-9 w-full">
           <p className="text-xs sm:text-sm opacity-90 mb-2 cursor-pointer text-black">
             <span>

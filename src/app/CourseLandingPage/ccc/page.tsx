@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from 'next/image';
 import {  faPhone, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import CourseHandoutTable from "@/components/ui/CourseHandoutTable";
-import AnimatedLogo from '@/components/AnimatedLogo';
 
 // Data for Course Handout Table
 const courseHandoutData = [
@@ -395,7 +394,7 @@ export default function CoursePage() {
       <div className="absolute inset-0 bg-black/0"></div>
 
       {/* Content over the image */}
-      <div className="absolute inset-0 flex items-center">
+      <div className="absolute inset-0 flex items-center courseText courseMobileText">
         <div className="container-1200 px-9 w-full">
           <p className="text-xs sm:text-sm opacity-90 mb-2 cursor-pointer text-black">
             <span>
@@ -409,7 +408,7 @@ export default function CoursePage() {
   </div>
 
   {/* Navigation Tabs - mobile: horizontally scrollable pill buttons */}
-  <div className="border-b border-gray-200 px-2 sticky top-24 md:top-20 bg-white z-40">
+  <div className="border-b border-gray-200 px-2 sticky top-24 md:top-20 bg-white z-40 courseNavigation">
         <div className="container-1200 px-0 w-full pt-4 pb-4">
           <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
             <div className="flex gap-3 md:gap-6 w-max md:w-full">
@@ -428,9 +427,9 @@ export default function CoursePage() {
       </div>
 
       {/* Course Content - All Sections Visible */}
-      <div className="space-y-0">
+      <div className="space-y-0 ">
         {/* Overview Section (text left, video right) - Light shade */}
-        <section id="overview" className="scroll-mt-32 bg-white py-12">
+        <section id="overview" className="scroll-mt-32 bg-white py-12 ">
           <div className="container-1200 mx-auto px-6 w-full">
             <h2 className="text-2xl text-gray-800 font-bold mb-6">Overview</h2>
             <div className="grid md:grid-cols-2 gap-25 items-start">
