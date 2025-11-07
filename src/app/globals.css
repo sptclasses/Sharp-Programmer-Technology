@@ -232,4 +232,20 @@ body {
   #alumni .text-4xl {
     font-size: 1.6rem;
   }
+  .courseText{
+    font-size: 1rem;
+    padding-left: 140px;
+  }
+  .ourStars{
+    font-size: 5rem;
+  }
+
+}
+@media(max-width: 639px) {
+  .courseMobileText{
+    padding-left:0px ;
+    font-size: 1rem;
+    text-align: center;
+
+  }
 }

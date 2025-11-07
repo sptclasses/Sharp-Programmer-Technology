@@ -40,7 +40,7 @@ export default function About() {
           }
         }
       `}</style>
-      <section id="about" className="py-40 mt-0 font-['Inter','Poppins',sans-serif]" style={{ backgroundColor: '#f9f9fb' }}>
+      <section id="about" className="py-20 mt-0 font-['Inter','Poppins',sans-serif]" style={{ backgroundColor: '#f9f9fb' }}>
         <div className="mx-auto px-4 sm:px-6 lg:px-8 xl:px-0" style={{ width: 'min(1650px, 100vw)', height: 'auto' }}>
           <div className="grid md:grid-cols-2 items-center about-grid" style={{ minHeight: '436px' }}>
             <div className="text-left px-4 sm:px-0">
